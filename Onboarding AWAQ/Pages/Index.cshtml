@@ -6,7 +6,7 @@
 }
 
 <section style="height: 100%">
-    
+        <h1>@Model.mensaje</h1>
         <div class="row" style="padding-left: 0; padding-rigth: 0;">
             <!-- División para el formulario de correo y contraseña -->
             <div class="col-lg-6">
@@ -26,29 +26,28 @@
                         <!-- Correo Electrónico -->
                         <p class="forms-paragraph">Correo</p>
                         <div class="form-outline mb-3">
-                           <input class="input-forms form-control" asp-for="correo"> 
+                           <!-- <input class="input-forms form-control" asp-for="correo"> -->
                         </div>
 
                         <!-- Contraseña -->
                         <p class="forms-paragraph">Contraseña</p>
                         <div class="form-outline mb-3">
-                            <input class="input-forms form-control" asp-for="contraseña">
+                            <!-- <input class="input-forms form-control" asp-for="contraseña"> -->
                         </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check mb-0">
-                            <input class="mantenerSesion-cuadrito form-check-input me-2" type="checkbox">
-                            <a class="mantenerSesion-text text-body" href="#!">Mantener Sesión</a>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Checkbox -->
+                            <div class="form-check mb-0">
+                                <input class="mantenerSesion-cuadrito form-check-input me-2" type="checkbox">
+                                <a class="mantenerSesion-text text-body" href="#!">Mantener Sesión</a>
+                            </div>
+                            <label><a asp-page="Recuperacion" class="forgot-password text-body">¿Olvidaste tu contraseña?</a></label>
                         </div>
-                        <label><a asp-page="Recuperacion" class="forgot-password text-body">¿Olvidaste tu contraseña?</a></label>
-                    </div>    
+
                         <div class="pt-4 mb-4">
                             <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
                         </div>
                     </form>
-
-                    
-
 
                     <div class="text-center">
                         <p><span class="question"> ¿No tienes cuenta?</span> <a asp-page="Registro" class="text-body crearCuenta">Crear cuenta</a></p>
