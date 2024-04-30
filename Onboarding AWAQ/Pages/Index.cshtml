@@ -26,13 +26,17 @@
                         <!-- Correo Electrónico -->
                         <p class="forms-paragraph">Correo</p>
                         <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
+                           <!-- <input class="input-forms form-control" asp-for="correo"> -->
                         </div>
 
                         <!-- Contraseña -->
                         <p class="forms-paragraph">Contraseña</p>
                         <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
+                            <!-- <input class="input-forms form-control" asp-for="contraseña"> -->
+                        </div>
+                        
+                        <div class="pt-4 mb-4">
+                            <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
                         </div>
                     </form>
 
@@ -44,9 +48,7 @@
                         </div>
                         <label><a asp-page="Recuperacion" class="forgot-password text-body">¿Olvidaste tu contraseña?</a></label>
                     </div>
-                    <div class="pt-4 mb-4">
-                        <button type="button" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
-                    </div>
+
 
                     <div class="text-center">
                         <p><span class="question"> ¿No tienes cuenta?</span> <a asp-page="Registro" class="text-body crearCuenta">Crear cuenta</a></p>
