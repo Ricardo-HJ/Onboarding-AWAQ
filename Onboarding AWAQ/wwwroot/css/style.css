@@ -1,0 +1,108 @@
+﻿.texto-presentacion {
+    color: #2C5629;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.main-paragraph {
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.input-forms {
+    border-radius: 9px;
+    border: 1px solid var(--Outlines, #EAEAEA);
+    background: #FFF;
+    /* Shadow */
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
+}
+
+.inicioSesion-btn {
+    border-radius: 8px;
+    border: 1px solid var(--Black, #272727);
+    background: #000;
+}
+
+.forms-paragraph {
+    color: #000;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.max {
+    width: 95vw;
+    height: 95vh;
+}
+
+
+body {
+    overflow: hidden;
+}
+
+.background-awaq {
+    background-image: url("../img/background.png");
+}
+
+.forgot-password {
+    color: #000;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+}
+
+.mantener-sesion {
+    font-size: 12px;
+}
+
+.mantenerSesion-cuadrito {
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.mantenerSesion-text {
+    color: #000;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+}
+
+@media(max-width: 991px) {
+    body {
+        overflow-y: scroll;
+    }
+}
+
+.question {
+    color: #888;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.crearCuenta {
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+}

@@ -7,4 +7,15 @@
     <RootNamespace>Onboarding_AWAQ</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\favicon_package_v0.16\**" />
+    <Content Remove="wwwroot\favicon_package_v0.16\**" />
+    <EmbeddedResource Remove="wwwroot\favicon_package_v0.16\**" />
+    <None Remove="wwwroot\favicon_package_v0.16\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
