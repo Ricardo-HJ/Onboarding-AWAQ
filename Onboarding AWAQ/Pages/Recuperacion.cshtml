@@ -1,0 +1,58 @@
+﻿@page
+@model WebApp_AWAQ.Pages.RecuperacionModel
+@{
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <!-- División para el formulario de correo y contraseña -->
+            <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+
+                    <div class="text-center pt-5 mt-5">
+                        <!-- Logo o imagen de marca -->
+                        <img src="./img/AWAQ-logo.png" style="width: 100px;" alt="logo">
+                    </div>
+
+                    <div class="mb-5 text-center">
+                        <h1 class=" texto-presentacion">Recuperación de cuenta</h1>
+                        <p class="main-paragraph">Por favor, ingresa tus datos</p>
+                    </div>
+
+                    <form class="pt-2">
+                        <!-- Correo Electrónico -->
+                        <p class="forms-paragraph">Correo</p>
+                        <div class="form-outline mb-3">
+                            <input class="input-forms form-control">
+                        </div>
+                    </form>
+
+                    <div class="pt-4 mb-4">
+                        <button type="button" class="inicioSesion-btn btn btn-dark col-12">Enviar código de recuperación</button>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p><span class="question"> ¿No tienes cuenta?</span> <a asp-page="Registro" class="text-body crearCuenta">Crear cuenta</a></p>
+                        <p><span class="question"> ¿Ya tienes una cuenta?</span> <a asp-page="Index" class="text-body crearCuenta">Inicia Sesión</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- División para la imagen -->
+            <div class="col-lg-6 position-relative">
+                <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100%;">
+                    <!-- Logo de la marca -->
+                    <div class="position-absolute top-40 start-50 translate-middle-x">
+                        <img class="img-fluid" src="./img/AWAQ-LOGOHD.png" style="width: 1000px;" alt="logo de la marca">
+                    </div>
+                    <div class="text-center">
+                        <img class="img-fluid" src="./img/background.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
