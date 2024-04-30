@@ -39,7 +39,8 @@ namespace Onboarding_AWAQ.Pages
 			{
 				using (var registro = CMD.ExecuteReader())
 				{
-					usr = new Usuario();
+                    registro.Read();
+                    usr = new Usuario();
 					usr.Id = Convert.ToInt32(registro["idUsuario"]);
 					usr.Correo = correo;
 					usr.Contraseña = registro["Contraseña"].ToString();
@@ -47,8 +48,8 @@ namespace Onboarding_AWAQ.Pages
 					if (usr.Contraseña == contraseña)
 					{
 						mensaje = "Correo y contraseña validos, inicio de sesion";
-						//Conexion.Dispose();
-						//Response.Redirect("Dashboard")
+						Conexion.Dispose();
+						Response.Redirect("Dashboard");
 					}
 					else
 					{

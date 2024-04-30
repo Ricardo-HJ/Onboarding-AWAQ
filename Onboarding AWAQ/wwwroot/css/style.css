@@ -117,3 +117,9 @@ body {
     line-height: normal;
     text-decoration-line: underline;
 }
+
+.bkgDash{
+    background-image: url(../img/Home.png);
+    height: 100vh;
+    width: auto;
+}
