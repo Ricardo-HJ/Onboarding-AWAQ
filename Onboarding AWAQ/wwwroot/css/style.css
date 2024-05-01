@@ -167,3 +167,9 @@ body {
     height: 100vh;
     width: auto;
 }
+
+.bkgLead{
+    background-image: url(../img/Lead.png);
+    height: 100vh;
+    width: auto;
+}
