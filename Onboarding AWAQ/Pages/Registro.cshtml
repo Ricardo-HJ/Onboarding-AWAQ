@@ -1,75 +1,68 @@
 ﻿@page
-@model WebApp_AWAQ.Pages.RegistroModel
+@model WebApp_AWAQ.Pages.RecuperacionModel
 @{
+    ViewData["Title"] = "Dashboard";
+   
 }
 
 
-<section>
-    
-        <div class="row" style="padding-left: 0; padding-rigth: 0;">
-            <!-- División para el formulario de correo y contraseña -->
+<section style="height: 100%; padding: 3vh;">
+        <div class="row" style="padding-left: 0; padding-rigth: 0; height:100%">
+            <!-- Columna de sidebar -->
             <div class="col-lg-6">
-                <div class="card-body p-md-5" style="max-width: 560px; margin: auto; margin-top: 10vh;">
+                <!-- Sidebar -->
+                <div class="side-bar d-flex flex-column flex-shrink-0" >
 
-                    <div class="text-center">
-                        <!-- Logo o imagen de marca -->
-                        <img src="./img/AWAQ-logo.png" style="width: 100px;" alt="logo">
+                    <a href="/" class="d-block p-3 link-body-emphasis text-decoration-none logo-side" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                    <img src="./img/Logo AWAQ.png" alt="">
+                    <span class="visually-hidden">Icon-only</span>
+                    </a>
+
+                    <ol class="nav nav-pills nav-flush flex-column mb-auto text-center">
+
+                        <li class="nav-item" style="margin-bottom: 24px">
+                            <a href="/" class="buton-side-active" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+                            <img src="./img/Boton home.png" class="bi pe-none" role="img" aria-label="Home">
+                            </a>
+                        </li>
+
+                        <li class="nav-item" style="margin-bottom: 24px">
+                            <a href="/" class="buton-side" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
+                            <img src="./img/Boton colab.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+                            </a>
+                        </li>
+
+                        <li class="nav-item" style="margin-bottom: 24px">
+                            <a href="/" class="buton-side" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                            <img src="./img/Boton leaderboard.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+                            </a>
+                        </li>
+
+                    </ol>
+
+                    <div class="dropdown border-top">
+                    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
                     </div>
-
-                    <div class="mb-3 text-center">
-                        <h1 class=" texto-presentacion">Bienvenido de Nuevo</h1>
-                        <p class="main-paragraph">Por favor, ingresa tus datos</p>
-                    </div>
-
-                    <form>
+                </div> 
+            </div>
+            
+            <div class="col-lg-6">
+                    <form class="pt-2">
                         <!-- Correo Electrónico -->
                         <p class="forms-paragraph">Correo</p>
                         <div class="form-outline mb-3">
                             <input class="input-forms form-control">
                         </div>
-
-                        <!-- Contraseña -->
-                        <p class="forms-paragraph">Nombre</p>
-                        <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
-                        </div>
-
-                        <!-- Correo Electrónico -->
-                        <p class="forms-paragraph">Contraseña</p>
-                        <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
-                        </div>
-
-                        <!-- Contraseña -->
-                        <p class="forms-paragraph">Confirmar contraseña</p>
-                        <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
-                        </div>
                     </form>
-
-                    <div class="pt-4 mb-4">
-                        <button type="button" class="inicioSesion-btn btn btn-dark col-12">Crear cuenta</button>
-                    </div>
-
-                    <div class="text-center">
-                        <p><span class="question"> ¿Ya tienes una cuenta?</span> <a asp-page="Index" class="text-body crearCuenta">Inicia sesión</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- División para la imagen -->
-            <div class="col-lg-6 position-relative mobile-only">
-                <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100%;">
-                    <!-- Logo de la marca -->
-                    <div class="position-absolute top-40 start-50 translate-middle-x">
-                        <img class="img-fluid" src="./img/AWAQ-LOGOHD.png" style="height: max-content;" alt="logo de la marca">
-                    </div>
-                    <div class="text-center" style="width: 100%; height: 100%;">
-                        <img src="./img/background.png" style="height: 100vh; width: 100%; object-fit: cover;" alt="">
-                    </div>
-                </div>
             </div>
         </div>
-    
-    </div>
 </section>
