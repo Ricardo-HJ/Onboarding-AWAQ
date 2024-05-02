@@ -9,11 +9,89 @@
 <div class="row">
     <h1>Registro de nuevo colaborador</h1>
 </div>
-<div class="row" >
-    <form class="pt-2">
-        <p class="forms-paragraph">Pais</p>
-        <div class="form-outline mb-3">
-            <input class="input-forms form-control">
+<div class="row h-100" >
+    <div class="col">
+        <form class="pt-2" style="max-width: 424px">
+            <p class="forms-paragraph">País</p>
+            <div class="form-outline mb-3">
+                <select class="form-select input-forms" aria-label="Default select example">
+                    <option selected>Selecciona</option>
+                    <option value="1">España</option>
+                    <option value="2">México</option>
+                    <option value="3">Colombia</option>
+                </select>
+            </div>
+
+            <p class="forms-paragraph">Ciudad</p>
+            <div class="form-outline mb-3">
+                <select class="form-select input-forms" aria-label="Default select example">
+                    <option selected>Selecciona</option>
+                    <option value="1">CDMX</option>
+                    <option value="2">Barcelona</option>
+                    <option value="3">Bogotá</option>
+                </select>
+            </div>
+
+            <p class="forms-paragraph">Departamento</p>
+            <div class="form-outline mb-3">
+                <select class="form-select input-forms" aria-label="Default select example">
+                    <option selected>Selecciona</option>
+                    <option value="1">Recursos Humanos</option>
+                    <option value="2">Administrador</option>
+                    <option value="3">TEDI</option>
+                </select>
+            </div>
+
+            <p class="forms-paragraph">Nombre</p>
+            <div class="form-outline mb-3">
+                <input class="input-forms form-control">
+            </div>
+
+            <p class="forms-paragraph">Correo</p>
+            <div class="form-outline mb-3">
+                <input class="input-forms form-control">
+            </div>
+
+            <p class="forms-paragraph">Numero</p>
+            <div class="form-outline mb-3">
+                <input class="input-forms form-control">
+            </div>
+        </form>
+    </div>
+    <div class="col"> <!-- Add 'd-flex justify-content-center align-items-center' to center content vertically and horizontally -->
+        <div class="row">
+            <div class="col">
+                <form class="pt-2" style="max-width: 424px"> <!-- Add 'mx-auto' to center the form horizontally -->
+                    <p class="forms-paragraph">Contraseña provisional</p>
+                    <div class="form-outline mb-3">
+                        <input class="input-forms form-control">
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+        <div class="row">
+            <div class="col" style="max-width: 336px;">
+                <div class="colab-card">
+                    <div class="img-perfil">
+                        <img src="~/img/profile.png">
+                    </div>
+                    <div class="titles">
+                        <h3>Nombre</h3>
+                        <h4>Departamento</h4>
+                    </div>
+                    <div class="details">
+                        <div class="location">
+                            <h3>Pais</h3>
+                            <h4>Ciudad</h4>
+                        </div>
+                        <p>correo@example.com</p>
+                        <p>+52 12 123 12 12</p>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-dark col-12 inicioSesion-btn">Registrar Colaborador</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
