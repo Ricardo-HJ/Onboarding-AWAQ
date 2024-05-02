@@ -43,7 +43,7 @@ namespace Onboarding_AWAQ.Pages
                     usr = new Usuario();
 					usr.Id = Convert.ToInt32(registro["idUsuario"]);
 					usr.Correo = correo;
-					usr.Contraseña = registro["Contraseña"].ToString();
+					usr.Contraseña = registro["Contraseña"].ToString()!;
 
 					if (usr.Contraseña == contraseña)
 					{
@@ -60,12 +60,10 @@ namespace Onboarding_AWAQ.Pages
 			catch (MySqlException)
 			{
 				mensaje = "Correo o contraseña invalidos, no se pudo iniciar sesion";
-				Conexion.Dispose();
 			}
 			catch (IndexOutOfRangeException)
 			{
 				mensaje = "No se pudo obtener la informacion";
-				Conexion.Dispose();
 			}
 			Conexion.Dispose();
 		}
