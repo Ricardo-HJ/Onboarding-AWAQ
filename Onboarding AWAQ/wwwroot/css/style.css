@@ -1,6 +1,21 @@
-﻿.mobile-only {
+﻿.desk-only {
     display: none;
 }
+
+.mobile-only {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .desk-only {
+        display: block;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
 .colab-card p {
     margin: 0;
 }
@@ -155,11 +170,7 @@
     line-height: normal;
 }
 
-@media (min-width: 992px) {
-    .mobile-only {
-        display: block;
-    }
-}
+
 
 .colab-card { 
     display: inline-flex;
