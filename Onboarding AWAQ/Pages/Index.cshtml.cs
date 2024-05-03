@@ -21,10 +21,7 @@ namespace Onboarding_AWAQ.Pages
 
 		public void OnGet()
 		{
-			DotNetEnv.Env.Load();
-			apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
-			Console.WriteLine($"API KEY:'{apiKey}'");
-			mensaje = "X";
+
 		}
 		public void OnPost()
 		{
