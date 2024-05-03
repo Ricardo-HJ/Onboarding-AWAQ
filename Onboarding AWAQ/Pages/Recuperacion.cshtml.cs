@@ -52,6 +52,7 @@ namespace WebApp_AWAQ.Pages
             if (!validCorreo)
             {
                 string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
 
@@ -76,10 +77,10 @@ namespace WebApp_AWAQ.Pages
                         SendMail(token, correo).Wait();
 
                         registro.Read();
+
                         idUsuario = (registro["idUsuario"]).ToString();
                         Response.Cookies.Append("ID", idUsuario);
                         Response.Cookies.Append("Correo", correo);
-
 
                     }
                     else
@@ -131,17 +132,20 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validContra && validToken)
             {   
-                if (Request.Form["contraseña"] == Request.Form["verificarContraseña"])
+                if (Request.Form["contraseï¿½a"] == Request.Form["verificarContraseï¿½a"])
                 {
+               
                     string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
                     MySqlCommand CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
-                    CMD.CommandText = "update usuario set `contraseña` = @contraseña where correo = @correo;";
-                    CMD.Parameters.AddWithValue("@contraseña", Request.Form["contraseña"]);
+
+                    CMD.CommandText = "update usuario set `contraseï¿½a` = @contraseï¿½a where correo = @correo;";
+                    CMD.Parameters.AddWithValue("@contraseï¿½a", Request.Form["contraseï¿½a"]);
                     CMD.Parameters.AddWithValue("@correo", Request.Cookies["Correo"]);
+
                     CMD.ExecuteNonQuery();
                     CMD.Dispose();
                     
@@ -165,7 +169,7 @@ namespace WebApp_AWAQ.Pages
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contraseña OnBoarding AWAQ";
+            var subject = "Recuperar contraseï¿½a OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
             var htmlContent = "<p>Su codigo de recuperacion es <strong>" + token+ "</strong></p>";
 

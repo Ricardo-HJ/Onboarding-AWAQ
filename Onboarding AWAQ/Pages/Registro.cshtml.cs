@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using Onboarding_AWAQ;
 
-namespace WebApp_AWAQ.Pages
+namespace Onboarding_AWAQ.Pages
 {
     public class RegistroModel : PageModel
     {
@@ -14,10 +14,11 @@ namespace WebApp_AWAQ.Pages
         [BindProperty] public string nombre { get; set; }
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
-        [BindProperty] public string contraseña { get; set; }
+        [BindProperty] public string contraseï¿½a { get; set; }
 
         public void OnGet()
         {
+            CurrentPath = HttpContext.Request.Path;
         }
 
         public void OnPost() 
@@ -28,13 +29,13 @@ namespace WebApp_AWAQ.Pages
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contraseña`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contraseña);";
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contraseï¿½a`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contraseï¿½a);";
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
             CMD.Parameters.AddWithValue("@correo", correo);
             CMD.Parameters.AddWithValue("@telefono", telefono);
-            CMD.Parameters.AddWithValue("@contraseña", contraseña);
+            CMD.Parameters.AddWithValue("@contraseï¿½a", contraseï¿½a);
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
@@ -94,7 +95,7 @@ namespace WebApp_AWAQ.Pages
             nombre = "";
             correo = "";
             telefono = "";
-            contraseña = "";
+            contraseï¿½a = "";
             Response.Redirect("index");
         }
     }

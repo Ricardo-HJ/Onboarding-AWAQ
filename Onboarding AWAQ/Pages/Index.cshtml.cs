@@ -4,12 +4,14 @@ using MySql.Data.MySqlClient;
 
 namespace Onboarding_AWAQ.Pages
 {
+
 	public class IndexModel : PageModel
 	{
 		[BindProperty] public string correo { get; set; }
 		[BindProperty] public string contraseña { get; set; }
 		[BindProperty] public string mensaje { get; set; }
 
+		public string apiKey { get; set; }
 		private readonly ILogger<IndexModel> _logger;
 
 		public IndexModel(ILogger<IndexModel> logger)
@@ -19,7 +21,10 @@ namespace Onboarding_AWAQ.Pages
 
 		public void OnGet()
 		{
-			mensaje = "";
+			DotNetEnv.Env.Load();
+			apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
+			Console.WriteLine($"API KEY:'{apiKey}'");
+			mensaje = "X";
 		}
 		public void OnPost()
 		{

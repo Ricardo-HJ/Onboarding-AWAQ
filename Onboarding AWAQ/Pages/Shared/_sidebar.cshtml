@@ -1,27 +1,26 @@
-﻿<div class="side-bar d-flex flex-column flex-shrink-0" >
-
+﻿<script src="./js/sidebar.js"></script>
+<div class="side-bar d-flex flex-column flex-shrink-0" >
     <div class="d-block p-3 link-body-emphasis text-decoration-none logo-side" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
     <img src="./img/Logo AWAQ.png" alt="">
     <span class="visually-hidden">Icon-only</span>
     </div>
 
     <ol class="nav nav-pills nav-flush flex-column mb-auto text-center">
-
         <li class="nav-item" style="margin-bottom: 24px">
-            <a asp-page="Dashboard" class="buton-side" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
-            <img src="./img/Boton home black.png" class="bi pe-none" role="img" aria-label="Home">
+            <a asp-page="Dashboard" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+            <img src="./img/Dashboard-default.png" class="bi pe-none" role="img" aria-label="Home">
             </a>
         </li>
 
         <li class="nav-item" style="margin-bottom: 24px">
-            <a href="Registro" class="buton-side-active" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
-            <img src="./img/Boton colab white.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+            <a href="Registro" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
+            <img src="./img/Registro-default.png" class="bi pe-none" role="img" aria-label="Home">
             </a>
         </li>
 
         <li class="nav-item" style="margin-bottom: 24px">
-            <a asp-page="Leaderboard" class="buton-side" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
-            <img src="./img/Boton leaderboard black.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+            <a asp-page="Leaderboard" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+            <img src="./img/Leaderboard-default.png" class="bi pe-none" role="img" aria-label="Home">
             </a>
         </li>
 

@@ -1,5 +1,4 @@
 ﻿@page
-@model Onboarding_AWAQ.Pages.LeaderboardcshtmlModel
 @{
     Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
     ViewData["Title"] = "Leaderboard";
@@ -8,6 +7,76 @@
 <div class="row">
     <h1>Leaderboard</h1>
 </div>
-<div class="row" >
-    <img src="./img/Lead.png" class="img-fluid">
+<div class="row h-100" >
+    <div class="col" style="display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 41px;
+align-self: stretch;">
+        <div class="leaderboard-card">
+            <div class="ld-cd-first">
+                <h1>1</h1>
+                <div class="ld-cd-info">
+                    <img src="./img/Profile.png" alt="profile">
+                    <div>
+                        <p>Nombre</p>
+                        <div class="ld-cd-tag">
+                            <p>TEDI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="ld-cd-finish">Termino hace 5 dias</p>
+            </div>
+            <div class="ld-cd-points">
+                <h2>1500 pts</h2>
+                <h2>2:14 Hrs</h2>
+            </div>
+        </div>
+
+        <div class="leaderboard-card">
+            <div class="ld-cd-first">
+                <h1 style="color: #CE6930;">2</h1>
+                <div class="ld-cd-info">
+                    <img src="./img/Profile.png" alt="profile">
+                    <div>
+                        <p>Nombre</p>
+                        <div class="ld-cd-tag">
+                            <p>TEDI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="ld-cd-finish">Termino hace 5 dias</p>
+            </div>
+            <div class="ld-cd-points">
+                <h2>1500 pts</h2>
+                <h2>2:14 Hrs</h2>
+            </div>
+        </div>
+
+        <div class="leaderboard-card">
+            <div class="ld-cd-first">
+                <h1 style="color: #651A19;">3</h1>
+                <div class="ld-cd-info">
+                    <img src="./img/Profile.png" alt="profile">
+                    <div>
+                        <p>Nombre</p>
+                        <div class="ld-cd-tag">
+                            <p>TEDI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="ld-cd-finish">Termino hace 5 dias</p>
+            </div>
+            <div class="ld-cd-points">
+                <h2>1500 pts</h2>
+                <h2>2:14 Hrs</h2>
+            </div>
+        </div>
+    </div>
 </div>
