@@ -9,7 +9,8 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Mysqlx.Crud;
+using Microsoft.AspNetCore.Http;
+
 
 namespace WebApp_AWAQ.Pages
 {
@@ -28,16 +29,12 @@ namespace WebApp_AWAQ.Pages
             validToken = false;
             validContra = false;
             validCorreo = false;
-            Console.WriteLine("isValidCorreo: " + validCorreo);
-            Console.WriteLine("isValidToken: " + validToken);
-            Console.WriteLine("isValidContra: " + validContra);
         }
 
         public void OnPost()
         {
             foreach (var key in Request.Form)
             {
-                Console.WriteLine("" + key.Key + ": " + key.Value);
                 if (key.Key == "isValidCorreo")
                 {
                     validCorreo = bool.Parse(key.Value);
@@ -52,13 +49,8 @@ namespace WebApp_AWAQ.Pages
                 }
             }
 
-            Console.WriteLine("isValidCorreo: " + validCorreo);
-            Console.WriteLine("isValidToken: " + validToken);
-            Console.WriteLine("isValidContra: " + validContra);
-
             if (!validCorreo)
             {
-                Console.WriteLine("Correo");
                 string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
@@ -85,8 +77,12 @@ namespace WebApp_AWAQ.Pages
 
                         registro.Read();
                         idUsuario = (registro["idUsuario"]).ToString();
+                        Response.Cookies.Append("ID", idUsuario);
+                        Response.Cookies.Append("Correo", correo);
 
-                    } else
+
+                    }
+                    else
                     {
                         validCorreo = false;
                     }
@@ -113,10 +109,17 @@ namespace WebApp_AWAQ.Pages
                 MySqlCommand CMD = new MySqlCommand();
                 CMD.Connection = Conexion;
                 CMD.CommandText = "select token from token where idUsuario = @ID order by generado desc limit 1;";
-                CMD.Parameters.AddWithValue("@ID", correo);
-                Console.WriteLine(token);
-                Console.WriteLine(Request.Form["token"]);
-                if(token == Request.Form["token"])
+                CMD.Parameters.AddWithValue("@ID", Request.Cookies["ID"]);
+
+                using (var tokenRow = CMD.ExecuteReader())
+                {
+                    if (tokenRow.HasRows)
+                    {
+                        tokenRow.Read();
+                        token = tokenRow["token"].ToString();
+                    }
+                }
+                if(token == inputToken)
                 {
                     validCorreo = true;
                     validToken = true;
@@ -128,22 +131,29 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validContra && validToken)
             {   
-                Console.WriteLine("Contraseña");
                 if (Request.Form["contraseña"] == Request.Form["verificarContraseña"])
                 {
-                    Console.WriteLine("Cambiando Contraseña");
                     string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
                     MySqlCommand CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
-                    CMD.CommandText = "update usuario set `contraseña` = @contraseña where correo = @correo ;";
+                    CMD.CommandText = "update usuario set `contraseña` = @contraseña where correo = @correo;";
                     CMD.Parameters.AddWithValue("@contraseña", Request.Form["contraseña"]);
-                    CMD.Parameters.AddWithValue("@correo", correo);
-
+                    CMD.Parameters.AddWithValue("@correo", Request.Cookies["Correo"]);
                     CMD.ExecuteNonQuery();
+                    CMD.Dispose();
+                    
+                    CMD = new MySqlCommand();
+                    CMD.Connection = Conexion;
+                    CMD.CommandText = "delete from token where idUsuario = @ID;";
+                    CMD.Parameters.AddWithValue("@ID", Request.Cookies["ID"]);
+                    CMD.ExecuteNonQuery();
+
                     Conexion.Dispose();
+                    Response.Cookies.Delete("ID");
+                    Response.Cookies.Delete("Correo");
                     Response.Redirect("index");
                 }
             }
@@ -151,7 +161,7 @@ namespace WebApp_AWAQ.Pages
 
         static async Task SendMail(string token, string direccion)
         {
-            var apiKey = "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";
+            var apiKey = "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";
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
@@ -167,6 +177,7 @@ namespace WebApp_AWAQ.Pages
                 htmlContent
             );
             var response = await cliente.SendEmailAsync(correo);
+            Console.WriteLine(response.StatusCode);
         }
     }
 }
