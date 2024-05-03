@@ -20,29 +20,35 @@
                     <p class="main-paragraph">Por favor, ingresa tus datos</p>
                 </div>
 
-                @if (Model.stage == "recuperacion")
+                @if (!Model.validToken && Model.validCorreo)
                 {
                     <form method="post">
-                        <input type="text" name="token"/>
-                        <input type="submit" name="" value="Verificar Codigo" />
+                        <input type="text" asp-for="inputToken" />
+                        <input type="hidden" value="true" name="isValidCorreo" />
+                        <input type="submit" value="Verificar Codigo" />
+                        @if (Model.inputToken != null && Model.token != Model.inputToken)
+                        {
+                            <label>El token ingresado no corresponde con el token enviado por correo</label>
+                        }
                     </form>
                 }
                 else
                 {
                     <form class="pt-2" method="post">
-                        @if (Model.validToken){
+                        @if (Model.validToken && !Model.validContra){
                             <!-- Contraseña -->
                             <p class="forms-paragraph">Contraseña</p>
                             <div class="form-outline mb-3">
-                                <input class="input-forms form-control" asp-for="contraseña">
+                                <input class="input-forms form-control" name="contraseña">
                             </div>
                             <!-- Verificar Contraseña -->
                             <p class="forms-paragraph">Verificar Contraseña</p>
                             <div class="form-outline mb-3">
-                                <input class="input-forms form-control" asp-for="verificarContraseña">
+                                <input class="input-forms form-control" name="verificarContraseña">
                             </div>
                             <div class="pt-4 mb-4">
-                                <input type="hidden" value="success" asp-for="stage">
+                                <input type="hidden" value="true" name="isValidCorreo" />
+                                <input type="hidden" value="true" name="isValidToken" />
                                 <button type="submit" class="inicioSesion-btn btn btn-dark col-12">Cambiar Contraseña</button>
                             </div>
                         } else {
@@ -50,9 +56,12 @@
                             <p class="forms-paragraph">Correo</p>
                             <div class="form-outline mb-3">
                                 <input class="input-forms form-control" asp-for="correo">
+                                @if (!Model.validCorreo && Model.correo != null)
+                                {
+                                    <label>El correo ingresado no se encuentra en la base de datos</label>
+                                }
                             </div>
                             <div class="pt-4 mb-4">
-                                <input type="hidden" value="recuperacion" asp-for="stage">
                                 <button type="submit" class="inicioSesion-btn btn btn-dark col-12">Enviar código de recuperación</button>
                             </div>
                         }
