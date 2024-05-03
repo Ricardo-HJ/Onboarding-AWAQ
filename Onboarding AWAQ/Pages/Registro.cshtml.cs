@@ -14,11 +14,10 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string nombre { get; set; }
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
-        [BindProperty] public string contrase�a { get; set; }
+        [BindProperty] public string contraseña { get; set; }
 
         public void OnGet()
         {
-            CurrentPath = HttpContext.Request.Path;
         }
 
         public void OnPost() 
@@ -29,13 +28,13 @@ namespace Onboarding_AWAQ.Pages
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contrase�a`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrase�a);";
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contraseña`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrase�a);";
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
             CMD.Parameters.AddWithValue("@correo", correo);
             CMD.Parameters.AddWithValue("@telefono", telefono);
-            CMD.Parameters.AddWithValue("@contrase�a", contrase�a);
+            CMD.Parameters.AddWithValue("@contraseña", contraseña);
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
@@ -95,7 +94,7 @@ namespace Onboarding_AWAQ.Pages
             nombre = "";
             correo = "";
             telefono = "";
-            contrase�a = "";
+            contraseña = "";
             Response.Redirect("index");
         }
     }
