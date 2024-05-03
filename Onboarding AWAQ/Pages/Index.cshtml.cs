@@ -49,19 +49,19 @@ namespace Onboarding_AWAQ.Pages
 
 					if (usr.Contrasena == contrasena)
 					{
-						mensaje = "Correo y contraseña validos, inicio de sesion";
+						mensaje = "Correo y contrasena validos, inicio de sesion";
 						Conexion.Dispose();
 						Response.Redirect("Dashboard");
 					}
 					else
 					{
-						mensaje = "Contraseña invalida, no se pudo iniciar de sesion";
+						mensaje = "Contrasena invalida, no se pudo iniciar de sesion";
 					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo o contraseña invalidos, no se pudo iniciar sesion";
+				mensaje = "Correo o contrasena invalidos, no se pudo iniciar sesion";
 			}
 			catch (IndexOutOfRangeException)
 			{
