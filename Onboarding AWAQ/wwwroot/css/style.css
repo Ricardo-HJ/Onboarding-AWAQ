@@ -5,6 +5,116 @@
     margin: 0;
 }
 
+.leaderboard-card {
+    display: flex;
+    width: 499px;
+    height: 275px;
+    padding: 33px 42px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 42px;
+    flex-shrink: 0;
+
+    border-radius: 20px;
+    border: 1px solid var(--Outlines, #EAEAEA);
+    background: #FFF;
+
+    /* Shadow */
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
+}
+
+.leaderboard-card h2 {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.ld-cd-finish {
+    color: #000;
+    text-align: right;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.ld-cd-first {
+    display: flex;
+    height: 80px;
+    align-items: flex-start;
+    gap: 42px;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+.ld-cd-first h1 {
+    color: #F7C65E;
+    text-align: center;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.ld-cd-info {
+    display: flex;
+    width: 342px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ld-cd-info img {
+    width: 80px;
+    height: 80px;
+}
+
+.ld-cd-points{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.ld-cd-info p {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.ld-cd-tag {
+    display: flex;
+    padding: 4px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: 1px solid #C0FBDA;
+    background: #DFFDE7;
+}
+
+.ld-cd-tag p {
+    color: #40BF78;
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+
+
 .titles h3 {
     color: #000;
     text-align: right;
