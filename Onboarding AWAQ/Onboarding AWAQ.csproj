@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.4.0" />
+    <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
 </Project>

@@ -4,52 +4,84 @@
     ViewData["Title"] = "Recuperación";
 }
 
-
 <section>
-        <div class="row" style="padding-left: 0; padding-rigth: 0;">
-            <!-- División para el formulario de correo y contraseña -->
-            <div class="col-lg-6">
-                <div class="card-body p-md-5" style="max-width: 560px; margin: auto; margin-top: 10vh;">
+    <div class="row" style="padding-left: 0; padding-rigth: 0;">
+        <!-- División para el formulario de correo y contraseña -->
+        <div class="col-lg-6">
+            <div class="card-body p-md-5" style="max-width: 560px; margin: auto; margin-top: 10vh;">
 
-                    <div class="text-center pt-5 mt-5">
-                        <!-- Logo o imagen de marca -->
-                        <img src="./img/AWAQ-logo.png" style="width: 100px;" alt="logo">
-                    </div>
+                <div class="text-center pt-5 mt-5">
+                    <!-- Logo o imagen de marca -->
+                    <img src="./img/AWAQ-logo.png" style="width: 100px;" alt="logo">
+                </div>
 
-                    <div class="mb-5 text-center">
-                        <h1 class=" texto-presentacion">Recuperación de cuenta</h1>
-                        <p class="main-paragraph">Por favor, ingresa tus datos</p>
-                    </div>
+                <div class="mb-5 text-center">
+                    <h1 class=" texto-presentacion">Recuperación de cuenta</h1>
+                    <p class="main-paragraph">Por favor, ingresa tus datos</p>
+                </div>
 
-                    <form class="pt-2">
-                        <!-- Correo Electrónico -->
-                        <p class="forms-paragraph">Correo</p>
-                        <div class="form-outline mb-3">
-                            <input class="input-forms form-control">
-                        </div>
+                @if (!Model.validToken && Model.validCorreo)
+                {
+                    <form method="post">
+                        <input type="text" asp-for="inputToken" />
+                        <input type="hidden" value="true" name="isValidCorreo" />
+                        <input type="submit" value="Verificar Codigo" />
+                        @if (Model.inputToken != null && Model.token != Model.inputToken)
+                        {
+                            <label>El token ingresado no corresponde con el token enviado por correo</label>
+                        }
                     </form>
-
-                    <div class="pt-4 mb-4">
-                        <button type="button" class="inicioSesion-btn btn btn-dark col-12">Enviar código de recuperación</button>
-                    </div>
-
+                }
+                else
+                {
+                    <form class="pt-2" method="post">
+                        @if (Model.validToken && !Model.validContra){
+                            <!-- Contraseña -->
+                            <p class="forms-paragraph">Contraseña</p>
+                            <div class="form-outline mb-3">
+                                <input class="input-forms form-control" name="contraseña">
+                            </div>
+                            <!-- Verificar Contraseña -->
+                            <p class="forms-paragraph">Verificar Contraseña</p>
+                            <div class="form-outline mb-3">
+                                <input class="input-forms form-control" name="verificarContraseña">
+                            </div>
+                            <div class="pt-4 mb-4">
+                                <input type="hidden" value="true" name="isValidCorreo" />
+                                <input type="hidden" value="true" name="isValidToken" />
+                                <button type="submit" class="inicioSesion-btn btn btn-dark col-12">Cambiar Contraseña</button>
+                            </div>
+                        } else {
+                            <!-- Correo Electrónico -->
+                            <p class="forms-paragraph">Correo</p>
+                            <div class="form-outline mb-3">
+                                <input class="input-forms form-control" asp-for="correo">
+                                @if (!Model.validCorreo && Model.correo != null)
+                                {
+                                    <label>El correo ingresado no se encuentra en la base de datos</label>
+                                }
+                            </div>
+                            <div class="pt-4 mb-4">
+                                <button type="submit" class="inicioSesion-btn btn btn-dark col-12">Enviar código de recuperación</button>
+                            </div>
+                        }
+                    </form>
                     <div class="d-flex justify-content-between align-items-center">
                         <p><span class="question"> ¿No tienes cuenta?</span> <a asp-page="Registro" class="text-body crearCuenta">Crear cuenta</a></p>
                         <p><span class="question"> ¿Ya tienes una cuenta?</span> <a asp-page="Index" class="text-body crearCuenta">Inicia Sesión</a></p>
                     </div>
-                </div>
+                }
             </div>
-
-            <!-- División para la imagen -->
-            <div class="col-lg-6 position-relative mobile-only">
-                <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100%;">
-                    <!-- Logo de la marca -->
-                    <div class="position-absolute top-40 start-50 translate-middle-x">
-                        <img class="img-fluid" src="./img/AWAQ-LOGOHD.png" style="height: max-content;" alt="logo de la marca">
-                    </div>
-                    <div class="text-center" style="width: 100%; height: 100%;">
-                        <img src="./img/background.png" style="height: 100vh; width: 100%; object-fit: cover;" alt="">
-                    </div>
+        </div>
+        <!-- División para la imagen -->
+        <div class="col-lg-6 position-relative mobile-only">
+            <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100%;">
+                <!-- Logo de la marca -->
+                <div class="position-absolute top-40 start-50 translate-middle-x">
+                    <img class="img-fluid" src="./img/AWAQ-LOGOHD.png" style="height: max-content;" alt="logo de la marca">
+                </div>
+                <div class="text-center" style="width: 100%; height: 100%;">
+                    <img src="./img/background.png" style="height: 100vh; width: 100%; object-fit: cover;" alt="">
                 </div>
             </div>
         </div>
