@@ -1,0 +1,41 @@
+﻿<div class="side-bar d-flex flex-column flex-shrink-0" >
+
+    <div class="d-block p-3 link-body-emphasis text-decoration-none logo-side" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+    <img src="./img/Logo AWAQ.png" alt="">
+    <span class="visually-hidden">Icon-only</span>
+    </div>
+
+    <ol class="nav nav-pills nav-flush flex-column mb-auto text-center">
+
+        <li class="nav-item" style="margin-bottom: 24px">
+            <a asp-page="Dashboard" class="buton-side" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+            <img src="./img/Boton home black.png" class="bi pe-none" role="img" aria-label="Home">
+            </a>
+        </li>
+
+        <li class="nav-item" style="margin-bottom: 24px">
+            <a href="Registro" class="buton-side-active" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
+            <img src="./img/Boton colab white.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+            </a>
+        </li>
+
+        <li class="nav-item" style="margin-bottom: 24px">
+            <a asp-page="Leaderboard" class="buton-side" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+            <img src="./img/Boton leaderboard black.png" class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
+            </a>
+        </li>
+
+    </ol>
+
+    <div class="dropdown">
+    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="./img/User Circle.png" alt="mdo" width="40" height="40" class="rounded-circle">
+    </a>
+    <ul class="dropdown-menu text-small shadow">
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" asp-page="Index">Sign out</a></li>
+    </ul>
+    </div>
+</div> 

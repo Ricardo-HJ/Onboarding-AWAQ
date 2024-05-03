@@ -1,11 +1,105 @@
 ﻿.mobile-only {
     display: none;
 }
+.colab-card p {
+    margin: 0;
+}
+
+.titles h3 {
+    color: #000;
+    text-align: right;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.details h4 {
+    color: #222;
+    text-align: right;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.details h3 {
+    color: #000;
+    text-align: right;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.titles h4 {
+    color: #000;
+    text-align: right;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 
 @media (min-width: 992px) {
     .mobile-only {
         display: block;
     }
+}
+
+.colab-card { 
+    display: inline-flex;
+    width: 314px;
+    padding: 24px;
+    border-radius: 17px;
+    border: 1px solid var(--Outlines, #EAEAEA);
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
+    background: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.img-perfil {
+    width: 146px;
+    height: 146px;
+    border-radius: 73px;
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    width: 100%;
+}
+
+.location{
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: baseline;
+    gap: 82px;
+}
+
+h1 {
+    margin-top: 10px;
+    color: #000;
+    font-family: "Segoe UI";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .buton-side-active{
@@ -74,7 +168,8 @@
 .input-forms {
     border-radius: 9px;
     border: 1px solid var(--Outlines, #EAEAEA);
-    background: #FFF;
+    min-width: 314px;
+    height: 48px;
     /* Shadow */
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
 }
