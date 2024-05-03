@@ -151,7 +151,8 @@ namespace WebApp_AWAQ.Pages
 
         static async Task SendMail(string token, string direccion)
         {
-            var cliente = new SendGridClient(leo);
+            var apiKey = "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";
+            var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
             var subject = "Recuperar contraseña OnBoarding AWAQ";
