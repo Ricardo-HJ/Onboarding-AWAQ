@@ -161,7 +161,6 @@ namespace WebApp_AWAQ.Pages
 
         static async Task SendMail(string token, string direccion)
         {
-            var apiKey = "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";
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
