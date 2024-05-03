@@ -1,5 +1,5 @@
 ﻿@page
-@model Onboarding_AWAQ.Pages.RegistroModel
+@model WebApp_AWAQ.Pages.RegistroModel
 @{
     ViewData["Title"] = "Registro";
     Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
@@ -8,64 +8,63 @@
 <div class="row">
     <h1>Registro de nuevo colaborador</h1>
 </div>
-<div class="row h-100" >
+<form class="row h-100" method="post">
     <div class="col">
-        <form class="pt-2" style="max-width: 424px">
+        <div class="pt-2" style="max-width: 424px">
             <p class="forms-paragraph">País</p>
             <div class="form-outline mb-3">
-                <select class="form-select input-forms" aria-label="Default select example">
+                <select class="form-select input-forms" aria-label="Default select example" asp-for="pais">
                     <option selected>Selecciona</option>
-                    <option value="1">España</option>
-                    <option value="2">México</option>
-                    <option value="3">Colombia</option>
+                    <option value="España">España</option>
+                    <option value="México">México</option>
+                    <option value="Colombia">Colombia</option>
                 </select>
             </div>
 
             <p class="forms-paragraph">Ciudad</p>
             <div class="form-outline mb-3">
-                <select class="form-select input-forms" aria-label="Default select example">
+                <select class="form-select input-forms" aria-label="Default select example" asp-for="ciudad">
                     <option selected>Selecciona</option>
-                    <option value="1">CDMX</option>
-                    <option value="2">Barcelona</option>
-                    <option value="3">Bogotá</option>
+                    <option value="CDMX">CDMX</option>
+                    <option value="Barcelona">Barcelona</option>
+                    <option value="Bogotá">Bogotá</option>
                 </select>
             </div>
 
             <p class="forms-paragraph">Departamento</p>
             <div class="form-outline mb-3">
-                <select class="form-select input-forms" aria-label="Default select example">
+                <select class="form-select input-forms" aria-label="Default select example" asp-for="departamento">
                     <option selected>Selecciona</option>
-                    <option value="1">Recursos Humanos</option>
-                    <option value="2">Administrador</option>
-                    <option value="3">TEDI</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="TEDI">TEDI</option>
                 </select>
             </div>
 
             <p class="forms-paragraph">Nombre</p>
             <div class="form-outline mb-3">
-                <input class="input-forms form-control">
+                <input class="input-forms form-control" asp-for="nombre">
             </div>
 
             <p class="forms-paragraph">Correo</p>
             <div class="form-outline mb-3">
-                <input class="input-forms form-control">
+                <input class="input-forms form-control" asp-for="correo">
             </div>
 
             <p class="forms-paragraph">Numero</p>
             <div class="form-outline mb-3">
-                <input class="input-forms form-control">
+                <input class="input-forms form-control" asp-for="telefono" maxlength="15">
             </div>
-        </form>
+        </div>
     </div>
     <div class="col"> <!-- Add 'd-flex justify-content-center align-items-center' to center content vertically and horizontally -->
         <div class="row">
             <div class="col">
-                <form class="pt-2" style="max-width: 424px"> <!-- Add 'mx-auto' to center the form horizontally -->
+                <div class="pt-2" style="max-width: 424px"> <!-- Add 'mx-auto' to center the form horizontally -->
                     <p class="forms-paragraph">Contraseña provisional</p>
                     <div class="form-outline mb-3">
-                        <input class="input-forms form-control">
+                        <input class="input-forms form-control" asp-for="contraseña">
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -93,4 +92,4 @@
             </div>
         </div>
     </div>
-</div>
+</form>
