@@ -52,7 +52,7 @@ namespace WebApp_AWAQ.Pages
 
             if (!validCorreo)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
 
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
@@ -104,7 +104,7 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validToken)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
 
@@ -133,18 +133,18 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validContra && validToken)
             {   
-                if (Request.Form["contraseña"] == Request.Form["verificarContraseña"])
+                if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
                 {
                
-                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
                     MySqlCommand CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
 
-                    CMD.CommandText = "update usuario set `contraseña` = @contraseña where correo = @correo;";
-                    CMD.Parameters.AddWithValue("@contraseña", Request.Form["contraseña"]);
+                    CMD.CommandText = "update usuario set `contrasena` = @contrasena where correo = @correo;";
+                    CMD.Parameters.AddWithValue("@contrasena", Request.Form["contrasena"]);
                     CMD.Parameters.AddWithValue("@correo", Request.Cookies["Correo"]);
 
                     CMD.ExecuteNonQuery();
@@ -171,7 +171,7 @@ namespace WebApp_AWAQ.Pages
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contraseña OnBoarding AWAQ";
+            var subject = "Recuperar contrasena OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
             var htmlContent = "<p>Su codigo de recuperacion es <strong>" + token+ "</strong></p>";
 

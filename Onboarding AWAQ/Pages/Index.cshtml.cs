@@ -8,7 +8,7 @@ namespace Onboarding_AWAQ.Pages
 	public class IndexModel : PageModel
 	{
 		[BindProperty] public string correo { get; set; }
-		[BindProperty] public string contraseña { get; set; }
+		[BindProperty] public string contrasena { get; set; }
 		[BindProperty] public string mensaje { get; set; }
 
 		public string apiKey { get; set; }
@@ -25,15 +25,15 @@ namespace Onboarding_AWAQ.Pages
 		}
 		public void OnPost()
 		{
-			mensaje = "Correo:" + correo + ", Contraseña: " + contraseña;
+			mensaje = "Correo:" + correo + ", Contrasena: " + contrasena;
 
-			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
 			MySqlConnection Conexion = new MySqlConnection(ConexionDB);
 			Conexion.Open();
 
 			MySqlCommand CMD = new MySqlCommand();
 			CMD.Connection = Conexion;
-			string Comand = "select `idUsuario`, `contraseña` from usuario where correo = \"" + correo + "\";";
+			string Comand = "select `idUsuario`, `contrasena` from usuario where correo = \"" + correo + "\";";
 			CMD.CommandText = Comand;
 
 			Usuario usr = new Usuario();
@@ -45,9 +45,9 @@ namespace Onboarding_AWAQ.Pages
                     usr = new Usuario();
 					usr.Id = Convert.ToInt32(registro["idUsuario"]);
 					usr.Correo = correo;
-					usr.Contraseña = registro["Contraseña"].ToString()!;
+					usr.Contrasena = registro["Contrasena"].ToString()!;
 
-					if (usr.Contraseña == contraseña)
+					if (usr.Contrasena == contrasena)
 					{
 						mensaje = "Correo y contraseña validos, inicio de sesion";
 						Conexion.Dispose();

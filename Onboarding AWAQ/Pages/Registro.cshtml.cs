@@ -14,7 +14,7 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string nombre { get; set; }
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
-        [BindProperty] public string contraseña { get; set; }
+        [BindProperty] public string contrasena { get; set; }
 
         public void OnGet()
         {
@@ -22,19 +22,19 @@ namespace Onboarding_AWAQ.Pages
 
         public void OnPost() 
         {
-            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
             MySqlConnection Conexion = new MySqlConnection(ConexionDB);
             Conexion.Open();
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contraseña`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrase�a);";
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
             CMD.Parameters.AddWithValue("@correo", correo);
             CMD.Parameters.AddWithValue("@telefono", telefono);
-            CMD.Parameters.AddWithValue("@contraseña", contraseña);
+            CMD.Parameters.AddWithValue("@contrasena", contrasena);
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
@@ -94,7 +94,7 @@ namespace Onboarding_AWAQ.Pages
             nombre = "";
             correo = "";
             telefono = "";
-            contraseña = "";
+            contrasena = "";
             Response.Redirect("index");
         }
     }
