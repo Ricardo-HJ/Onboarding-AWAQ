@@ -28,7 +28,7 @@ namespace Onboarding_AWAQ.Pages
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);"
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
