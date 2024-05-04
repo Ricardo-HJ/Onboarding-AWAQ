@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 
 namespace WebApp_AWAQ.Pages
@@ -51,7 +52,7 @@ namespace WebApp_AWAQ.Pages
 
             if (!validCorreo)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
 
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
@@ -103,7 +104,7 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validToken)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
 
@@ -132,18 +133,18 @@ namespace WebApp_AWAQ.Pages
 
             } else if(!validContra && validToken)
             {   
-                if (Request.Form["contrase�a"] == Request.Form["verificarContrase�a"])
+                if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
                 {
                
-                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
                     MySqlCommand CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
 
-                    CMD.CommandText = "update usuario set `contrase�a` = @contrase�a where correo = @correo;";
-                    CMD.Parameters.AddWithValue("@contrase�a", Request.Form["contrase�a"]);
+                    CMD.CommandText = "update usuario set `contrasena` = @contrasena where correo = @correo;";
+                    CMD.Parameters.AddWithValue("@contrasena", Request.Form["contrasena"]);
                     CMD.Parameters.AddWithValue("@correo", Request.Cookies["Correo"]);
 
                     CMD.ExecuteNonQuery();
@@ -165,11 +166,12 @@ namespace WebApp_AWAQ.Pages
 
         static async Task SendMail(string token, string direccion)
         {
-            var apiKey = "";
+            DotNetEnv.Env.Load();
+            string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contrase�a OnBoarding AWAQ";
+            var subject = "Recuperar contrasena OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
             var htmlContent = "<p>Su codigo de recuperacion es <strong>" + token+ "</strong></p>";
 
