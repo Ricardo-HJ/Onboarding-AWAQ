@@ -25,7 +25,7 @@ namespace Onboarding_AWAQ.Pages
 		}
 		public void OnPost()
 		{
-			mensaje = "Correo:" + correo + ", Contrasena: " + contrasena;
+			mensaje = "Correo:" + correo + ", Contraseña: " + contrasena;
 
 			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
 			MySqlConnection Conexion = new MySqlConnection(ConexionDB);
@@ -55,13 +55,13 @@ namespace Onboarding_AWAQ.Pages
 					}
 					else
 					{
-						mensaje = "Contrasena invalida, no se pudo iniciar de sesion";
+						mensaje = "Contraseña invalida, no se pudo iniciar de sesion";
 					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo o contrasena invalidos, no se pudo iniciar sesion";
+				mensaje = "Correo o contraseña invalidos, no se pudo iniciar sesion";
 			}
 			catch (IndexOutOfRangeException)
 			{
