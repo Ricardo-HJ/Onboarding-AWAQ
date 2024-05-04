@@ -27,7 +27,7 @@ namespace Onboarding_AWAQ.Pages
 		{
 			mensaje = "Correo:" + correo + ", Contraseña: " + contrasena;
 
-			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
 			MySqlConnection Conexion = new MySqlConnection(ConexionDB);
 			Conexion.Open();
 

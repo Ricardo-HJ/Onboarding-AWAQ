@@ -22,13 +22,13 @@ namespace Onboarding_AWAQ.Pages
 
         public void OnPost() 
         {
-            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=Ts3A8AC2@23";
+            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
             MySqlConnection Conexion = new MySqlConnection(ConexionDB);
             Conexion.Open();
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, `contrasena`) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrase�a);";
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);"
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
