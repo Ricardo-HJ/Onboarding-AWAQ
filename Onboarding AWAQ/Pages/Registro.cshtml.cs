@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using Onboarding_AWAQ;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 namespace Onboarding_AWAQ.Pages
 {
@@ -22,7 +24,8 @@ namespace Onboarding_AWAQ.Pages
 
         public void OnPost() 
         {
-            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
+            DotNetEnv.Env.Load();
+            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
             MySqlConnection Conexion = new MySqlConnection(ConexionDB);
             Conexion.Open();
 
@@ -87,6 +90,7 @@ namespace Onboarding_AWAQ.Pages
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
+            SendMail(contrasena, correo).Wait();
             Conexion.Dispose();
             pais = "";
             ciudad = "";
@@ -96,6 +100,27 @@ namespace Onboarding_AWAQ.Pages
             telefono = "";
             contrasena = "";
             Response.Redirect("index");
+        }
+        static async Task SendMail(string token, string direccion)
+        {
+            DotNetEnv.Env.Load();
+            string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
+            var cliente = new SendGridClient(apiKey);
+            var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
+            var to = new EmailAddress(direccion, "Support AWAQ");
+            var subject = "Recuperar contrasena OnBoarding AWAQ";
+            var plainText = "Su codigo de recuperacion es" + token;
+            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";
+
+            var correo = MailHelper.CreateSingleEmail(
+                from,
+                to,
+                subject,
+                plainText,
+                htmlContent
+            );
+            var response = await cliente.SendEmailAsync(correo);
+            Console.WriteLine(response.StatusCode);
         }
     }
 }
