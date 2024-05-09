@@ -1,0 +1,184 @@
+/*
+--- Checar error message y estilo
+*/
+
+/* || General Styles || */
+:root {
+    --bg-color: #fafafa;
+    --shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.07);
+    --black: #111;
+    --awaq-green: #2C5629;
+}
+
+body {
+    margin-bottom: 0;
+    min-height: 100vh;
+}
+
+main {
+    margin: 0%; 
+    padding: 0%; 
+    width: 100%; 
+    height: 100vh;
+}
+
+section {
+    height: 100%;
+}
+
+.row {
+    --bs-gutter-x: 0;
+}
+
+/* || || Forms styles || || */
+form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 464px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.input label {
+    align-self: stretch;
+    color: var(--black);
+    font-family: Inter;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input input {
+    width: 100%;
+    height: 3rem;
+    padding: 1rem;
+    margin: 0;
+    border-radius: 0.45rem !important;
+    border: 1px solid var(--Outlines, #EAEAEA);
+    background: #FFF;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
+}
+
+
+/* || Authentication pages styles || */
+
+.check-square {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #000;
+}
+
+.no-check {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 0px solid #000;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    width: 100%;
+}
+
+.form-options {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+    row-gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.form-options a {
+    color: #000;
+    font-family: Inter;
+    font-size: 0.65rem;
+    font-style: normal;
+    font-weight: 500;
+    text-decoration-line: underline;
+}
+
+.form-options input{
+    margin-top: 0.425rem;
+}
+
+.form-column {
+    min-height: 100vh;
+}
+
+.full-row {
+    padding: 0 !important;
+}
+
+.auth-container {
+    max-width: 560px; 
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+}
+
+.auth-title {
+    text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.auth-title h1{  
+    color: var(--awaq-green);
+    font-family: THICCCBOI;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+}
+
+.auth-title p {
+    color: var(--black);
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.auth-title img {
+    width: 100px;
+}
+
+.auth-img-col {
+    background-image: url('../img/background.png');
+    background-size: cover;
+}
+
+.auth-img-col img{
+    max-width: 20rem;
+}
+
+
+/* || Sidebar Styles || */

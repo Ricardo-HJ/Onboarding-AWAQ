@@ -5,68 +5,63 @@
    
 }
 
-<section style="height: 100%">
-        <div class="row" style="padding-left: 0; padding-rigth: 0;">
-            <!-- División para el formulario de correo y contraseña -->
-            <div class="col-lg-6">
-                <div class="card-body p-md-5" style="max-width: 560px; margin: auto; margin-top: 10vh;">
-
-                    <div class="text-center pt-5">
-                        <!-- Logo o imagen de marca -->
-                        <img src="./img/AWAQ-logo.png" style="width: 100px;" alt="logo">
-                    </div>
-
-                    <div class="mb-5 text-center">
-                        <h1 class=" texto-presentacion">Bienvenido de Nuevo</h1>
-                        <p class="main-paragraph">Por favor, ingresa tus datos</p>
-                    </div>
-
-                    <form method="post">
-                        <!-- Correo Electrónico -->
-                        <p class="forms-paragraph">Correo</p>
-                        <div class="form-outline mb-3">
-                            <input class="input-forms form-control" asp-for="correo">
-                        </div>
-
-                        <!-- Contraseña -->
-                        <p class="forms-paragraph">Contraseña</p>
-                        <div class="form-outline mb-3">
-                            <input type="password" class="input-forms form-control" asp-for="contrasena">
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <!-- Checkbox -->
-                            <div class="form-check mb-0">
-                                <input class="mantenerSesion-cuadrito form-check-input me-2" type="checkbox">
-                                <a class="mantenerSesion-text text-body" href="#!">Mantener Sesión</a>
-                            </div>
-                            <label><a asp-page="Recuperacion" class="forgot-password text-body">¿Olvidaste tu contraseña?</a></label>
-                        </div>
-
-                        <div class="pt-4 mb-4">
-                            <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
-                        </div>
-                    </form>
-
-                    <div class="text-center">
-                        <p><span class="question"> ¿No tienes cuenta?</span> <a asp-page="Registro" class="text-body crearCuenta">Crear cuenta</a></p>
-                    </div>
-                </div>
+<section>
+    <div class="row full-row">
+        <!-- Forms column -->
+        <div class="col-lg-6 d-flex justify-content-center align-items-center form-column card-body p-md-5 auth-container">
+            <!-- Logo and welcome message -->
+            <div class="col-12 auth-title">
+                <img src="./img/AWAQ-logo.png">
+                <h1>Bienvenido de Nuevo</h1>
+                <p>Por favor, ingresa tus datos</p>
             </div>
 
-            <!-- División para la imagen -->
-            <div class="col-lg-6 position-relative desk-only">
-                <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100%;">
-                    <!-- Logo de la marca -->
-                    <div class="position-absolute top-40 start-50 translate-middle-x">
-                        <img class="img-fluid" src="./img/AWAQ-LOGOHD.png" style="height: max-content;" alt="logo de la marca">
+            <!-- Login form -->
+            <form method="post" class="col-12">
+                <!-- Text inputs -->
+                <div class="input-group">
+                    <!-- Mail -->
+                    <div class="input col-12">
+                        <label class="forms-paragraph">Correo</label>
+                        <input type="text" asp-for="correo">
                     </div>
-                    <div class="text-center" style="width: 100%; height: 100%;">
-                        <img src="./img/background.png" style="height: 100vh; width: 100%; object-fit: cover;" alt="">
+                    <!-- Password -->
+                    <div class="input col-12">
+                        <label class="forms-paragraph">Contraseña</label>
+                        <input type="password" asp-for="contrasena">
                     </div>
                 </div>
-            </div>
+                <!-- Form actions -->
+                <div class="form-actions">
+                    <!-- Options -->
+                    <div class="form-options">
+                        <!-- Checkbox Remember me-->
+                        <div class="form-check mb-0 pr-3 align-items-center">
+                            <input class="form-check-input me-2 check-square" type="checkbox">
+                            <a href="#!">Mantener Sesión</a>
+                        </div>
+                        <!-- Link recuperacion -->
+                        <div class="form-check mb-0 pr-3 align-items-center">
+                            <input class="form-check-input me-2 no-check" type="checkbox">
+                            <a asp-page="Recuperacion">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
+                    </div>    
+                </div>
+                <!-- Boton temporal de dashboard
+                <div class="pt-4 mb-4">
+                    <a asp-page="Dashboard" class="btn btn-dark col-4 inicioSesion-btn">Dashboard</a>
+                </div> -->
+            </form>
         </div>
-    </div>
-    
+
+        <!-- Image column -->
+        <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center position-relative auth-img-col">
+            <!-- AWAQ Logo -->    
+            <img src="./img/AWAQ-LOGOHD.png" alt="logo de la marca">
+        </div>
+    </div>    
 </section>
