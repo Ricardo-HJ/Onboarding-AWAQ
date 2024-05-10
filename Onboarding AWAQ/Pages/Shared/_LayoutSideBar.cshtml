@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./css/newstyle.css" asp-append-version="true"/>
 
     <!-- Link to style -->
-    <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/newstyle.css" rel="stylesheet" />
 
     <!-- GoogleFonts -->
@@ -21,10 +20,10 @@
 <body>
     <main role="main">
         <section>
-            <div class="row full-row">
+            <div class="row row-2">
                 <partial name="_sidebar" /> 
         <!-- Columna de contenido -->
-                <div class="col d-flex flex-column justify-content-between">
+                <div class="col content">
                     @RenderBody()
                 </div>
             </div>

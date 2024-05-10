@@ -23,12 +23,12 @@
                     <!-- Mail -->
                     <div class="input col-12">
                         <label class="forms-paragraph">Correo</label>
-                        <input type="text" asp-for="correo">
+                        <input type="text" asp-for="correo" autocomplete="username">
                     </div>
                     <!-- Password -->
                     <div class="input col-12">
                         <label class="forms-paragraph">Contraseña</label>
-                        <input type="password" asp-for="contrasena">
+                        <input type="password" asp-for="contrasena" autocomplete="current-password">
                     </div>
                 </div>
                 <!-- Form actions -->
@@ -51,10 +51,10 @@
                         <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Iniciar Sesión</button>
                     </div>    
                 </div>
-                <!-- Boton temporal de dashboard
-                <div class="pt-4 mb-4">
-                    <a asp-page="Dashboard" class="btn btn-dark col-4 inicioSesion-btn">Dashboard</a>
-                </div> -->
+                <!-- Boton temporal de dashboard -->
+                <div class="col-12 pt-4 mb-4">
+                    <a asp-page="Registro" class="btn btn-dark col-4 inicioSesion-btn">Dashboard</a>
+                </div> 
             </form>
         </div>
 

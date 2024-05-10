@@ -186,8 +186,9 @@ namespace WebApp_AWAQ.Pages
 
         public class TokenGenerator
         {
-            private const string Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            private const int TokenLength = 2;
+            /*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*/
+            private const string Characters = "0123456789";
+            private const int TokenLength = 6;
 
             public static string GenerateToken()
             {
