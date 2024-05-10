@@ -7,14 +7,13 @@
 
 <div class="row">
     <h1>Registro de nuevo colaborador</h1>
-    
 </div>
-<div class="row row-registro">
+<form method="post" class="row row-registro">
     <div class="input-group registro-form">
         <!-- País -->
         <div class="input col-12">
             <label class="forms-paragraph">País</label>
-            <select> 
+            <select asp-for="pais"> 
                 <option selected>Selecciona</option>
                 <option value="España">España</option>
                 <option value="Mexico">México</option>
@@ -24,20 +23,20 @@
         <!-- Ciudad -->
         <div class="input col-12">
             <label class="forms-paragraph">Ciudad</label>
-            <select> 
+            <select asp-for="ciudad"> 
                 <option selected>Selecciona</option>
-                <option value="España">Barcelona</option>
-                <option value="Mexico">CDMX</option>
-                <option value="Colombia">Bogota</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="CDMX">CDMX</option>
+                <option value="Bogota">Bogota</option>
             </select>
         </div>
         <!-- Departamento -->
         <div class="input col-12">
             <label class="forms-paragraph">Departamento</label>
-            <select> 
+            <select asp-for="departamento"> 
                 <option selected>Selecciona</option>
-                <option value="España">TEDI</option>
-                <option value="Mexico">Recursos humanos</option>
+                <option value="TEDI">TEDI</option>
+                <option value="Recursos Humanos">Recursos humanos</option>
             </select>
         </div>
         <!-- Foto de perfil -->
@@ -48,22 +47,22 @@
         <!-- Nombre -->
         <div class="input col-12">
             <label class="forms-paragraph">Nombre</label>
-            <input type="text">
+            <input type="text" asp-for="nombre">
         </div>
         <!-- Mail -->
         <div class="input col-12">
             <label class="forms-paragraph">Correo</label>
-            <input type="text">
+            <input type="text" asp-for="correo">
         </div>
         <!-- Number -->
         <div class="input col-12">
             <label class="forms-paragraph">Numero</label>
-            <input type="text">
+            <input type="text" asp-for="telefono">
         </div>
         <!-- Temp password -->
         <div class="input col-12">
             <label class="forms-paragraph">Contraseña provicional</label>
-            <input type="text">
+            <input type="text" asp-for="contrasena">
         </div>
         
     </div>  
@@ -84,6 +83,8 @@
             </div>
         </div>
         <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Registrar</button>
-    </div>
-</div>
+    </div>    
+</form>
+
+
 
