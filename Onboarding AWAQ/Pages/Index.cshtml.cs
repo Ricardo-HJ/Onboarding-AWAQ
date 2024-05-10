@@ -10,8 +10,10 @@ namespace Onboarding_AWAQ.Pages
 		[BindProperty] public string correo { get; set; }
 		[BindProperty] public string contrasena { get; set; }
 		[BindProperty] public string mensaje { get; set; }
+        [BindProperty] public string mensajeContra { get; set; }
 
-		public string apiKey { get; set; }
+
+        public string apiKey { get; set; }
 		private readonly ILogger<IndexModel> _logger;
 
 		public IndexModel(ILogger<IndexModel> logger)
@@ -25,9 +27,8 @@ namespace Onboarding_AWAQ.Pages
 		}
 		public void OnPost()
 		{
-			mensaje = "Correo:" + correo + ", Contrasena: " + contrasena;
-
-			string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
+            DotNetEnv.Env.Load();
+            string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS").ToString();
 			MySqlConnection Conexion = new MySqlConnection(ConexionDB);
 			Conexion.Open();
 
@@ -49,19 +50,18 @@ namespace Onboarding_AWAQ.Pages
 
 					if (usr.Contrasena == contrasena)
 					{
-						mensaje = "Correo y contrasena validos, inicio de sesion";
 						Conexion.Dispose();
 						Response.Redirect("Dashboard");
 					}
 					else
 					{
-						mensaje = "Contrasena invalida, no se pudo iniciar de sesion";
+                        mensajeContra = "Contraseña invalida, no se pudo iniciar de sesion";
 					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo o contrasena invalidos, no se pudo iniciar sesion";
+				mensaje = "Correo invalido, no se pudo iniciar sesion";
 			}
 			catch (IndexOutOfRangeException)
 			{

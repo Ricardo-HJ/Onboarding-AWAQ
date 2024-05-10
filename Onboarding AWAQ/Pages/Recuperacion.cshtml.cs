@@ -54,7 +54,7 @@ namespace WebApp_AWAQ.Pages
 
             if (!validCorreo)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
 
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
@@ -101,7 +101,7 @@ namespace WebApp_AWAQ.Pages
             } 
             else if(!validToken)
             {
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
 
@@ -134,7 +134,9 @@ namespace WebApp_AWAQ.Pages
             {
                 if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
                 {
-                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=STM02";
+               
+                    string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
+
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
