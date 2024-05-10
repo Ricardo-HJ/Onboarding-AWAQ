@@ -32,6 +32,7 @@ namespace Onboarding_AWAQ.Pages
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
             CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
+
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
@@ -110,7 +111,7 @@ namespace Onboarding_AWAQ.Pages
             var to = new EmailAddress(direccion, "Support AWAQ");
             var subject = "Recuperar contrasena OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";
+            var htmlContent = "<p>Su contraseï¿½a temporal es <strong>" + token + "</strong></p>";
 
             var correo = MailHelper.CreateSingleEmail(
                 from,

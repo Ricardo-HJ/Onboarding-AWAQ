@@ -6,9 +6,10 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="./css/newstyle.css" asp-append-version="true"/>
 
     <!-- Link to style -->
-    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/newstyle.css" rel="stylesheet" />
 
     <!-- GoogleFonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,28 +17,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Bebas+Neue&family=Inter:wght@100..900&family=Signika+Negative:wght@300..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
 
 </head>
-<body style="margin-bottom: 0; height: 100vh">
-    <div style="margin: 0%; padding: 0%; width: 100%; height: 100%">
-        <main role="main" style="height: 100%;">
-            <section style="height: 100%; padding: 3vh;">
-                <div class="row" style="padding-left: 0; padding-right: 0; height:100%; --bs-gutter-x: 0;">
-            <!-- Columna de sidebar -->
-                    <div class= "desk-only" style="width: 82px; padding: 0; margin-right: 40px;">
-                        <partial name="_sidebar" /> 
-                       <!--  @await Html.PartialAsync("_sidebar", model: new Onboarding_AWAQ.Pages.Shared._LayoutSideBarModel())-->
-                    </div>
-            <!-- Columna de contenido -->
-                    <div class="col d-flex flex-column justify-content-between">
-                        @RenderBody()
-                    </div>
+<body>
+    <main role="main">
+        <section>
+            <div class="row row-2">
+                <partial name="_sidebar" /> 
+        <!-- Columna de contenido -->
+                <div class="col content">
+                    @RenderBody()
                 </div>
-            </section>
-        </main>
-    </div>
+            </div>
+        </section>
+    </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

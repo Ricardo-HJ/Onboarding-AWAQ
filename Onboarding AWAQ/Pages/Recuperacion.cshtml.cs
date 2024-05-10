@@ -11,7 +11,8 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebApp_AWAQ.Pages
 {
@@ -19,7 +20,7 @@ namespace WebApp_AWAQ.Pages
     {
         public string token { get; set; }
         [BindProperty] public string inputToken { get; set; }
-        [BindProperty] public string correo {  get; set; }
+        [BindProperty] public string correo { get; set; }
         [BindProperty] public bool validToken { get; set; }
         [BindProperty] public bool validCorreo { get; set; }
         [BindProperty] public bool validContra { get; set; }
@@ -34,6 +35,7 @@ namespace WebApp_AWAQ.Pages
 
         public void OnPost()
         {
+            token = TokenGenerator.GenerateToken();
             foreach (var key in Request.Form)
             {
                 if (key.Key == "isValidCorreo")
@@ -62,21 +64,15 @@ namespace WebApp_AWAQ.Pages
                 CMD.CommandText = "select `idUsuario` from usuario where correo = @correo;";
                 CMD.Parameters.AddWithValue("@correo", correo);
                 string idUsuario = "";
+                
 
                 using (var registro = CMD.ExecuteReader())
                 {
                     if (registro.HasRows)
                     {
-                        string caracteresPosibles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                        Random randomizer = new Random();
-                        for (int i = 0; i < 4; i++)
-                        {
-                            int index = randomizer.Next(0, caracteresPosibles.Length - 1);
-                            token += caracteresPosibles[index];
-                        }
                         validCorreo = true;
                         SendMail(token, correo).Wait();
-
+                    
                         registro.Read();
 
                         idUsuario = (registro["idUsuario"]).ToString();
@@ -102,7 +98,8 @@ namespace WebApp_AWAQ.Pages
                 }
                 Conexion.Dispose();
 
-            } else if(!validToken)
+            } 
+            else if(!validToken)
             {
                 string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
@@ -125,18 +122,21 @@ namespace WebApp_AWAQ.Pages
                 {
                     validCorreo = true;
                     validToken = true;
-                } else
+                } 
+                else
                 {
                     validCorreo = true;
                     validToken = false;
                 }
 
-            } else if(!validContra && validToken)
-            {   
+            } 
+            else if(!validContra && validToken)
+            {
                 if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
                 {
                
                     string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
+
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                     Conexion.Open();
 
@@ -149,7 +149,7 @@ namespace WebApp_AWAQ.Pages
 
                     CMD.ExecuteNonQuery();
                     CMD.Dispose();
-                    
+
                     CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
                     CMD.CommandText = "delete from token where idUsuario = @ID;";
@@ -185,5 +185,25 @@ namespace WebApp_AWAQ.Pages
             var response = await cliente.SendEmailAsync(correo);
             Console.WriteLine(response.StatusCode);
         }
+
+        public class TokenGenerator
+        {
+            /*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*/
+            private const string Characters = "0123456789";
+            private const int TokenLength = 6;
+
+            public static string GenerateToken()
+            {
+                byte[] data = new byte[TokenLength];
+                using (var random = RandomNumberGenerator.Create())
+                {
+                    random.GetBytes(data);
+                }
+
+                var token = new string(Enumerable.Range(0, TokenLength).Select(x => Characters[new Random().Next(0, Characters.Length)]).ToArray());
+                return token;
+            }
+        }
     }
+
 }

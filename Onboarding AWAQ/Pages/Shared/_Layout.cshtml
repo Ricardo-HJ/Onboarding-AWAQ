@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="./css/newstyle.css" asp-append-version="true"/>
 
     <!-- Link to style -->
     <link href="./css/style.css" rel="stylesheet" />
@@ -16,16 +16,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Bebas+Neue&family=Inter:wght@100..900&family=Signika+Negative:wght@300..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
 
 </head>
-<body style="margin-bottom: 0; height: 100vh">
-    <div style="margin: 0%; padding: 0%; width: 100%; height: 100%">
-        <main role="main" style="height: 100%;">
-            @RenderBody()
-        </main>
-    </div>
+<body>
+    <main role="main">
+        @RenderBody()
+    </main>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

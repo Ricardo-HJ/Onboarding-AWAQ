@@ -1,1 +1,2 @@
-# Repo
+# Proyecto Onboarding-AWAQ
+Nuestro enfoque principal radica en la creación de una experiencia gamificada en colaboración con AWAQ, diseñada para orientar a los nuevos colaboradores a través de una serie de módulos que abarcan aspectos críticos como seguridad, comunicaciones y código ético. Para garantizar la efectividad de este proceso, se requerirá que los colaboradores alcancen una puntuación mínima para obtener la aprobación.

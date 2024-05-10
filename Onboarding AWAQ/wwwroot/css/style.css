@@ -1,22 +1,4 @@
-﻿.desk-only {
-    display: none;
-}
-
-.mobile-only {
-    display: block;
-}
-
-@media (min-width: 992px) {
-    .desk-only {
-        display: block;
-    }
-
-    .mobile-only {
-        display: none;
-    }
-}
-
-.colab-card p {
+﻿.colab-card p {
     margin: 0;
 }
 
@@ -250,28 +232,10 @@ h1 {
     background: #F9F9F9;
 }
 
-.logo-side {
-    padding-left: 23px !important;
-    padding-top: 32px !important;
-    padding-bottom: 32px !important;
-}
-
-.side-bar {
-    height: 100%;
-    width: 82px;
-
-    border-radius: 20px;
-    border: 1px solid var(--Outlines, #EAEAEA);
-    background: #FFF;
-
-    /* Shadow large */
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.07);
-}
-
 .texto-presentacion {
     color: #2C5629;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 2.25rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -315,11 +279,6 @@ h1 {
     height: 95vh;
 }
 
-
-body {
-    overflow: hidden;
-}
-
 .background-awaq {
     background-image: url("../img/background.png");
 }
@@ -353,11 +312,7 @@ body {
     text-decoration-line: underline;
 }
 
-@media(max-width: 991px) {
-    body {
-        overflow-y: scroll;
-    }
-}
+
 
 .question {
     color: #888;
@@ -380,12 +335,6 @@ body {
 
 .bkgDash{
     background-image: url(../img/Home.png);
-    height: 100vh;
-    width: auto;
-}
-
-.bkgLead{
-    background-image: url(../img/Lead.png);
     height: 100vh;
     width: auto;
 }
