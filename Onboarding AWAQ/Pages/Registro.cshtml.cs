@@ -17,6 +17,8 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
         [BindProperty] public string contrasena { get; set; }
+        [BindProperty] public byte[] perfil { get; set; }
+
 
         public void OnGet()
         {
@@ -111,7 +113,7 @@ namespace Onboarding_AWAQ.Pages
             var to = new EmailAddress(direccion, "Support AWAQ");
             var subject = "Recuperar contrasena OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su contrase�a temporal es <strong>" + token + "</strong></p>";
+            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";
 
             var correo = MailHelper.CreateSingleEmail(
                 from,
