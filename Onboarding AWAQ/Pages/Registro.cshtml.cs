@@ -17,7 +17,7 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
         [BindProperty] public string contrasena { get; set; }
-        [BindProperty] public string perfil { get; set; }
+        [BindProperty] public byte[] perfil { get; set; }
 
 
         public void OnGet()

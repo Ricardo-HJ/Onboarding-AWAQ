@@ -11,11 +11,19 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 function changeCard(value) {
-    var validClass = ["perfil", "nombre", "correo", "telefono", "pais", "ciudad", "departamento"]
+    var validClass = ["nombre", "correo", "telefono", "pais", "ciudad", "departamento"]
     if (validClass.includes(value.id)) {
         value.addEventListener("change", () => {
             var item = document.querySelectorAll(`.card-colab .${value.id}`);
-            item[0].innerHTML = value.value;
+            item[0].innerHTML = value.value
+        })
+    } else if (value.id === "perfil") {
+        value.addEventListener("change", () => {
+            var item = document.querySelectorAll(`.card-colab .${value.id}`);
+            if (value.Files[0]["type"].split("/")[0] !== "image") {
+                //
+            }
+            item[0].src = value.value;
         })
     }
 }
