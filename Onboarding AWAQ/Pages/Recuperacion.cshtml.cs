@@ -63,24 +63,23 @@ namespace WebApp_AWAQ.Pages
 
                 MySqlCommand CMD = new MySqlCommand();
                 CMD.Connection = Conexion;
-                CMD.CommandText = "select `idUsuario` from usuario where correo = @correo;";
+                CMD.CommandText = "select `idUsuario`, nombre from usuario where correo = @correo;";
                 CMD.Parameters.AddWithValue("@correo", correo);
                 string idUsuario = "";
-                
 
                 using (var registro = CMD.ExecuteReader())
                 {
                     if (registro.HasRows)
                     {
-                        validCorreo = true;
-                        SendMail(token, correo).Wait();
-                    
                         registro.Read();
+
+                        validCorreo = true;
+                        SendMail(token, correo, (registro["nombre"]).ToString()).Wait();
+                    
 
                         idUsuario = (registro["idUsuario"]).ToString();
                         Response.Cookies.Append("ID", idUsuario);
                         Response.Cookies.Append("Correo", correo);
-
                     }
                     else
                     {
@@ -165,20 +164,20 @@ namespace WebApp_AWAQ.Pages
             }
         }
 
-        static async Task SendMail(string token, string direccion)
+        static async Task SendMail(string token, string direccion, string nombre)
         {
             DotNetEnv.Env.Load();
             var apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage();
             msg.SetFrom(new EmailAddress("awaq.noreply@gmail.com", "AWAQ Support"));
-            msg.AddTo(new EmailAddress(direccion, "Nombre"));
+            msg.AddTo(new EmailAddress(direccion, nombre));
             msg.SetTemplateId("d-872c23def3fd4bd1a6bbd716c5103ab8");
 
             var dynamicTemplateData = new ExampleTemplateData
             {
                 Subject = "Recuperación de contraseña",
-                Name = "Falta",
+                Name = nombre,
                 Code = token
             };
 
