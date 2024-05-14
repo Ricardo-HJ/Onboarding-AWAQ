@@ -2,6 +2,41 @@
 --- Checar error message y estilo
 */
 
+
+/* || General Styles || */
+:root {
+    --bg-color: #fafafa;
+    --shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.07);
+    --black: #111;
+    --awaq-green: #2C5629;
+}
+
+body {
+    margin-bottom: 0;
+    min-height: 100vh;
+}
+
+main {
+    margin: 0%; 
+    padding: 0%; 
+    width: 100%; 
+    height: 100vh;
+}
+
+section {
+    height: 100%;
+}
+
+h1 {
+    color: #111;
+    font-family: "Segoe UI";
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -28,30 +63,6 @@ select::after {
 }
 
 
-/* || General Styles || */
-:root {
-    --bg-color: #fafafa;
-    --shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.07);
-    --black: #111;
-    --awaq-green: #2C5629;
-}
-
-body {
-    margin-bottom: 0;
-    min-height: 100vh;
-}
-
-main {
-    margin: 0%; 
-    padding: 0%; 
-    width: 100%; 
-    height: 100vh;
-}
-
-section {
-    height: 100%;
-}
-
 .row {
     --bs-gutter-x: 0;
 }
@@ -69,16 +80,6 @@ section {
     gap: 2rem;
     flex: 1 0 0;
     align-self: stretch;
-}
-
-h1 {
-    color: #111;
-    font-family: "Segoe UI";
-    font-size: 2.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
 }
 
 /* || || Forms styles || || */
@@ -107,6 +108,16 @@ h1 {
 }
 
 .input label {
+    align-self: stretch;
+    color: var(--black);
+    font-family: Inter;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.label-file {
     align-self: stretch;
     color: var(--black);
     font-family: Inter;
@@ -150,25 +161,6 @@ h1 {
     font-weight: 400;
     line-height: normal;
 }
-
-.input-button::-webkit-file-upload-button{
-    display: flex;
-    padding: 0.25rem 0.5rem;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    border-radius: 0.25rem;
-    border: 1px solid #EFEFEF;
-    background: #FFF;
-
-    color: #111;
-    font-family: Inter;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-} 
 
 
 /* || Authentication pages styles || */
@@ -382,7 +374,7 @@ h1 {
     flex-shrink: 0;
 
     border-radius: 4.5625rem;
-    background: url(../img/profile.png) lightgray 50% / cover no-repeat;
+    background: url(../img/User\ Circle.png) lightgray 50% / cover no-repeat;
 }
 
 .card-title {
@@ -430,12 +422,14 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     gap: 2.5rem;
+    width: 90%;
 }
 
 .card-location {
     display: flex;
     align-items: center;
-    gap: 5.125rem;
+    width: 100%;
+    justify-content: space-between;
 }
 
 
@@ -449,3 +443,73 @@ h1 {
     align-self: stretch;
 }
 
+
+
+
+
+
+/* || Pruebas boton || */
+.input-file {
+    display: flex;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 3rem;
+    padding-left: 1rem;
+    margin: 0;
+    border-radius: 0.45rem !important;
+    border: 1px solid var(--Outlines, #EAEAEA);
+    background: #FFF;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10);
+    color: #525252;
+    font-family: Inter;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input-file input {
+    width: 0;
+    height: 0;
+}
+
+.input-file label {
+    display: flex;
+    padding: 0.25rem 0.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    border: 1px solid #EFEFEF;
+    background: #FFF;
+    cursor: pointer;
+}
+
+/* our visual feedback P */
+.file-return {
+	margin: 0;
+}
+
+.file-return:not(:empty) {
+	margin: 1em 0;
+}
+
+.file-return {
+    color: #525252;
+    font-family: Inter;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input-img {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}

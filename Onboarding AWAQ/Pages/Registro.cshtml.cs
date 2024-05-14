@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using Mysqlx.Crud;
 using Onboarding_AWAQ;
 using SendGrid.Helpers.Mail;
@@ -107,23 +108,47 @@ namespace Onboarding_AWAQ.Pages
         static async Task SendMail(string token, string direccion)
         {
             DotNetEnv.Env.Load();
+            var apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage();
+            msg.SetFrom(new EmailAddress("test@example.com", "Example User"));
+            msg.AddTo(new EmailAddress("test@example.com", "Example User"));
+            msg.SetTemplateId("d-d42b0eea09964d1ab957c18986c01828");
+
+            /*
             string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
             var cliente = new SendGridClient(apiKey);
             var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
             var to = new EmailAddress(direccion, "Support AWAQ");
             var subject = "Recuperar contrasena OnBoarding AWAQ";
             var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";
+            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";*/
 
-            var correo = MailHelper.CreateSingleEmail(
-                from,
-                to,
-                subject,
-                plainText,
-                htmlContent
-            );
-            var response = await cliente.SendEmailAsync(correo);
+            var dynamicTemplateData = new ExampleTemplateData
+            {
+                Subject = "Recuperación de contraseña",
+                Name = "Falta",
+                Code = token
+            };
+
+            msg.SetTemplateData(dynamicTemplateData);
+            var response = await client.SendEmailAsync(msg);
             Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.Headers.ToString());
+            Console.WriteLine("\n\nPress any key to exit.");
+            Console.ReadLine();
+        }
+
+        private class ExampleTemplateData
+        {
+            [JsonProperty("subject")]
+            public string Subject { get; set; }
+
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("code")]
+            public string Code { get; set; }
         }
     }
 }
