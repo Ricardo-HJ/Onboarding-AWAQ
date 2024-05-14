@@ -175,15 +175,6 @@ namespace WebApp_AWAQ.Pages
             msg.AddTo(new EmailAddress(direccion, "Nombre"));
             msg.SetTemplateId("d-872c23def3fd4bd1a6bbd716c5103ab8");
 
-            /*
-            string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
-            var cliente = new SendGridClient(apiKey);
-            var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
-            var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contrasena OnBoarding AWAQ";
-            var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";*/
-
             var dynamicTemplateData = new ExampleTemplateData
             {
                 Subject = "Recuperación de contraseña",
@@ -196,18 +187,18 @@ namespace WebApp_AWAQ.Pages
             Console.WriteLine(response.StatusCode);
             Console.WriteLine(response.Headers.ToString());
             Console.WriteLine("\n\nPress any key to exit.");
-            Console.ReadLine();
+
         }
 
         private class ExampleTemplateData
         {
-            [JsonProperty("subject")]
+            [JsonProperty("Subject")]
             public string Subject { get; set; }
 
-            [JsonProperty("name")]
+            [JsonProperty("Name")]
             public string Name { get; set; }
 
-            [JsonProperty("code")]
+            [JsonProperty("Code")]
             public string Code { get; set; }
         }
 
