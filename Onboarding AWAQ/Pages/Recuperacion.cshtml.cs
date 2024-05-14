@@ -75,7 +75,7 @@ namespace WebApp_AWAQ.Pages
 
                         validCorreo = true;
                         SendMail(token, correo, (registro["nombre"]).ToString()).Wait();
-                    
+                        /**/ 
 
                         idUsuario = (registro["idUsuario"]).ToString();
                         Response.Cookies.Append("ID", idUsuario);
