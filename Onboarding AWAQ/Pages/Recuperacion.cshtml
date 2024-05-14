@@ -16,7 +16,7 @@
 
             @if (!Model.validToken && Model.validCorreo)
             {
-                <form method="post" class="col-12">
+                <form method="post" class="col-12 form-login">
                     <div class="input col-12">
                         <label class="forms-paragraph">Codigo de recuperacion</label>
                         <input type="text" asp-for="inputToken">
@@ -34,7 +34,7 @@
             }
             else
             {
-                <form method="post" class="col-12">
+                <form method="post" class="col-12 form-login">
                     @if (Model.validToken && !Model.validContra){
                         /**/
                         <div class="input-group">
