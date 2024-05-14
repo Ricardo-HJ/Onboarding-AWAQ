@@ -54,6 +54,7 @@ namespace WebApp_AWAQ.Pages
 
             if (!validCorreo)
             {
+                DotNetEnv.Env.Load();
                 string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
 
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
@@ -65,7 +66,6 @@ namespace WebApp_AWAQ.Pages
                 CMD.Parameters.AddWithValue("@correo", correo);
                 string idUsuario = "";
                 
-
                 using (var registro = CMD.ExecuteReader())
                 {
                     if (registro.HasRows)
@@ -188,8 +188,7 @@ namespace WebApp_AWAQ.Pages
 
         public class TokenGenerator
         {
-            /*abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*/
-            private const string Characters = "0123456789";
+            private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             private const int TokenLength = 6;
 
             public static string GenerateToken()
