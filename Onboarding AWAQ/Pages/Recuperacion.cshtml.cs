@@ -184,10 +184,6 @@ namespace WebApp_AWAQ.Pages
 
             msg.SetTemplateData(dynamicTemplateData);
             var response = await client.SendEmailAsync(msg);
-            Console.WriteLine(response.StatusCode);
-            Console.WriteLine(response.Headers.ToString());
-            Console.WriteLine("\n\nPress any key to exit.");
-
         }
 
         private class ExampleTemplateData
