@@ -83,7 +83,8 @@ insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena, superUs
 	("Pedro Jimenez", "Mexico", "Monterrey", "pedroJ@pedro.com", "1111111", "PedroJPedro", 0),
 	("Rodrigo Perez", "Colombia", "Medellin", "rodrigoP@rodrigo.com", "8888888", "RodrigoPRodrigo", 0),
 	("Maria Rodriguez", "Colombia", "Medellin", "maria@gmail.com", "7777777", "ContraM123", 0),
-	("Juan Rulfo", "España", "Barcelona", "Rulfo_Juan@yahoo.com", "6666666", "A143Vcew@19", 0);
+	("Juan Rulfo", "España", "Barcelona", "Rulfo_Juan@yahoo.com", "6666666", "A143Vcew@19", 0),
+    ("Ricardo", "Mexico", "CDMX", "rh9344001@gmail.com", "844555221", "sayra", 1);
 
 insert into departamento (departamento) values 
 	("TEDI"),

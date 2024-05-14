@@ -94,7 +94,7 @@ namespace Onboarding_AWAQ.Pages
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
-            SendMail(contrasena, correo).Wait();
+            SendMail(contrasena, correo, nombre, correo, contrasena).Wait();
             Conexion.Dispose();
             pais = "";
             ciudad = "";
@@ -105,50 +105,37 @@ namespace Onboarding_AWAQ.Pages
             contrasena = "";
             Response.Redirect("index");
         }
-        static async Task SendMail(string token, string direccion)
+        static async Task SendMail(string token, string direccion, string nombre, string correo, string contrasena)
         {
             DotNetEnv.Env.Load();
             var apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage();
-            msg.SetFrom(new EmailAddress("test@example.com", "Example User"));
-            msg.AddTo(new EmailAddress("test@example.com", "Example User"));
-            msg.SetTemplateId("d-d42b0eea09964d1ab957c18986c01828");
-
-            /*
-            string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
-            var cliente = new SendGridClient(apiKey);
-            var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
-            var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contrasena OnBoarding AWAQ";
-            var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su contraseña temporal es <strong>" + token + "</strong></p>";*/
+            msg.SetFrom(new EmailAddress("awaq.noreply@gmail.com", "AWAQ Support"));
+            msg.AddTo(new EmailAddress(direccion, nombre));
+            msg.SetTemplateId("d-b24a58d6ff2349d29d6fab2d2f176e81");
 
             var dynamicTemplateData = new ExampleTemplateData
             {
-                Subject = "Recuperación de contraseña",
-                Name = "Falta",
-                Code = token
+                Name = nombre,
+                Mail = correo,
+                Pass = contrasena
             };
 
             msg.SetTemplateData(dynamicTemplateData);
             var response = await client.SendEmailAsync(msg);
-            Console.WriteLine(response.StatusCode);
-            Console.WriteLine(response.Headers.ToString());
-            Console.WriteLine("\n\nPress any key to exit.");
-            Console.ReadLine();
         }
 
         private class ExampleTemplateData
         {
-            [JsonProperty("subject")]
-            public string Subject { get; set; }
-
-            [JsonProperty("name")]
+            [JsonProperty("Name")]
             public string Name { get; set; }
 
-            [JsonProperty("code")]
-            public string Code { get; set; }
+            [JsonProperty("Mail")]
+            public string Mail { get; set; }
+
+            [JsonProperty("Pass")]
+            public string Pass { get; set; }
         }
     }
 }

@@ -19,7 +19,7 @@ function changeCard(value) {
         })
     } else if (value.id === "my-file") {
         value.addEventListener("change", () => {
-            var item = document.querySelector(`.card-colab .perfil`);
+            var item = document.querySelector(`.card-colab .colab-img`);
             if (value.files["0"]["type"].split("/")[0] !== "image") {
                 /*label.innerHTML = "Formato de archivo incorrecto ingrese una imagen";*/
             } else {
