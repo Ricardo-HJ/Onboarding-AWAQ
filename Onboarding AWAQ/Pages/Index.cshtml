@@ -22,15 +22,13 @@
                 <div class="input-group">
                     <!-- Mail -->
                     <div class="input col-12">
-                        <label class="forms-paragraph">Correo</label>
+                        <label class="forms-paragraph">Correo</label><label>@Model.mensaje</label>
                         <input type="text" asp-for="correo" autocomplete="username">
-                        <label>@Model.mensaje</label>
                     </div>
                     <!-- Password -->
                     <div class="input col-12">
-                        <label class="forms-paragraph">Contraseña</label>
+                        <label class="forms-paragraph">Contraseña</label><label>@Model.mensajeContra</label>
                         <input type="password" asp-for="contrasena" autocomplete="current-password">
-                        <label>@Model.mensajeContra</label>
                     </div>
 
 
