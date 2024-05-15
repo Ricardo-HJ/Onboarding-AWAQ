@@ -17,20 +17,24 @@ function changeCard(value) {
             var item = document.querySelector(`.card-colab .${value.id}`);
             item.innerHTML = value.value
         })
-    } else if (value.id === "file-input") {
+    } else if (value.id === "my-file") {
         value.addEventListener("change", () => {
-            var item = document.querySelector(`.card-colab .perfil`);
+            var item = document.querySelector(`.card-colab .colab-img`);
             if (value.files["0"]["type"].split("/")[0] !== "image") {
-                var label = document.createElement("label");
-                label.innerHTML = "Formato de archivo incorrecto ingrese una imagen";
-                value.parentElement.appendChild(label);
+                /*label.innerHTML = "Formato de archivo incorrecto ingrese una imagen";*/
             } else {
-                var child = value.parentElement.children[2];
-                if (child) { child.remove(); }
                 const image = value.files[0];
                 const fileURL = URL.createObjectURL(image);
                 item.src = fileURL;
             }
         })
     }
+}
+
+function displayFileName() {
+    const fileInput = document.getElementById('my-file');
+    const fileName = fileInput.files[0].name;
+    const fileReturn = document.querySelector('.file-return');
+    fileReturn.textContent = fileName;
+    
 }

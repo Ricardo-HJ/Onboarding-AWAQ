@@ -40,10 +40,16 @@
             </select>
         </div>
         <!-- Foto de perfil -->
-        <div class="input col-12">
-            <label for="file-input">Sube una foto de perfil</label>
-            <input type="file" id="file-input" class="input-button"/>
+        <div class="input-img col-12">
+            <label class="label-file forms-paragraph">Foto de perfil</label>
+            <label class="label-file"></label>
+            <div class="input-file">
+                <p class="file-return">Seleccionar imagen</p>
+                <input id="my-file" type="file" accept="image/png, image/jpeg" onchange="displayFileName()">
+                <label for="my-file">Subir imagen</label>
+            </div>
         </div>
+
         <!-- Nombre -->
         <div class="input col-12">
             <label class="forms-paragraph">Nombre</label>
@@ -68,18 +74,18 @@
     </div>  
     <div class="card-button">
         <div class="card-colab">
-            <img src="./img/profile.png" alt="Colaborador" class="colab-img perfil">
+            <img class="colab-img" src="../img/UnsetUser.png">
             <div class="card-name-dept">
-                <h1 class="card-title nombre">Debra Holt</h1>
-                <h2 class="card-subtitle departamento">TEDI</h2>
+                <h1 class="card-title nombre">Nombre</h1>
+                <h2 class="card-subtitle departamento">Departamento</h2>
             </div>
             <div class="card-details">
                 <div class="card-location">
-                    <h1 class="card-title ciudad">Barcelona</h1>
-                    <h2 class="card-subtitle pais">España</h2>
+                    <h1 class="card-title ciudad">Ciudad</h1>
+                    <h2 class="card-subtitle pais">Pais</h2>
                 </div>
-                <p class="correo">mail@gmail.com</p>
-                <p class="telefono">+52 81 123 45 67</p>
+                <p class="correo">awaq.ejemplo@gmail.com</p>
+                <p class="telefono">+00 000 0000 00</p>
             </div>
         </div>
         <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Registrar</button>

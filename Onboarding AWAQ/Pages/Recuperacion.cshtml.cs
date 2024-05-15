@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using MySqlX.XDevAPI;
 using Onboarding_AWAQ;
 using Org.BouncyCastle.Crypto.Macs;
@@ -62,23 +63,23 @@ namespace WebApp_AWAQ.Pages
 
                 MySqlCommand CMD = new MySqlCommand();
                 CMD.Connection = Conexion;
-                CMD.CommandText = "select `idUsuario` from usuario where correo = @correo;";
+                CMD.CommandText = "select `idUsuario`, nombre from usuario where correo = @correo;";
                 CMD.Parameters.AddWithValue("@correo", correo);
                 string idUsuario = "";
-                
+
                 using (var registro = CMD.ExecuteReader())
                 {
                     if (registro.HasRows)
                     {
-                        validCorreo = true;
-                        SendMail(token, correo).Wait();
-                    
                         registro.Read();
+
+                        validCorreo = true;
+                        SendMail(token, correo, (registro["nombre"]).ToString()).Wait();
+                        /**/ 
 
                         idUsuario = (registro["idUsuario"]).ToString();
                         Response.Cookies.Append("ID", idUsuario);
                         Response.Cookies.Append("Correo", correo);
-
                     }
                     else
                     {
@@ -134,7 +135,6 @@ namespace WebApp_AWAQ.Pages
             {
                 if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
                 {
-               
                     string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
 
                     MySqlConnection Conexion = new MySqlConnection(ConexionDB);
@@ -164,31 +164,42 @@ namespace WebApp_AWAQ.Pages
             }
         }
 
-        static async Task SendMail(string token, string direccion)
+        static async Task SendMail(string token, string direccion, string nombre)
         {
             DotNetEnv.Env.Load();
-            string apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
-            var cliente = new SendGridClient(apiKey);
-            var from = new EmailAddress("awaq.noreply@gmail.com", "Support AWAQ");
-            var to = new EmailAddress(direccion, "Support AWAQ");
-            var subject = "Recuperar contrasena OnBoarding AWAQ";
-            var plainText = "Su codigo de recuperacion es" + token;
-            var htmlContent = "<p>Su codigo de recuperacion es <strong>" + token+ "</strong></p>";
+            var apiKey = Environment.GetEnvironmentVariable("ASPNETCORE_API_KEY");
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage();
+            msg.SetFrom(new EmailAddress("awaq.noreply@gmail.com", "AWAQ Support"));
+            msg.AddTo(new EmailAddress(direccion, nombre));
+            msg.SetTemplateId("d-872c23def3fd4bd1a6bbd716c5103ab8");
 
-            var correo = MailHelper.CreateSingleEmail(
-                from,
-                to,
-                subject,
-                plainText,
-                htmlContent
-            );
-            var response = await cliente.SendEmailAsync(correo);
-            Console.WriteLine(response.StatusCode);
+            var dynamicTemplateData = new ExampleTemplateData
+            {
+                Subject = "Recuperación de contraseña",
+                Name = nombre,
+                Code = token
+            };
+
+            msg.SetTemplateData(dynamicTemplateData);
+            var response = await client.SendEmailAsync(msg);
+        }
+
+        private class ExampleTemplateData
+        {
+            [JsonProperty("Subject")]
+            public string Subject { get; set; }
+
+            [JsonProperty("Name")]
+            public string Name { get; set; }
+
+            [JsonProperty("Code")]
+            public string Code { get; set; }
         }
 
         public class TokenGenerator
         {
-            private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            private const string Characters = "0123456789";
             private const int TokenLength = 6;
 
             public static string GenerateToken()
