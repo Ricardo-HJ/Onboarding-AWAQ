@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace WebApp_AWAQ.Pages
+namespace Onboarding_AWAQ.Pages
 {
     public class RecuperacionModel : PageModel
     {
@@ -28,6 +28,10 @@ namespace WebApp_AWAQ.Pages
 
         public void OnGet()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
+            {
+                Response.Redirect("index");
+            };
             token = "";
             validToken = false;
             validContra = false;

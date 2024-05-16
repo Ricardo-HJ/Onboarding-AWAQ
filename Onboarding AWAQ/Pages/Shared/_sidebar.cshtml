@@ -19,14 +19,16 @@
             </a>
         </li>
         <!-- Registro button -->
-        <li class="nav-item">
-            <a href="Registro" aria-label="Dashboard">
-            <img src="./img/Registro-default.png">
-            </a>
-        </li>
+        @if (Model.admin){
+            <li class="nav-item">
+                <a asp-page="Registro" aria-label="Registro">
+                    <img src="./img/Registro-default.png">
+                </a>
+            </li>
+        }
         <!-- Leaderboard button -->
         <li class="nav-item">
-            <a asp-page="Leaderboard" aria-label="Orders">
+            <a asp-page="Leaderboard" aria-label="Leaderboard">
             <img src="./img/Leaderboard-default.png">
             </a>
         </li>

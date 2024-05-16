@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Onboarding_AWAQ.Pages
 {
@@ -11,19 +13,13 @@ namespace Onboarding_AWAQ.Pages
 		[BindProperty] public string contrasena { get; set; }
 		[BindProperty] public string mensaje { get; set; }
         [BindProperty] public string mensajeContra { get; set; }
-
-
         public string apiKey { get; set; }
-		private readonly ILogger<IndexModel> _logger;
-
-		public IndexModel(ILogger<IndexModel> logger)
-		{
-			_logger = logger;
-		}
-
 		public void OnGet()
 		{
-
+			if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == false)
+			{
+                Response.Redirect("Leaderboard");
+            };
 		}
 		public void OnPost()
 		{
@@ -34,7 +30,7 @@ namespace Onboarding_AWAQ.Pages
 
 			MySqlCommand CMD = new MySqlCommand();
 			CMD.Connection = Conexion;
-			string Comand = "select `idUsuario`, `contrasena` from usuario where correo = \"" + correo + "\";";
+			string Comand = "select `idUsuario`, `contrasena`, `src`, `superUsuario` from usuario where correo = \"" + correo + "\";";
 			CMD.CommandText = Comand;
 
 			Usuario usr = new Usuario();
@@ -47,11 +43,15 @@ namespace Onboarding_AWAQ.Pages
 					usr.Id = Convert.ToInt32(registro["idUsuario"]);
 					usr.Correo = correo;
 					usr.Contrasena = registro["Contrasena"].ToString()!;
+					usr.superUsuario = Convert.ToBoolean(registro["superUsuario"]);
+					usr.src = registro["src"].ToString();
 
 					if (usr.Contrasena == contrasena)
 					{
 						Conexion.Dispose();
-						Response.Redirect("Dashboard");
+                        HttpContext.Session.SetString("usuario", usr.Id.ToString());
+                        HttpContext.Session.SetString("permisos", usr.superUsuario.ToString());
+                        Response.Redirect("Dashboard");
 					}
 					else
 					{

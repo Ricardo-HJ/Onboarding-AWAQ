@@ -6,5 +6,7 @@
 		public string Correo { get; set; }
 		public string Nombre { get; set; }
 		public string Contrasena { get; set; }
-	}
+        public bool superUsuario { get; set; }
+		public string src {  get; set; }
+    }
 }

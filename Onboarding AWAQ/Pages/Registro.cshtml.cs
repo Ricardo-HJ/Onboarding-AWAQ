@@ -6,11 +6,14 @@ using Mysqlx.Crud;
 using Onboarding_AWAQ;
 using SendGrid.Helpers.Mail;
 using SendGrid;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Onboarding_AWAQ.Pages
 {
     public class RegistroModel : PageModel
     {
+        public bool admin { get; set; }
         [BindProperty] public string pais {  get; set; }
         [BindProperty] public string ciudad { get; set; }
         [BindProperty] public string departamento { get; set; }
@@ -18,15 +21,24 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
         [BindProperty] public string contrasena { get; set; }
-        [BindProperty] public byte[] perfil { get; set; }
-
+        [BindProperty] public IFormFile perfil { get; set; }
 
         public void OnGet()
         {
+            admin = Convert.ToBoolean(HttpContext.Session.GetString("permisos"));
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
+            {
+                Response.Redirect("index");
+            } else if (HttpContext.Session.GetString("Leaderboard") == "False")
+            {
+                /*Regresarlo a la ultima pagina*/
+                Response.Redirect("index");
+            }
         }
 
-        public void OnPost() 
+        public async void OnPost() 
         {
+            string imagePath = await ImageUpload(perfil);
             DotNetEnv.Env.Load();
             string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
             MySqlConnection Conexion = new MySqlConnection(ConexionDB);
@@ -34,7 +46,7 @@ namespace Onboarding_AWAQ.Pages
 
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
+            CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena, src) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena, @imagen);";
 
             CMD.Parameters.AddWithValue("@nombre", nombre);
             CMD.Parameters.AddWithValue("@pais", pais);
@@ -42,6 +54,7 @@ namespace Onboarding_AWAQ.Pages
             CMD.Parameters.AddWithValue("@correo", correo);
             CMD.Parameters.AddWithValue("@telefono", telefono);
             CMD.Parameters.AddWithValue("@contrasena", contrasena);
+            CMD.Parameters.AddWithValue("@imagen", imagePath);
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
@@ -104,6 +117,21 @@ namespace Onboarding_AWAQ.Pages
             telefono = "";
             contrasena = "";
             Response.Redirect("index");
+        }
+        public async Task<string> ImageUpload(IFormFile image)
+        {
+            if (image.Length > 0)
+            {   
+                /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
+                var filePath = (Directory.GetCurrentDirectory()) + "/profileImages/user" + Request.Cookies["ID"] + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
+                var relativePath = Path.GetRelativePath(Directory.GetCurrentDirectory(), filePath);
+                using (var stream = System.IO.File.OpenWrite(filePath))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                return relativePath;
+            }
+            return "No image Provided";
         }
         static async Task SendMail(string token, string direccion, string nombre, string correo, string contrasena)
         {
