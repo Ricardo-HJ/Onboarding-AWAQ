@@ -25,6 +25,9 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public bool validToken { get; set; }
         [BindProperty] public bool validCorreo { get; set; }
         [BindProperty] public bool validContra { get; set; }
+        [BindProperty] public string mensaje { get; set; }
+        [BindProperty] public string mensaje2 { get; set; }
+        [BindProperty] public bool alert { get; set; }
 
         public void OnGet()
         {
@@ -32,6 +35,7 @@ namespace Onboarding_AWAQ.Pages
             {
                 Response.Redirect("index");
             };
+            alert = false;
             token = "";
             validToken = false;
             validContra = false;
@@ -106,6 +110,7 @@ namespace Onboarding_AWAQ.Pages
             } 
             else if(!validToken)
             {
+                mensaje = "Codigo incorrecto";
                 string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
@@ -164,6 +169,11 @@ namespace Onboarding_AWAQ.Pages
                     Response.Cookies.Delete("ID");
                     Response.Cookies.Delete("Correo");
                     Response.Redirect("index");
+                }
+                else if (Request.Form["contrasena"] != Request.Form["verificarContrasena"])
+                {
+                    alert = true;
+                    mensaje2 = "Las contraseñas no coinciden";
                 }
             }
         }
