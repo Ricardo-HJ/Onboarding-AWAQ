@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\profileImages\user1profileImage.png" />
+    <None Include="wwwroot\profileImages\user6ProfileImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
     <PackageReference Include="MySql.Data" Version="8.4.0" />

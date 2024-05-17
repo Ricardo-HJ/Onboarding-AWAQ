@@ -1,7 +1,5 @@
 using Onboarding_AWAQ.Pages;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.AspNetCore.Rewrite;
 
 
 namespace Onboarding_AWAQ.Pages
@@ -51,6 +53,14 @@ namespace Onboarding_AWAQ.Pages
 						Conexion.Dispose();
                         HttpContext.Session.SetString("usuario", usr.Id.ToString());
                         HttpContext.Session.SetString("permisos", usr.superUsuario.ToString());
+						if(usr.src != "")
+                        {
+                            HttpContext.Session.SetString("src", usr.src);
+                        } else
+						{
+                            HttpContext.Session.SetString("src", "./img/User Circle.png");
+                        }
+
                         Response.Redirect("Dashboard");
 					}
 					else
