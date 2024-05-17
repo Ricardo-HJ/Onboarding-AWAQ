@@ -19,14 +19,16 @@
             </a>
         </li>
         <!-- Registro button -->
-        <li class="nav-item">
-            <a href="Registro" aria-label="Dashboard">
-            <img src="./img/Registro-default.png">
-            </a>
-        </li>
+        @if (Model.admin){
+            <li class="nav-item">
+                <a asp-page="Registro" aria-label="Registro">
+                    <img src="./img/Registro-default.png">
+                </a>
+            </li>
+        }
         <!-- Leaderboard button -->
         <li class="nav-item">
-            <a asp-page="Leaderboard" aria-label="Orders">
+            <a asp-page="Leaderboard" aria-label="Leaderboard">
             <img src="./img/Leaderboard-default.png">
             </a>
         </li>
@@ -34,14 +36,14 @@
     <!-- Profile icon -->
     <div class="dropdown">
     <a href="#" class="d-flex align-items-center justify-content-center p-3" data-bs-toggle="dropdown">
-        <img src="./img/User Circle.png" class="rounded-circle">
+        <img src="@Model.src" class="rounded-circle">
     </a>
     <!-- Profile menu -->
     <ul class="dropdown-menu text-small shadow">
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" asp-page="Index">Sign out</a></li>
+        <li><a class="dropdown-item" asp-page="LogOut">Sign out</a></li>
     </ul>
 
     </div>

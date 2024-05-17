@@ -6,11 +6,15 @@ using Mysqlx.Crud;
 using Onboarding_AWAQ;
 using SendGrid.Helpers.Mail;
 using SendGrid;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Onboarding_AWAQ.Pages
 {
     public class RegistroModel : PageModel
     {
+        public bool admin { get; set; }
+        public string src { get; set; }
         [BindProperty] public string pais {  get; set; }
         [BindProperty] public string ciudad { get; set; }
         [BindProperty] public string departamento { get; set; }
@@ -18,14 +22,24 @@ namespace Onboarding_AWAQ.Pages
         [BindProperty] public string correo { get; set; }
         [BindProperty] public string telefono { get; set; }
         [BindProperty] public string contrasena { get; set; }
-        [BindProperty] public byte[] perfil { get; set; }
-
+        [BindProperty] public IFormFile perfil { get; set; }
 
         public void OnGet()
         {
+            admin = Convert.ToBoolean(HttpContext.Session.GetString("permisos"));
+            src = HttpContext.Session.GetString("src");
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
+            {
+                Response.Redirect("index");
+            } else if (HttpContext.Session.GetString("Leaderboard") == "False")
+            {
+                /*Regresarlo a la ultima pagina*/
+                Response.Redirect("index");
+            }
         }
 
-        public void OnPost() 
+        public async void OnPost() 
         {
             DotNetEnv.Env.Load();
             string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
@@ -65,6 +79,14 @@ namespace Onboarding_AWAQ.Pages
                 }
             }
             CMD.Dispose();
+            string imagePath = await ImageUpload(perfil, idUsuario);
+
+            CMD = new MySqlCommand();
+            CMD.Connection = Conexion;
+            CMD.CommandText = "update usuario set `src` = @src where correo = @correo;";
+            CMD.Parameters.AddWithValue("@src", imagePath);
+            CMD.Parameters.AddWithValue("@correo", correo);
+            CMD.ExecuteNonQuery();
 
             CMD = new MySqlCommand();
             CMD.Connection = Conexion;
@@ -104,6 +126,21 @@ namespace Onboarding_AWAQ.Pages
             telefono = "";
             contrasena = "";
             Response.Redirect("index");
+        }
+        public async Task<string> ImageUpload(IFormFile image, int ID)
+        {
+            if (image.Length > 0)
+            {
+                /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
+                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
+                var filePath = (Directory.GetCurrentDirectory()) + relativePath;
+                using (var stream = System.IO.File.OpenWrite(filePath))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                return "." + relativePath;
+            }
+            return "No image Provided";
         }
         static async Task SendMail(string token, string direccion, string nombre, string correo, string contrasena)
         {
