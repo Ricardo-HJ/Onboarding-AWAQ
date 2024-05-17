@@ -55,13 +55,13 @@ namespace Onboarding_AWAQ.Pages
 					}
 					else
 					{
-                        mensajeContra = "Contraseña invalida, no se pudo iniciar de sesion";
+                        mensajeContra = "Contraseña incorrecta";
 					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo invalido, no se pudo iniciar sesion";
+				mensaje = "Correo no valido";
 			}
 			catch (IndexOutOfRangeException)
 			{

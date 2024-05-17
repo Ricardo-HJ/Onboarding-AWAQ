@@ -5,6 +5,7 @@
    
 }
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section>
     <div class="row full-row">
         <!-- Forms column -->
@@ -22,12 +23,24 @@
                 <div class="input-group">
                     <!-- Mail -->
                     <div class="input col-12">
-                        <label class="forms-paragraph">Correo</label><label>@Model.mensaje</label>
+                        <div class="input-labels">
+                            <label class="forms-paragraph">Correo</label>
+                            <div class="alert">
+                                <img src="./img/alert-circle.png">
+                                <label class="alert-label">@Model.mensaje</label>
+                            </div>
+                        </div>
                         <input type="text" asp-for="correo" autocomplete="username">
                     </div>
                     <!-- Password -->
                     <div class="input col-12">
-                        <label class="forms-paragraph">Contraseña</label><label>@Model.mensajeContra</label>
+                        <div class="input-labels">
+                            <label class="forms-paragraph">Contraseña</label>
+                            <div class="alert">
+                                <img src="./img/alert-circle.png">
+                                <label>@Model.mensajeContra</label>
+                            </div>
+                        </div>
                         <input type="password" asp-for="contrasena" autocomplete="current-password">
                     </div>
 

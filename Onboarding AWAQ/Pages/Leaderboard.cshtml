@@ -4,78 +4,26 @@
     ViewData["Title"] = "Leaderboard";
 }
 
+
 <div class="row">
     <h1>Leaderboard</h1>
 </div>
-<div class="row h-100" style="gap: 2rem;">
-    <div class="col-top-3">
-        <div class="leaderboard-card">
-            <div class="ld-cd-first">
-                <h1>1</h1>
-                <div class="ld-cd-info">
-                    <img src="./img/Profile.png" alt="profile">
-                    <div>
-                        <p>Nombre</p>
-                        <div class="ld-cd-tag">
-                            <p>TEDI</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p class="ld-cd-finish">Termino hace 5 dias</p>
-            </div>
-            <div class="ld-cd-points">
-                <h2>1500 pts</h2>
-                <h2>2:14 Hrs</h2>
-            </div>
-        </div>
+<div class="row h-100 w-100" style="gap: 2rem;">
+    <div class="col-top-3 h-100" id="cards-container">
 
-        <div class="leaderboard-card">
-            <div class="ld-cd-first">
-                <h1 style="color: #CE6930;">2</h1>
-                <div class="ld-cd-info">
-                    <img src="./img/Profile.png" alt="profile">
-                    <div>
-                        <p>Nombre</p>
-                        <div class="ld-cd-tag">
-                            <p>TEDI</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p class="ld-cd-finish">Termino hace 5 dias</p>
-            </div>
-            <div class="ld-cd-points">
-                <h2>1500 pts</h2>
-                <h2>2:14 Hrs</h2>
-            </div>
-        </div>
-
-        <div class="leaderboard-card">
-            <div class="ld-cd-first">
-                <h1 style="color: #651A19;">3</h1>
-                <div class="ld-cd-info">
-                    <img src="./img/Profile.png" alt="profile">
-                    <div>
-                        <p>Nombre</p>
-                        <div class="ld-cd-tag">
-                            <p>TEDI</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p class="ld-cd-finish">Termino hace 5 dias</p>
-            </div>
-            <div class="ld-cd-points">
-                <h2>1500 pts</h2>
-                <h2>2:14 Hrs</h2>
-            </div>
-        </div>
     </div>
-    <div class="col-6">
-        <img src="../img/Lead.png" style="height: 82%">
+    <div class="col lead-container h-100">
+        <div class="titles">
+            <p style="width: 4rem;">Lugar</p>
+            <p style="width: 13rem;">Nombre</p>
+            <p style="width: 4rem;">Puntos</p>
+            <p style="width: 5rem;">Tiempo</p>
+            <p style="width: 7rem;">Terminado</p>
+            <p style="width: 12rem;">Departamento</p>
+        </div>
+        <div class="rows-container w-100" id="rows-container">
+            
+        </div>
     </div>
 </div>
+<script src="./js/leaderboard.js"></script>
