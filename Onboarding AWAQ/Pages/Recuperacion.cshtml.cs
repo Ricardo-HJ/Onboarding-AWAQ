@@ -28,10 +28,6 @@ namespace Onboarding_AWAQ.Pages
 
         public void OnGet()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
-            {
-                Response.Redirect("index");
-            };
             token = "";
             validToken = false;
             validContra = false;

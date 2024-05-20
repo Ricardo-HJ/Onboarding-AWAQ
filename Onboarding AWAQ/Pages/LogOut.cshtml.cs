@@ -7,7 +7,11 @@ namespace Onboarding_AWAQ.Pages
     {
         public void OnGet()
         {
-            HttpContext.Session.Clear();
+			if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
+			{
+				Response.Redirect("index");
+			};
+			HttpContext.Session.Clear();
             Response.Redirect("Index");
         }
     }
