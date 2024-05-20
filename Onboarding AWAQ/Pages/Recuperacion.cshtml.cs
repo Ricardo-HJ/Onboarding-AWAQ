@@ -31,10 +31,6 @@ namespace Onboarding_AWAQ.Pages
 
         public void OnGet()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
-            {
-                Response.Redirect("index");
-            };
             alert = false;
             token = "";
             validToken = false;
@@ -152,8 +148,9 @@ namespace Onboarding_AWAQ.Pages
                     MySqlCommand CMD = new MySqlCommand();
                     CMD.Connection = Conexion;
 
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Request.Form["contrasena"]);
                     CMD.CommandText = "update usuario set `contrasena` = @contrasena where correo = @correo;";
-                    CMD.Parameters.AddWithValue("@contrasena", Request.Form["contrasena"]);
+                    CMD.Parameters.AddWithValue("@contrasena", hashedPassword);
                     CMD.Parameters.AddWithValue("@correo", Request.Cookies["Correo"]);
 
                     CMD.ExecuteNonQuery();

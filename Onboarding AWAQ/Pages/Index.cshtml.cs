@@ -48,7 +48,7 @@ namespace Onboarding_AWAQ.Pages
 					usr.superUsuario = Convert.ToBoolean(registro["superUsuario"]);
 					usr.src = registro["src"].ToString();
 
-					if (usr.Contrasena == contrasena)
+					if (BCrypt.Net.BCrypt.Verify(contrasena, usr.Contrasena))
 					{
 						Conexion.Dispose();
                         HttpContext.Session.SetString("usuario", usr.Id.ToString());

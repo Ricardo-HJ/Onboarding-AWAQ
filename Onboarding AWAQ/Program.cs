@@ -1,4 +1,5 @@
-using Onboarding_AWAQ.Pages;
+using Onboarding_AWAQ.Pages; // Add this for the PasswordHasher class
+using Microsoft.AspNetCore.Identity; // Add this for the IPasswordHasher<> and ApplicationUser types
 
 var builder = WebApplication.CreateBuilder(args);
 

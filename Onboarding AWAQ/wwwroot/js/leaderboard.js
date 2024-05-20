@@ -11,12 +11,7 @@ const data = [
     { id: 9, name: "Noah Thomas", amount: 2900, duration: "2:05 Hr", date: "Jueves 15:40", tag: "STU" },
     { id: 10, name: "Isabella Garcia", amount: 2400, duration: "2:40 Hr", date: "Viernes 09:55", tag: "VWX" },
     { id: 11, name: "Michael Johnson", amount: 1800, duration: "3:10 Hr", date: "Viernes 14:15", tag: "ABC" },
-    { id: 12, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sabado 11:20", tag: "PQR" },
-    { id: 13, name: "William Davis", amount: 2700, duration: "2:30 Hr", date: "Domingo 18:00", tag: "LMN" },
-    { id: 14, name: "Olivia Wilson", amount: 2200, duration: "1:55 Hr", date: "Lunes 10:45", tag: "JKL" },
-    { id: 15, name: "Ethan Martinez", amount: 3100, duration: "2:15 Hr", date: "Martes 13:25", tag: "GHI" },
-    { id: 16, name: "Ava Anderson", amount: 2600, duration: "2:20 Hr", date: "Miercoles 20:10", tag: "DEF" },
-    { id: 17, name: "Noah Thomas", amount: 2900, duration: "2:05 Hr", date: "Jueves 15:40", tag: "STU" },
+    { id: 12, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sabado 11:20", tag: "PQR" }
 ];
 
   // Function to create a single lead row

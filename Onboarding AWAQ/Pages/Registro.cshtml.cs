@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Mysqlx.Crud;
@@ -11,6 +12,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Onboarding_AWAQ.Pages
 {
+
+
+
     public class RegistroModel : PageModel
     {
         public bool admin { get; set; }
@@ -32,7 +36,8 @@ namespace Onboarding_AWAQ.Pages
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
             {
                 Response.Redirect("index");
-            } else if (HttpContext.Session.GetString("Leaderboard") == "False")
+            } 
+            else if (HttpContext.Session.GetString("Leaderboard") == "False")
             {
                 /*Regresarlo a la ultima pagina*/
                 Response.Redirect("index");
@@ -46,6 +51,8 @@ namespace Onboarding_AWAQ.Pages
             MySqlConnection Conexion = new MySqlConnection(ConexionDB);
             Conexion.Open();
 
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(contrasena);
+            
             MySqlCommand CMD = new MySqlCommand();
             CMD.Connection = Conexion;
             CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
@@ -55,7 +62,7 @@ namespace Onboarding_AWAQ.Pages
             CMD.Parameters.AddWithValue("@ciudad", ciudad);
             CMD.Parameters.AddWithValue("@correo", correo);
             CMD.Parameters.AddWithValue("@telefono", telefono);
-            CMD.Parameters.AddWithValue("@contrasena", contrasena);
+            CMD.Parameters.AddWithValue("@contrasena", hashedPassword);
             CMD.ExecuteNonQuery();
             CMD.Dispose();
 
@@ -75,7 +82,7 @@ namespace Onboarding_AWAQ.Pages
                 }
                 else
                 {
-                    // Validacion y decir que no jala
+                    
                 }
             }
             CMD.Dispose();
@@ -125,14 +132,13 @@ namespace Onboarding_AWAQ.Pages
             correo = "";
             telefono = "";
             contrasena = "";
-            Response.Redirect("index");
         }
         public async Task<string> ImageUpload(IFormFile image, int ID)
         {
             if (image.Length > 0)
             {
                 /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
-                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
+                var relativePath = "/wwwroot/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
                 var filePath = (Directory.GetCurrentDirectory()) + relativePath;
                 using (var stream = System.IO.File.OpenWrite(filePath))
                 {
