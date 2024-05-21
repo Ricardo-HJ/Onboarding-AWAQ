@@ -71,11 +71,11 @@ namespace Onboarding_AWAQ.Pages
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo no valido";
+				mensaje = "Correo no válido";
 			}
 			catch (IndexOutOfRangeException)
 			{
-				mensaje = "No se pudo obtener la informacion";
+				mensaje = "No se pudo obtener la información";
 			}
 			Conexion.Dispose();
 		}
