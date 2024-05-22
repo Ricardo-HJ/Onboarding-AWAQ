@@ -61,8 +61,7 @@ namespace Onboarding_AWAQ.Pages
 
             CMD = new MySqlCommand();
             CMD.Connection = Conexion;
-            CMD.CommandText = "select `idUsuario` from usuario where correo = @correo and nombre = @nombre;";
-            CMD.Parameters.AddWithValue("@nombre", nombre);
+            CMD.CommandText = "select `idUsuario` from usuario where correo = @correo;";
             CMD.Parameters.AddWithValue("@correo", correo);
             int idUsuario = 0;
 
