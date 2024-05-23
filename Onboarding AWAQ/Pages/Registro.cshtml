@@ -5,6 +5,7 @@
     Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
 }
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <div class="row">
     <h1>Registro de nuevo colaborador</h1>
 </div>
@@ -12,7 +13,13 @@
     <div class="input-group registro-form">
         <!-- País -->
         <div class="input col-12">
-            <label class="forms-paragraph">País</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">País</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <label class="alert-label">@Model.mensajePais</label>
+                </div>
+            </div>
             <select asp-for="pais"> 
                 <option selected>Selecciona</option>
                 <option value="España">España</option>
@@ -22,7 +29,13 @@
         </div>
         <!-- Ciudad -->
         <div class="input col-12">
-            <label class="forms-paragraph">Ciudad</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Ciudad</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <label class="alert-label">@Model.mensajeCiudad</label>
+                </div>
+            </div>
             <select asp-for="ciudad"> 
                 <option selected>Selecciona</option>
                 <option value="Barcelona">Barcelona</option>
@@ -32,7 +45,13 @@
         </div>
         <!-- Departamento -->
         <div class="input col-12">
-            <label class="forms-paragraph">Departamento</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Departamento</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <label class="alert-label">@Model.mensajeDepartamento</label>
+                </div>
+            </div>
             <select asp-for="departamento"> 
                 <option selected>Selecciona</option>
                 <option value="TEDI">TEDI</option>
@@ -41,7 +60,13 @@
         </div>
         <!-- Foto de perfil -->
         <div class="input-img col-12">
-            <label class="label-file forms-paragraph">Foto de perfil</label>
+            <div class="input-labels">
+                <label class="label-file forms-paragraph">Foto de perfil</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <span class="alert-label" asp-validation-for="perfil"></span>
+                </div>
+            </div>
             <label class="label-file"></label>
             <div class="input-file">
                 <p class="file-return">Seleccionar imagen</p>
@@ -52,22 +77,46 @@
 
         <!-- Nombre -->
         <div class="input col-12">
-            <label class="forms-paragraph">Nombre</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Nombre</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <span asp-validation-for="nombre"></span>
+                </div>
+            </div>
             <input type="text" asp-for="nombre">
         </div>
         <!-- Mail -->
         <div class="input col-12">
-            <label class="forms-paragraph">Correo</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Correo</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <span asp-validation-for="correo"></span>
+                </div>
+            </div>
             <input type="text" asp-for="correo">
         </div>
         <!-- Number -->
         <div class="input col-12">
-            <label class="forms-paragraph">Numero</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Numero</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <span asp-validation-for="telefono"></span>
+                </div>
+            </div>
             <input type="text" asp-for="telefono">
         </div>
         <!-- Temp password -->
         <div class="input col-12">
-            <label class="forms-paragraph">Contraseña provicional</label>
+            <div class="input-labels">
+                <label class="forms-paragraph">Contraseña provicional</label>
+                <div class="alert">
+                    <img src="./img/alert-circle.png">
+                    <span asp-validation-for="contrasena"></span>
+                </div>
+            </div>
             <input type="text" asp-for="contrasena">
         </div>
         
@@ -91,6 +140,3 @@
         <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Registrar</button>
     </div>    
 </form>
-
-
-
