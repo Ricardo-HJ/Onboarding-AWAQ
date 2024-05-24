@@ -76,10 +76,8 @@ namespace Onboarding_AWAQ.Pages
                     if (registro.HasRows)
                     {
                         registro.Read();
-
                         validCorreo = true;
                         SendMail(token, correo, (registro["nombre"]).ToString()).Wait();
-                        /**/ 
 
                         idUsuario = (registro["idUsuario"]).ToString();
                         Response.Cookies.Append("ID", idUsuario);
@@ -138,7 +136,7 @@ namespace Onboarding_AWAQ.Pages
             } 
             else if(!validContra && validToken)
             {
-                if (Request.Form["contrasena"] == Request.Form["verificarContrasena"])
+                if (Request.Form["contrasena"] == Request.Form["verificarContrasena"] && Request.Form["contrasena"] != "")
                 {
                     string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
 

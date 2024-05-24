@@ -120,7 +120,7 @@ select::after {
     line-height: normal;
 }
 
-.input div div label {
+.input div div label, .input div div span, .input-img div div span {
     color: #EA6A6A;
     font-family: Inter;
     font-size: .8rem;
