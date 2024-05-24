@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Mysqlx.Crud;
@@ -13,6 +14,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Onboarding_AWAQ.Pages
 {
+
+
+
     public class RegistroModel : PageModel
     {
         public bool admin { get; set; }
@@ -22,8 +26,8 @@ namespace Onboarding_AWAQ.Pages
         public string mensajeDepartamento { get; set; }
         [BindProperty] public string pais {  get; set; }
 		[BindProperty] public string ciudad { get; set; }
-		[BindProperty] public string departamento { get; set; }
-		[BindProperty][Required(ErrorMessage = "Ingresar nombre")] public string nombre { get; set; }
+        [BindProperty] public string departamento { get; set; }
+        [BindProperty][Required(ErrorMessage = "Ingresar nombre")] public string nombre { get; set; }
 		[BindProperty][Required(ErrorMessage = "Ingresar correo")] public string correo { get; set; }
 		[BindProperty][Required(ErrorMessage = "Ingresar telefono")] public string telefono { get; set; }
 		[BindProperty][Required(ErrorMessage = "Ingresar pais")] public string contrasena { get; set; }
@@ -37,7 +41,9 @@ namespace Onboarding_AWAQ.Pages
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("usuario")) == true)
             {
                 Response.Redirect("index");
+
             } else if (HttpContext.Session.GetString("permisos") == "False")
+
             {
                 /*Regresarlo a la ultima pagina*/
                 Response.Redirect("Leaderboard");
@@ -46,15 +52,18 @@ namespace Onboarding_AWAQ.Pages
 
         public async void OnPost() 
         {
+
             admin = Convert.ToBoolean(HttpContext.Session.GetString("permisos"));
             src = HttpContext.Session.GetString("src");
 
             if (!((pais == "Selecciona" || pais == null) || (ciudad == "Selecciona" || ciudad == null) || 
                 (departamento == "Selecciona" || departamento == null) || (nombre == "" || nombre == null) || 
                 (correo == "" || correo == null) || (telefono == "" || telefono == null) || (contrasena == "" || contrasena == null)))
+
             {
                 DotNetEnv.Env.Load();
-                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
+         
+         string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
 
@@ -145,8 +154,9 @@ namespace Onboarding_AWAQ.Pages
             if (image.Length > 0)
             {
                 /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
-                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
+                var relativePath = "/wwwroot/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
                 var filePath = (Directory.GetCurrentDirectory()) + relativePath;
+                Console.Write(filePath);
                 using (var stream = System.IO.File.OpenWrite(filePath))
                 {
                     await image.CopyToAsync(stream);

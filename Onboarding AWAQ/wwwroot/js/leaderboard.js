@@ -1,22 +1,18 @@
 // Define an array with the data for each row
 const data = [
-    { id: 1, name: "Jacob Jones", amount: 2500, duration: "2:35 Hr", date: "Miercoles 16:48", tag: "TEDI" },
+    { id: 1, name: "Jacob Jones", amount: 2500, duration: "2:35 Hr", date: "Miércoles 16:48", tag: "TEDI" },
     { id: 2, name: "Emily Smith", amount: 3000, duration: "1:45 Hr", date: "Jueves 09:30", tag: "XYZ" },
     { id: 3, name: "Michael Johnson", amount: 1800, duration: "3:10 Hr", date: "Viernes 14:15", tag: "ABC" },
-    { id: 4, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sabado 11:20", tag: "PQR" },
+    { id: 4, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sábado 11:20", tag: "PQR" },
     { id: 5, name: "William Davis", amount: 2700, duration: "2:30 Hr", date: "Domingo 18:00", tag: "LMN" },
     { id: 6, name: "Olivia Wilson", amount: 2200, duration: "1:55 Hr", date: "Lunes 10:45", tag: "JKL" },
-    { id: 7, name: "Ethan Martinez", amount: 3100, duration: "2:15 Hr", date: "Martes 13:25", tag: "GHI" },
-    { id: 8, name: "Ava Anderson", amount: 2600, duration: "2:20 Hr", date: "Miercoles 20:10", tag: "DEF" },
+    { id: 7, name: "Ethan Martínez", amount: 3100, duration: "2:15 Hr", date: "Martes 13:25", tag: "GHI" },
+    { id: 8, name: "Ava Anderson", amount: 2600, duration: "2:20 Hr", date: "Miércoles 20:10", tag: "DEF" },
     { id: 9, name: "Noah Thomas", amount: 2900, duration: "2:05 Hr", date: "Jueves 15:40", tag: "STU" },
-    { id: 10, name: "Isabella Garcia", amount: 2400, duration: "2:40 Hr", date: "Viernes 09:55", tag: "VWX" },
+    { id: 10, name: "Isabella García", amount: 2400, duration: "2:40 Hr", date: "Viernes 09:55", tag: "VWX" },
     { id: 11, name: "Michael Johnson", amount: 1800, duration: "3:10 Hr", date: "Viernes 14:15", tag: "ABC" },
-    { id: 12, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sabado 11:20", tag: "PQR" },
-    { id: 13, name: "William Davis", amount: 2700, duration: "2:30 Hr", date: "Domingo 18:00", tag: "LMN" },
-    { id: 14, name: "Olivia Wilson", amount: 2200, duration: "1:55 Hr", date: "Lunes 10:45", tag: "JKL" },
-    { id: 15, name: "Ethan Martinez", amount: 3100, duration: "2:15 Hr", date: "Martes 13:25", tag: "GHI" },
-    { id: 16, name: "Ava Anderson", amount: 2600, duration: "2:20 Hr", date: "Miercoles 20:10", tag: "DEF" },
-    { id: 17, name: "Noah Thomas", amount: 2900, duration: "2:05 Hr", date: "Jueves 15:40", tag: "STU" },
+    { id: 12, name: "Sophia Brown", amount: 3500, duration: "2:00 Hr", date: "Sábado 11:20", tag: "PQR" },
+    { id: 13, name: "Michael Johnson", amount: 1800, duration: "3:10 Hr", date: "Viernes 14:15", tag: "ABC" }
 ];
 
   // Function to create a single lead row
@@ -79,27 +75,30 @@ data.forEach((rowData) => {
 const leaderboardData = [
     {
         position: 1,
+        positionColor: "#F7C65E",
         name: "John Doe",
         tag: "TEDI",
-        finishDate: "5 dias",
+        finishDate: "5 días",
         points: 1800,
         duration: "2:30 Hr",
         profileImage: "./img/profile.png"
     },
     {
         position: 2,
+        positionColor: "#CE6930",
         name: "Jane Smith",
         tag: "ABC",
-        finishDate: "3 dias",
+        finishDate: "3 días",
         points: 1600,
         duration: "1:45 Hr",
         profileImage: "./img/profile.png"
     },
     {
         position: 3,
+        positionColor: "#651A19",
         name: "Michael Johnson",
         tag: "XYZ",
-        finishDate: "7 dias",
+        finishDate: "7 días",
         points: 1400,
         duration: "2:00 Hr",
         profileImage: "./img/profile.png"
@@ -116,6 +115,7 @@ function createLeaderboardCard(data) {
 
     const position = document.createElement("h1");
     position.textContent = data.position;
+    position.style.color = data.positionColor;
     firstColumn.appendChild(position);
 
     const infoContainer = document.createElement("div");
@@ -127,6 +127,7 @@ function createLeaderboardCard(data) {
     infoContainer.appendChild(profileImage);
 
     const nameContainer = document.createElement("div");
+    nameContainer.classList.add("ld-cd-name");
 
     const nameText = document.createElement("p");
     nameText.textContent = data.name;
@@ -148,7 +149,7 @@ function createLeaderboardCard(data) {
 
     const finishDateText = document.createElement("p");
     finishDateText.classList.add("ld-cd-finish");
-    finishDateText.textContent = `Termino hace ${data.finishDate}`;
+    finishDateText.textContent = `Terminó hace ${data.finishDate}`;
     finishDateContainer.appendChild(finishDateText);
     card.appendChild(finishDateContainer);
 

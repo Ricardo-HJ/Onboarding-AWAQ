@@ -10,8 +10,9 @@ create table usuario(
 	ciudad varchar(50),
 	correo varchar(320),
 	telefono varchar(15),
-	contrasena varchar(30),
-	superUsuario tinyint default 0
+	contrasena varchar(100),
+	superUsuario tinyint default 0,
+    src varchar(150) default null
 );
 
 create table departamento(
@@ -28,7 +29,7 @@ create table usuarioDepartamento(
 
 create table token(
 	idToken int primary key auto_increment,
-	token varchar(8),
+	token varchar(6),
 	idUsuario int,
 	generado datetime,
 	foreign key (idUsuario) references usuario(idUsuario)
@@ -79,11 +80,6 @@ create table preguntaRespuesta(
 );
 
 insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena, superUsuario) values
-	("Adrian", "Mexico", "Monterrey","atrevino136@gmail.com", "0451664", "AJTJ", 1),
-	("Pedro Jimenez", "Mexico", "Monterrey", "pedroJ@pedro.com", "1111111", "PedroJPedro", 0),
-	("Rodrigo Perez", "Colombia", "Medellin", "rodrigoP@rodrigo.com", "8888888", "RodrigoPRodrigo", 0),
-	("Maria Rodriguez", "Colombia", "Medellin", "maria@gmail.com", "7777777", "ContraM123", 0),
-	("Juan Rulfo", "España", "Barcelona", "Rulfo_Juan@yahoo.com", "6666666", "A143Vcew@19", 0),
     ("Ricardo", "Mexico", "CDMX", "rh9344001@gmail.com", "844555221", "sayra", 1);
 
 insert into departamento (departamento) values 

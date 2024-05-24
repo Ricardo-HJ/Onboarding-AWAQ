@@ -48,7 +48,7 @@ namespace Onboarding_AWAQ.Pages
 					usr.superUsuario = Convert.ToBoolean(registro["superUsuario"]);
 					usr.src = registro["src"].ToString();
 
-					if (usr.Contrasena == contrasena)
+					if (BCrypt.Net.BCrypt.Verify(contrasena, usr.Contrasena))
 					{
 						Conexion.Dispose();
                         HttpContext.Session.SetString("usuario", usr.Id.ToString());
@@ -63,20 +63,26 @@ namespace Onboarding_AWAQ.Pages
 
                         Response.Redirect("Dashboard");
 					}
-					else
-					{
-                        mensajeContra = "Contraseña incorrecta";
-					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo no valido";
+				if(correo == "" || correo == null){
+					mensaje = "Favor de ingresar un correo";
+
+				} else{
+					mensaje = "Correo no válido";
+				}
 			}
 			catch (IndexOutOfRangeException)
 			{
-				mensaje = "No se pudo obtener la informacion";
+				mensaje = "No se pudo obtener la información";
+			} 
+			catch (ArgumentNullException)
+			{
+				mensajeContra = "Favor de ingresar una contraseña";
 			}
+
 			Conexion.Dispose();
 		}
 	}
