@@ -63,20 +63,26 @@ namespace Onboarding_AWAQ.Pages
 
                         Response.Redirect("Dashboard");
 					}
-					else
-					{
-                        mensajeContra = "Contraseña incorrecta";
-					}
 				}
 			}
 			catch (MySqlException)
 			{
-				mensaje = "Correo no válido";
+				if(correo == "" || correo == null){
+					mensaje = "Favor de ingresar un correo";
+
+				} else{
+					mensaje = "Correo no válido";
+				}
 			}
 			catch (IndexOutOfRangeException)
 			{
 				mensaje = "No se pudo obtener la información";
+			} 
+			catch (ArgumentNullException)
+			{
+				mensajeContra = "Favor de ingresar una contraseña";
 			}
+
 			Conexion.Dispose();
 		}
 	}

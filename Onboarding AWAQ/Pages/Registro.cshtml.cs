@@ -140,6 +140,7 @@ namespace Onboarding_AWAQ.Pages
                 /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
                 var relativePath = "/wwwroot/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
                 var filePath = (Directory.GetCurrentDirectory()) + relativePath;
+                Console.Write(filePath);
                 using (var stream = System.IO.File.OpenWrite(filePath))
                 {
                     await image.CopyToAsync(stream);
