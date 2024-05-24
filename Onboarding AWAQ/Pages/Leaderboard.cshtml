@@ -23,7 +23,18 @@
             <p style="width: 12rem;">Departamento</p>
         </div>
         <div class="rows-container w-100" id="rows-container">
-            
+            @foreach (Puntaje user in Model.Leaderboard)
+            {
+                <div>
+                    <p>user.position</p>
+                    <img src="user.src" alt="Alternate Text" />
+                    <p>user.name</p>
+                    <p>user.puntaje</p>
+                    <p>user.tiempoJugado</p>
+                    <p>user.departamento</p>
+                    <p>user.terminado</p>
+                </div>
+            }
         </div>
     </div>
 </div>
