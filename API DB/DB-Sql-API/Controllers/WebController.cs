@@ -196,6 +196,42 @@ namespace DB_Sql_API.Controllers
 			return Estadisticas;
 		}
 
+        /* Obtener cambios en el puntaje */
+        [Route("getHistroicPoints/{idUsuario}")]
+        [HttpGet]
+        public List<HistorialPuntos>? getHistroicPoints(int idUsuario)
+        {
+            List<HistorialPuntos> Estadisticas = new List<HistorialPuntos>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getPointsChange";
+            cmd.Parameters.AddWithValue("idUsuario", idUsuario);
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+                while (registro.Read())
+                {
+                    HistorialPuntos estadistica = new HistorialPuntos();
+					DateTime fecha = Convert.ToDateTime(registro["fecha"]);
+                    estadistica.fecha = DateOnly.FromDateTime(fecha);
+                    estadistica.puntos = Convert.ToInt32(registro["puntos"]);
+                    Estadisticas.Add(estadistica);
+                }
+            }
+            conexion.Close();
+            return Estadisticas;
+        }
+
         /* Obtener puntos por zona */
         [Route("getZonePoints/{idUsuario}")]
         [HttpGet]

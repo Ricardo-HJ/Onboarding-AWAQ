@@ -3,6 +3,7 @@
 @{
     Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
     ViewData["Title"] = "Dashboard";
+    var user = HttpContext.Session.GetString("usuario");
 }
 
 
@@ -39,13 +40,22 @@
                 <h1>Tiempo por pregunta</h1>
             </div>
             <div>
-                <p class="time-kpi">@Model.promedio.tiempo</p>
-                <p class="time-unit">@Model.promedio.unidad</p>
+                @if (Model.promedio != null)
+                {
+                    <p class="time-kpi">@Model.promedio.tiempo</p>
+                    <p class="time-unit">@Model.promedio.unidad</p>
+                }
+                else
+                {
+                    <div>
+                        No se ha empezado la capacitacion
+                    </div>
+                }
             </div> 
         </div>
         <div class="graph-container">
             <div class="graph-title">
-                <h1>Tiempo promedio por area</h1>
+                <h1>Puntos por Area</h1>
                 <div class="colored-tag">
                     <p>+ 46%</p>
                 </div>
@@ -75,53 +85,57 @@
         <div class="resume-col">
             <h1>Resumen por area</h1>
             <div class="resume-container">
-                @foreach (Area zona in Model.ListaAreas)
-                {
-                    <div class="resume-block">
-                        <div class="resume-title">
-                            <h1>@zona.zona</h1>
-                            <div class="colored-tag">
-                                @if (zona.progreso == 100)
-                                {
-                                    <p>Terminado</p>
-                                }
-                                else
-                                {
-                                    <p>@zona.progreso%</p>
-                                }
-                            </div>
-                        </div>
-                        <div class="resume-row-container">
-                            <div class="resume-row">
-                                <h1>Puntos:</h1>
-                                <h2>@zona.puntos</h2>
-                            </div>
-                            <div class="resume-row">
-                                <h1>Tiempo Jugado:</h1>
-                                <h2>@zona.tiempo</h2>
-                            </div>
-                            <div class="resume-row">
-                                <h1>Preguntas correctas:</h1>
-                                <h2>@zona.pCorrectas</h2>
-                            </div>
-                            <div class="resume-row">
-                                <h1>Preguntas incorrectas:</h1>
-                                <h2>@zona.pIncorrectas</h2>
-                            </div>
-                        </div>
-                    </div>
-                }
-                @if(!Model.ListaAreas.Any()) 
+                @if(Model.ListaAreas == null) 
                 {
                     <div>
                         No se ha empezado la capacitacion
                     </div>
+                }
+                else
+                {
+                    @foreach (Area zona in Model.ListaAreas)
+                    {
+                        <div class="resume-block">
+                            <div class="resume-title">
+                                <h1>@zona.zona</h1>
+                                <div class="colored-tag">
+                                    @if (zona.progreso == 100)
+                                    {
+                                        <p>Terminado</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@zona.progreso%</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="resume-row-container">
+                                <div class="resume-row">
+                                    <h1>Puntos:</h1>
+                                    <h2>@zona.puntos</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Tiempo Jugado:</h1>
+                                    <h2>@zona.tiempo</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Preguntas correctas:</h1>
+                                    <h2>@zona.pCorrectas</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Preguntas incorrectas:</h1>
+                                    <h2>@zona.pIncorrectas</h2>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 }
             </div>
         </div>
     </div>
 </div>
 
+<!-- Inyecta el valor de la sesión en JavaScript -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="./js/Graph.js"></script>
 <script src="./js/LargeGraph.js"></script>
