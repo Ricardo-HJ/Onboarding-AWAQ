@@ -196,19 +196,55 @@ namespace DB_Sql_API.Controllers
 			return Estadisticas;
 		}
 
+        /* Obtener puntos por zona */
+        [Route("getZonePoints/{idUsuario}")]
+        [HttpGet]
+        public List<Area>? getZonePoints(int idUsuario)
+        {
+            List<Area> Estadisticas = new List<Area>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getZonePoints";
+            cmd.Parameters.AddWithValue("idUsuario", idUsuario);
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+                while (registro.Read())
+                {
+                    Area estadistica = new Area();
+                    estadistica.zona = registro["zona"].ToString();
+                    estadistica.progreso = Convert.ToInt32(registro["progreso"]);
+                    estadistica.puntos = Convert.ToInt32(registro["puntos"]);
+                    Estadisticas.Add(estadistica);
+                }
+            }
+            conexion.Close();
+            return Estadisticas;
+        }
+
         /* Obtener tiempo promedio por pregunta */
-		private string[] Transform(double time)
+        private string[] Transform(double time)
 		{
 			string[] values = new string[2];
             if (time >= 60 && time < 3600)
             {
 				values[0] = time / 60 + ":" + time % 60;
-				values[1] = " minutos";
+				values[1] = "minutos";
             }
             else if (time >= 3600)
             {
 				values[0] = time / 3600 + ":" + (time % 3600) / 60;
-				values[1] = " horas";
+				values[1] = "horas";
             }
             else
             {
