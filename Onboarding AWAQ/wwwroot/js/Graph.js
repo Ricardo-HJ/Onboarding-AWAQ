@@ -1,4 +1,8 @@
 // Sample data
+fetch("", {
+    method: "GET"
+})
+
 const data = [
     { x: 1, y: 0.5 },
     { x: 2, y: 1 },

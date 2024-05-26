@@ -62,8 +62,12 @@ namespace Onboarding_AWAQ.Pages
                         }
 
                         Response.Redirect("Dashboard");
-					}
-				}
+					} 
+					else
+					{
+                        mensajeContra = "Contraseña incorrecta";
+                    }
+                }
 			}
 			catch (MySqlException)
 			{

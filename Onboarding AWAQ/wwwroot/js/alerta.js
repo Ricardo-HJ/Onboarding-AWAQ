@@ -23,10 +23,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-function changeClass(inputs) {
-    inputs.forEach(function (input) {
-        input.classList.add('box-alert');
-    });
-}
-
 

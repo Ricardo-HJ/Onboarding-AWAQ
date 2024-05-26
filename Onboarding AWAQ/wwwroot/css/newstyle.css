@@ -549,8 +549,6 @@ select::after {
 }
 
 
-
-
 /* || Pruebas boton || */
 .input-file {
     display: flex;
@@ -666,7 +664,6 @@ select::after {
 }
 
 .ld-cd-first h1 {
-    color: #F7C65E;
     text-align: center;
     font-family: Inter;
     font-size: 3rem;
@@ -674,6 +671,18 @@ select::after {
     font-weight: 600;
     line-height: normal;
     margin: 0;
+}
+
+.Position-1 {
+    color: #F7C65E;
+}
+
+.Position-2 {
+    color: #CE6930;
+}
+
+.Position-3 {
+    color: #651A19;
 }
 
 .ld-cd-info {
@@ -966,5 +975,140 @@ select::after {
     font-size: 0.8125rem;
     font-style: normal;
     font-weight: 400;
+    line-height: normal;
+}
+
+
+.user-info, p {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.user-info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 13rem;
+}
+
+.user-info img {
+    width: 20%;
+    height: auto;
+}
+
+.user-info p {
+    width: 80%;
+}
+
+/* Dashboard Style */
+
+.row-datos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.row-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.row-preguntas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+    width: 26rem;
+}
+
+.info-p {
+    color: #000;
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.Correctas {
+    height: 0.75rem;
+    flex-shrink: 0;
+    border-radius: 1.875rem 0rem 0rem 1.875rem;
+    background: #84EC9E;
+    width: 45%;
+}
+
+.Incorrectas {
+    height: 0.75rem;
+    flex-shrink: 0;
+    background: #FF986B;
+    width: 40%;
+}
+
+.Pendientes {
+    height: 0.75rem;
+    background: #f4c564;
+    border-radius: 0rem 1rem 1rem 0rem;
+    width: 15%;
+}
+
+.div-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem
+}
+
+.div-Correctas, .div-Incorrectas, .div-Pendientes {
+    width: 1rem;
+    height: 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.div-Correctas {
+    background: #84EC9E;
+}
+
+.div-Incorrectas {
+    background: #FF986B;
+}
+
+.div-Pendientes {
+    background: #F7C65E;
+}
+
+.clase {
+    color: var(--Dark-grey, #525252);
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.time-kpi {
+    color: #111;
+    font-family: "Segoe UI";
+    font-size: 5.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-inline: 6rem;
+}
+
+.time-unit {
+    color: #404040;
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
     line-height: normal;
 }
