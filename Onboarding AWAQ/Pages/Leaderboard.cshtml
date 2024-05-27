@@ -7,34 +7,85 @@
 
 
 <div class="row">
-    <h1>Podio</h1>
+    <h1>Leaderboard</h1>
 </div>
 <div class="row h-100 w-100" style="gap: 2rem;">
     <div class="col-top-3 h-100" id="cards-container">
+        @foreach(Puntaje user in Model.Leaderboard){
+            @if(user.position < 4)
+            {
+                <div class="leaderboard-card">
+                    <div class="ld-cd-first">
+                        <h1 class="Position-@user.position">@user.position</h1>
+                        <div class="ld-cd-info">
+                            @if (user.src == "")
+                            {
+                                <img class="rounded-circle" src="./img/User Circle.png" alt="Alternate Text" />
+                            }
+                            else
+                            {
+                                <img class="rounded-circle" src="@user.src" alt="Alternate Text" />
+                            }
+                            <div class="ld-cd-name">
+                                <p>@user.name</p>
+                                <div class="colored-tag">
+                                    <p>@user.departamento</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="ld-cd-finish">@user.terminado</p>
+                    </div>
+                    <div class="ld-cd-points">
+                        <h2>@user.puntaje pts</h2>
+                        <h2>@user.tiempoJugado</h2>
+                    </div>
+                </div>
+            }
+            else
+            {
+                break;
+            }
+
+        }
     </div>
     <div class="col lead-container h-100">
         <div class="titles">
-            <p style="width: 4rem;">Lugar</p>
-            <p style="width: 13rem;">Nombre</p>
-            <p style="width: 4rem;">Puntos</p>
-            <p style="width: 5rem;">Tiempo</p>
-            <p style="width: 7rem;">Terminado</p>
-            <p style="width: 12rem;">Departamento</p>
+            <p>Lugar</p>
+            <p>Nombre</p>
+            <p>Puntos</p>
+            <p>Tiempo</p>
+            <p>Terminado</p>
+            <p>Departamento</p>
         </div>
         <div class="rows-container w-100" id="rows-container">
             @foreach (Puntaje user in Model.Leaderboard)
             {
-                <div>
-                    <p>user.position</p>
-                    <img src="user.src" alt="Alternate Text" />
-                    <p>user.name</p>
-                    <p>user.puntaje</p>
-                    <p>user.tiempoJugado</p>
-                    <p>user.departamento</p>
-                    <p>user.terminado</p>
-                </div>
+                @if(user.position > 3)
+                {
+                    <div class="lead-row w-100">
+                        <p style="width: 4rem;">@user.position</p>
+                        <div class="user-info">
+                            @if (user.src == "")
+                            {
+                                <img class="rounded-circle" src="./img/User Circle.png" alt="Alternate Text" />
+                            }
+                            else
+                            {
+                                <img class="rounded-circle" src="@user.src" alt="Alternate Text" />
+                            }
+                            <p>@user.name</p>
+                        </div>
+                        <p style="width: 7rem;">@user.puntaje</p>
+                        <p style="width: 7rem;">@user.tiempoJugado</p>
+                        <p style="width: 7rem;">@user.terminado</p>
+                        <div class="colored-tag">
+                            <p style="width: 5rem;">@user.departamento</p>
+                        </div>
+                    </div>
+                }
             }
         </div>
     </div>
 </div>
-<script src="./js/leaderboard.js"></script>

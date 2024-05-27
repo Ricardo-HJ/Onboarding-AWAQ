@@ -14,11 +14,15 @@ using Microsoft.AspNetCore.Http;
 
 namespace Onboarding_AWAQ.Pages
 {
-
-
-
     public class RegistroModel : PageModel
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public RegistroModel(IWebHostEnvironment webHostEnvironment)
+        {
+            _webHostEnvironment = webHostEnvironment;
+        }
+
         public bool admin { get; set; }
         public string src { get; set; }
         public string mensajePais { get; set; }
@@ -42,15 +46,14 @@ namespace Onboarding_AWAQ.Pages
             {
                 Response.Redirect("index");
 
-            } else if (HttpContext.Session.GetString("permisos") == "False")
-
+            } 
+            else if (HttpContext.Session.GetString("permisos") == "False")
             {
-                /*Regresarlo a la ultima pagina*/
                 Response.Redirect("Leaderboard");
             }
         }
 
-        public async void OnPost() 
+        public async Task<IActionResult> OnPost() 
         {
 
             admin = Convert.ToBoolean(HttpContext.Session.GetString("permisos"));
@@ -63,10 +66,10 @@ namespace Onboarding_AWAQ.Pages
             {
                 DotNetEnv.Env.Load();
          
-         string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
+                string ConexionDB = "Server=127.0.0.1;Port=3306;Database=OnBoardingAWAQ;Uid=root;password=" + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PASS");
                 MySqlConnection Conexion = new MySqlConnection(ConexionDB);
                 Conexion.Open();
-
+                
                 MySqlCommand CMD = new MySqlCommand();
                 CMD.Connection = Conexion;
                 CMD.CommandText = "insert into usuario (nombre, pais, ciudad, correo, telefono, contrasena) values (@nombre, @pais, @ciudad, @correo, @telefono, @contrasena);";
@@ -76,7 +79,7 @@ namespace Onboarding_AWAQ.Pages
                 CMD.Parameters.AddWithValue("@ciudad", ciudad);
                 CMD.Parameters.AddWithValue("@correo", correo);
                 CMD.Parameters.AddWithValue("@telefono", telefono);
-                CMD.Parameters.AddWithValue("@contrasena", contrasena);
+                CMD.Parameters.AddWithValue("@contrasena", BCrypt.Net.BCrypt.HashPassword(contrasena));
                 CMD.ExecuteNonQuery();
                 CMD.Dispose();
 
@@ -128,10 +131,12 @@ namespace Onboarding_AWAQ.Pages
                 CMD.ExecuteNonQuery();
                 CMD.Dispose();
 
-                SendMail(contrasena, correo, nombre, correo, contrasena).Wait();
+                /* Envia el correo en segundo plano */
+                Task.Run(() => SendMail(contrasena, correo, nombre, correo, contrasena).Wait());
                 Conexion.Dispose();
-                Response.Redirect("index");
-            } else
+                return RedirectToPage("Leaderboard");
+            }
+            else
             {
                 if(pais == "Selecciona" || pais == null)
                 {
@@ -147,16 +152,17 @@ namespace Onboarding_AWAQ.Pages
                 {
                     mensajeDepartamento = "Ingresar Departamento";
                 }
+                return Page();
             }
         }
         public async Task<string> ImageUpload(IFormFile image, int ID)
         {
             if (image.Length > 0)
             {
-                /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
-                var relativePath = "/wwwroot/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
-                var filePath = (Directory.GetCurrentDirectory()) + relativePath;
-                Console.Write(filePath);
+                string filePath = Directory.GetCurrentDirectory();
+                string relativeLoc = "/wwwroot";
+                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName); 
+                filePath = filePath + relativeLoc + relativePath;
                 using (var stream = System.IO.File.OpenWrite(filePath))
                 {
                     await image.CopyToAsync(stream);

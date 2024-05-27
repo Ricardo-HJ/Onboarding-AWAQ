@@ -31,6 +31,23 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Endpoint para obtener el valor de la sesión de usuario
+app.MapGet("/GetUserSession", (HttpContext httpContext) =>
+{
+    // Accede a la sesión de usuario
+    var session = httpContext.Session;
+
+    // Obtiene el valor de la sesión de usuario
+    var user = session.GetString("usuario");
+
+    // Devuelve el valor de la sesión
+    return user;
+});
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.UseAuthorization();
 
 app.UseSession();
