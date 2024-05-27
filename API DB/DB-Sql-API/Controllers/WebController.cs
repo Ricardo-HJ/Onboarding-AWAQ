@@ -149,7 +149,7 @@ namespace DB_Sql_API.Controllers
 					puntaje.position = i;
 					puntaje.src = registro["src"].ToString();
 					puntaje.name = registro["nombre"].ToString();
-					puntaje.tiempoJugado = Convert.ToInt32(registro["tiempoJugado"]);
+					puntaje.tiempoJugado = TransformTime(Convert.ToInt32(registro["tiempoJugado"]));
 					puntaje.terminado = registro["terminado"].ToString();
 					puntaje.departamento = registro["departamento"].ToString();
 					puntaje.puntaje = Convert.ToInt32(registro["puntos"]);
