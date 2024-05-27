@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.AspNetCore.Rewrite;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Onboarding_AWAQ.Pages
@@ -22,7 +23,7 @@ namespace Onboarding_AWAQ.Pages
 			{
                 Response.Redirect("Leaderboard");
             };
-		}
+        }
 		public void OnPost()
 		{
             DotNetEnv.Env.Load();

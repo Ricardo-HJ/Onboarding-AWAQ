@@ -31,7 +31,14 @@ function getData(zoneInfo, position, zoneData, zones) {
 
 function noInfo() {
     var div = document.querySelector("#graph");
-    div.innerHTML = "No se ha empezado la capacitacion";
+    var pInvalid = document.createElement("p");
+    pInvalid.innerHTML = "N/A";
+    pInvalid.classList.add("time-kpi")
+
+    var pText = document.createElement("p");
+    pText.innerHTML = "No se a comenzado la capacitacion";
+    pText.classList.add("time-unit")
+    div.append(pInvalid, pText);
 }
 
 function graficate(data, zones) {

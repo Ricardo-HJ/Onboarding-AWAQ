@@ -47,9 +47,8 @@
                 }
                 else
                 {
-                    <div>
-                        No se ha empezado la capacitacion
-                    </div>
+                    <p class="time-kpi">N/A</p>
+                    <p class="time-unit">No se a comenzado la capacitacion</p>
                 }
             </div> 
         </div>
@@ -65,8 +64,8 @@
     </div>
     <div class="big-graph-row">
         <div class="large-graph">
-            <h1>Puntos</h1>
-            <div class="title-slider">
+            <h1>Puntos historicos</h1>
+            <!--<div class="title-slider">
                 <h1>Comparado con:</h1>
                 <div class="slider">
                     <div class="slider-select">
@@ -79,17 +78,16 @@
                         <p>Persona especifica</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div id="graphL"></div>
         </div>
         <div class="resume-col">
-            <h1>Resumen por area</h1>
+            <h2>Resumen por area</h2>
             <div class="resume-container">
                 @if(Model.ListaAreas == null) 
                 {
-                    <div>
-                        No se ha empezado la capacitacion
-                    </div>
+                    <p class="time-kpi">N/A</p>
+                    <p class="time-unit">No se a comenzado la capacitacion</p>
                 }
                 else
                 {

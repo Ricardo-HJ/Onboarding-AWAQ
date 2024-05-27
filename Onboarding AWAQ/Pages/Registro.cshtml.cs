@@ -16,6 +16,13 @@ namespace Onboarding_AWAQ.Pages
 {
     public class RegistroModel : PageModel
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public RegistroModel(IWebHostEnvironment webHostEnvironment)
+        {
+            _webHostEnvironment = webHostEnvironment;
+        }
+
         public bool admin { get; set; }
         public string src { get; set; }
         public string mensajePais { get; set; }
@@ -152,10 +159,10 @@ namespace Onboarding_AWAQ.Pages
         {
             if (image.Length > 0)
             {
-                /*Obtener el ultimo ID para setearlo como el nombre de la imagen*/
-                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName);
-                var filePath = (Directory.GetCurrentDirectory()) + relativePath;
-                Console.Write(filePath);
+                string filePath = Directory.GetCurrentDirectory();
+                string relativeLoc = "/wwwroot";
+                var relativePath = "/profileImages/user" + ID + "ProfileImage" + System.IO.Path.GetExtension(image.FileName); 
+                filePath = filePath + relativeLoc + relativePath;
                 using (var stream = System.IO.File.OpenWrite(filePath))
                 {
                     await image.CopyToAsync(stream);
