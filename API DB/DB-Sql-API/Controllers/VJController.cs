@@ -40,7 +40,8 @@ namespace DB_Sql_API.Controllers
 				{
 					registro.Read();
 					usuario.idUsuario = Convert.ToInt32(registro["idUsuario"]);
-					usuario.contrasena = (registro["contrasena"]).ToString();
+					usuario.nombre = (registro["nombre"]).ToString();
+                    usuario.contrasena = (registro["contrasena"]).ToString();
 					usuario.departamento = (registro["departamento"]).ToString();
 					usuario.tiempoJugado = Convert.ToInt32(registro["tiempoJugado"]);
 				}
