@@ -507,7 +507,16 @@ namespace DB_Sql_API.Controllers
 		{
 			if(time >= 60 && time < 3600)
 			{
-				return time / 60 + ":" + time % 60 + " minutos";
+				string segundos;
+                if (time % 60 <= 9)
+				{
+                    segundos = "0" + time % 60;
+				}
+				else
+				{
+					segundos = "" + time % 60;
+				}
+				return time / 60 + ":" + segundos + " minutos";
 			}
 			else if(time >= 3600)
 			{
