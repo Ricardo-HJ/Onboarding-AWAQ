@@ -1,8 +1,8 @@
 ﻿namespace DB_Sql_API
 {
-    public class Departamento
+    public class Zona
     {
-        public string departamento {  get; set; }
+        public string zona { get; set; }
         public int progreso { get; set; }
     }
 }
