@@ -24,7 +24,7 @@ namespace Onboarding_AWAQ.Pages
             try
             {
                 //Path interno del end point
-                string url = "api/Web/getAverageTimeQuestion/" + id;
+                string url = "api/Web/getAverage";
                 HttpResponseMessage Res = await cliente.GetAsync(url);
                 //Checar si el estatus es correcto del HttpClient
                 if (Res.IsSuccessStatusCode)
