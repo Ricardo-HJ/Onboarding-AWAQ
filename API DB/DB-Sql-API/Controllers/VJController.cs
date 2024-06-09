@@ -170,8 +170,41 @@ namespace DB_Sql_API.Controllers
 			}
 		}
 
-		/* Cambiar informacion de preguntas */
-		[Route("updatePregunta/{idPregunta}/{time}/{acierto}")]
+        /* Cambiar informacion de preguntas */
+        [Route("updateMijiuego/{minijuego}/{time}/{points}/{idUsuario}")]
+        [HttpPut]
+        public int? updateMinijuego(string minijuego, int time, int points, int idUsuario)
+        {
+
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "updateMinijuego";
+            cmd.Parameters.AddWithValue("minijuego", minijuego);
+            cmd.Parameters.AddWithValue("tiempo", time);
+            cmd.Parameters.AddWithValue("puntos", points);
+            cmd.Parameters.AddWithValue("idUsuario", idUsuario);
+
+
+            bool result = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            if (result)
+            {
+                conexion.Close();
+                return 200;
+            }
+            else
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        /* Cambiar informacion de preguntas */
+        [Route("updatePregunta/{idPregunta}/{time}/{acierto}")]
 		[HttpPut]
 		public int? updatePregunta(int idPregunta, int time, bool acierto)
 		{
