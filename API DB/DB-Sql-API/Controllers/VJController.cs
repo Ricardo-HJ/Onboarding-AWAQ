@@ -40,7 +40,8 @@ namespace DB_Sql_API.Controllers
 				{
 					registro.Read();
 					usuario.idUsuario = Convert.ToInt32(registro["idUsuario"]);
-					usuario.contrasena = (registro["contrasena"]).ToString();
+					usuario.nombre = (registro["nombre"]).ToString();
+                    usuario.contrasena = (registro["contrasena"]).ToString();
 					usuario.departamento = (registro["departamento"]).ToString();
 					usuario.tiempoJugado = Convert.ToInt32(registro["tiempoJugado"]);
 				}
@@ -52,8 +53,40 @@ namespace DB_Sql_API.Controllers
 			return usuario;
 		}
 
-		/* Obtener preguntas del minijuego */
-		[Route("getPreguntas/{idMinijuego}")]
+        /* Leaderboard del Videojuego */
+        [Route("getLeaderboard-VJ/")]
+        [HttpGet]
+        public IEnumerable<Puntaje>? GetLeaderboard()
+        {	
+            List<Puntaje> usuarioList = new List<Puntaje>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getGameLeaderboard";
+
+			int i = 1;
+            using (var registro = cmd.ExecuteReader())
+            {
+				if (!registro.HasRows) { return null; }
+                while (registro.Read())
+                {
+					Puntaje usuario = new Puntaje();
+					usuario.position = i;
+                    usuario.name = (registro["nombre"]).ToString();
+                    usuario.puntaje = Convert.ToInt32(registro["puntos"]);
+					usuarioList.Add(usuario);
+					i++;
+                }
+            }
+            return usuarioList;
+        }
+
+        /* Obtener preguntas del minijuego */
+        [Route("getPreguntas/{idMinijuego}")]
 		[HttpGet]
 		public IEnumerable<Pregunta>? GetLoginVideoJuego(int idMinijuego)
 		{
@@ -71,7 +104,6 @@ namespace DB_Sql_API.Controllers
 			using (var registro = cmd.ExecuteReader())
 			{
 				if (!registro.HasRows) {return null;}
-				int i = 0;
 				while (registro.Read())
 				{
 					Pregunta pregunta = new Pregunta();

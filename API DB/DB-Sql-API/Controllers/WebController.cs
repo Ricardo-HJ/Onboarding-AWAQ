@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Security.Policy;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -95,6 +96,7 @@ namespace DB_Sql_API.Controllers
 		[HttpGet]
 		public int? GetDepartamento(string departamento)
 		{
+			int idDepartamento = 0;
 			string connectionString = config.GetConnectionString("AWAQLocal");
 			MySqlConnection conexion = new MySqlConnection(connectionString);
 			conexion.Open();
@@ -110,8 +112,7 @@ namespace DB_Sql_API.Controllers
 				if (registro.HasRows)
 				{
 					registro.Read();
-					conexion.Close();
-					return Convert.ToInt32(registro["idDepartamento"]);
+                    idDepartamento = Convert.ToInt32(registro["idDepartamento"]);
 				}
 				else
 				{
@@ -119,12 +120,188 @@ namespace DB_Sql_API.Controllers
 					return null;
 				}
 			}
-		}
+            conexion.Close();
+			return idDepartamento;
 
-		/* Obtener puntajes del usuario */
-		[Route("getLeaderboard/")]
+        }
+
+        /* Obtener promedio de los usuarios */
+        [Route("getAverage/")]
+        [HttpGet]
+        public double? getAverage()
+        {
+			double promedio = 0;
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getAveragePoints";
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (registro.HasRows)
+                {
+                    registro.Read();
+                    promedio = Convert.ToDouble(registro["promedio"]);
+                }
+                else
+                {
+                    conexion.Close();
+                    return null;
+                }
+            }
+            conexion.Close();
+			return promedio;
+        }
+
+        /* Obtener puntos por departamento */
+        [Route("getUserStats/")]
+        [HttpGet]
+        public List<Zona>? getUserStats()
+        {
+            List<Zona> ListaStat = new List<Zona>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getUserStats";
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+                while (registro.Read())
+                {
+                    Zona stat = new Zona();
+                    stat.zona = registro["zona"].ToString();
+                    stat.progreso = Convert.ToInt32(registro["cantidad"]);
+                    ListaStat.Add(stat);
+                }
+            }
+            conexion.Close();
+            return ListaStat;
+        }
+
+        /* Obtener puntos por departamento */
+        [Route("getQuestions/{idUsuario}")]
+        [HttpGet]
+        public List<PreguntaUsuario>? getQuestionStats(int idUsuario)
+        {
+            List<PreguntaUsuario> ListaStat = new List<PreguntaUsuario>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getUserQuestionStats";
+            cmd.Parameters.AddWithValue("idUsuario", idUsuario);
+
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+                while (registro.Read())
+                {
+                    PreguntaUsuario stat = new PreguntaUsuario();
+                    stat.usuario = registro["nombre"].ToString();
+                    stat.minijuego = registro["minijuego"].ToString();
+                    stat.pregunta = registro["pregunta"].ToString();
+                    stat.tiempo = Convert.ToInt32(registro["segundos"]);
+                    stat.acierto = Convert.ToBoolean(registro["acierto"]);
+                    ListaStat.Add(stat);
+                }
+            }
+            conexion.Close();
+            return ListaStat;
+        }
+
+        /* Obtener puntos por departamento */
+        [Route("getAverageZones/")]
+        [HttpGet]
+        public List<Area>? getAvergaeZone()
+        {
+            List<Area> ListaDepartamento = new List<Area>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getAverageZoneProgres";
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+                while (registro.Read())
+                {
+                    Area zona = new Area();
+                    zona.zona = registro["zona"].ToString();
+                    zona.progreso = Convert.ToInt32(registro["progreso"]);
+                    ListaDepartamento.Add(zona);
+                }
+            }
+            conexion.Close();
+            return ListaDepartamento;
+        }
+
+        /* Obtener progreso por departamento */
+        [Route("getAverageDepartamento/")]
+        [HttpGet]
+        public List<Departamento>? getAvergaeDepartamento()
+        {
+            List<Departamento> ListaDepartamento = new List<Departamento>();
+            string connectionString = config.GetConnectionString("AWAQLocal");
+            MySqlConnection conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = conexion;
+            cmd.CommandText = "getDepartmentProgress";
+
+            using (var registro = cmd.ExecuteReader())
+            {
+                if (!registro.HasRows)
+                {
+                    conexion.Close();
+                    return null;
+                }
+				while (registro.Read())
+                {
+                    Departamento departamento = new Departamento();
+                    departamento.departamento = registro["departamento"].ToString();
+                    departamento.progreso = Convert.ToInt32(registro["Progreso Total"]);
+                    ListaDepartamento.Add(departamento);
+                }
+            }
+            conexion.Close();
+            return ListaDepartamento;
+        }
+
+        /* Obtener puntajes del usuario */
+        [Route("getLeaderboard/")]
 		[HttpGet]
-		public IEnumerable<Puntaje>? getLeaderboard()
+		public List<Puntaje>? getLeaderboard()
 		{
 			List<Puntaje> ListaPuntaje = new List<Puntaje>();
 			string connectionString = config.GetConnectionString("AWAQLocal");
