@@ -110,8 +110,8 @@ namespace Onboarding_AWAQ.Pages
             src = HttpContext.Session.GetString("src");
 
             promedio = await promedioPreguntasUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
-            ListaAreas = await areaUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
-            ListaPreguntas = await preguntasUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
+            ListaAreas = await Area(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
+            ListaPreguntas = await StatsPregunta(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
             return Page();
         }
     }

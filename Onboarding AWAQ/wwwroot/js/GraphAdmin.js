@@ -1,32 +1,25 @@
-/* Obtenemos el id de usuario */
-fetch('/GetUserSession')
-.then(response => response.text())
-.then(result => {
-    // Request to api
-    fetch(`https://localhost:7117/api/Web/getZonePoints/${result}`, {
-        method: 'GET',
-        mode: "cors"
-    })
-    .then(response => response.json())
-    .then(results => {
-        const zones = [];
-        const zoneData = [];
-        for (var i = 0; i < results.length; i++) {
-            getData(results[i], i + 1, zoneData, zones);
-        }
-        graficate(zoneData, zones)
-    })
-    .catch(e => {
-        noInfo();
-    })
-});
+fetch(`https://localhost:7117/api/Web/getAverageZones`, {
+    method: 'GET',
+    mode: "cors"
+})
+.then(response => response.json())
+.then(results => {
+    const zones = [];
+    const zoneData = [];
+    for (var i = 0; i < results.length; i++) {
+        getData(results[i], i + 1, zoneData, zones);
+    }
+    graficate(zoneData, zones)
+})
+.catch(e => {
+    noInfo();
+})
 
 function getData(zoneInfo, position, zoneData, zones) {
     var zone = zoneInfo["zona"];
-    var points = zoneInfo["puntos"];
     var completion = zoneInfo["progreso"];
     zones.push(zone)
-    zoneData.push({x : position * 2, y : points})
+    zoneData.push({x : position * 2, y : completion})
 }
 
 function noInfo() {
@@ -79,9 +72,9 @@ const svg = d3.selectAll("#graph").each(function () {
 
     svg.append("g")
         .call(d3.axisLeft(y).tickSize(0).tickPadding(16)
-            .tickValues(getDistanceY(data)) // Specify the points at which ticks should be placed
+            .tickValues([0, 25, 50, 75, 100]) // Specify the points at which ticks should be placed
             .tickFormat(function (d) { // Format the ticks
-                return d + " pts"
+                return d + "%";
             })
         )
         .call(g => g.select(".domain").style("stroke", "#EDEDED").style("stroke-width", "2px"))
@@ -122,19 +115,6 @@ function getDistanceX(data) {
     max = max - (increment/ 2);
     increment = max / (data.length * 1);
     var ticks = [];
-    for (var i = 0; i < data.length; i++) {
-        ticks.push(increment * (i + 1));
-    }
-    return ticks;
-}
-
-function getDistanceY(data) {
-    var max = 0;
-    for (var i = 0; i < data.length; i++) {
-        if (max < data[i].y) { max = data[i].y };
-    }
-    var increment = max / data.length;
-    var ticks = [0]
     for (var i = 0; i < data.length; i++) {
         ticks.push(increment * (i + 1));
     }
