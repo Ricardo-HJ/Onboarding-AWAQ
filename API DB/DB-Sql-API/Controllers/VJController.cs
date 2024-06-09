@@ -201,7 +201,7 @@ namespace DB_Sql_API.Controllers
                 return null;
             }
             conexion.Close();
-            return null;
+            return 200;
         }
 
         /* Cambiar informacion de preguntas */
@@ -224,17 +224,17 @@ namespace DB_Sql_API.Controllers
             cmd.Parameters.AddWithValue("idUsuario", idUsuario);
 
 
-            bool result = Convert.ToBoolean(cmd.ExecuteNonQuery());
-			if (result)
-			{
-				conexion.Close();
-				return 200;
-			}
-			else
-			{
-				conexion.Close();
-				return null;
-			}
-		}
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            conexion.Close();
+            return 200;
+        }
 	}
 }
