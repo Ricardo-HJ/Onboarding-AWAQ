@@ -172,7 +172,7 @@ namespace DB_Sql_API.Controllers
 
         /* Cambiar informacion de preguntas */
         [Route("updateMijiuego/{minijuego}/{time}/{points}/{idUsuario}")]
-        [HttpPut]
+        [HttpPost]
         public int? updateMinijuego(string minijuego, int time, int points, int idUsuario)
         {
 
