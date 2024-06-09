@@ -61,8 +61,13 @@ namespace Onboarding_AWAQ.Pages
 						{
                             HttpContext.Session.SetString("src", "./img/User Circle.png");
                         }
-
-                        Response.Redirect("Dashboard");
+						
+						if(usr.superUsuario){
+							Response.Redirect("DashboardAdmin");
+						} else {
+							Response.Redirect("Dashboard");
+						}
+                        
 					} 
 					else
 					{

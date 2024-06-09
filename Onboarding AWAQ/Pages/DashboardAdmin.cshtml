@@ -1,0 +1,132 @@
+﻿@page
+@model Onboarding_AWAQ.Pages.DashboardAdminModel
+@{
+    Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
+    ViewData["Title"] = "Dashboard";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+
+<div class="row">
+    <h1>Tablero</h1>
+</div>
+<div class="row row-dash" >
+    <div class="graph-row">
+        <div class="graph-container" style="justify-content: space-between;">
+            <div class="graph-title">
+                <h1>Progreso promedio</h1>
+                <div class="bars-details">
+                    <div class="name-color">
+                        <div style="background: #2D572A;"></div>
+                        <p>Colaborador regular</p>
+                    </div>
+                    <div class="name-color">
+                        <div style="background: #111;"></div>
+                        <p>Colaborador IT</p>
+                    </div>
+                </div>
+            </div>
+            <div id="barsgraph" ></div>
+        </div>
+        <div class="graph-container">
+            <div class="graph-title">
+                <h1>Progreso promedio</h1>
+            </div>
+            <div>
+                @if (Model.promedio != null)
+                {
+                    <p class="time-kpi">@Model.promedio</p>
+                }
+                else
+                {
+                    <p class="time-kpi">N/A</p>
+                    <p class="time-unit">No hay colaboradores en onboarding</p>
+                }
+            </div> 
+        </div>
+        <div class="graph-container">
+            <div class="graph-title">
+                <h1>Puntos promedio por Area</h1>
+                <div class="colored-tag">
+                    <p>+ 46%</p>
+                </div>
+            </div>
+            <div id="graph"></div> 
+        </div>
+    </div>
+    <div class="big-graph-row">
+        <div class="large-graph">
+            <h1>Puntos historicos promedios</h1>
+            <!--<div class="title-slider">
+                <h1>Comparado con:</h1>
+                <div class="slider">
+                    <div class="slider-select">
+                        <p>Nadie</p>
+                    </div>
+                    <div class="slider-opt">
+                        <p>Promedio</p>
+                    </div>
+                    <div class="slider-opt">
+                        <p>Persona especifica</p>
+                    </div>
+                </div>
+            </div>-->
+            <div id="graphL"></div>
+        </div>
+        <div class="resume-col">
+            <h2>Resumen por area</h2>
+            <div class="resume-container">
+                @if(Model.ListaAreas == null) 
+                {
+                    <p class="time-kpi">N/A</p>
+                    <p class="time-unit">No hay colaboradores en onboarding</p>
+                }
+                else
+                {
+                    @foreach (Area zona in Model.ListaAreas)
+                    {
+                        <div class="resume-block">
+                            <div class="resume-title">
+                                <h1>@zona.zona</h1>
+                                <div class="colored-tag">
+                                    @if (zona.progreso == 100)
+                                    {
+                                        <p>Terminado</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@zona.progreso%</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="resume-row-container">
+                                <div class="resume-row">
+                                    <h1>Puntos promedio:</h1>
+                                    <h2>@zona.puntos</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Tiempo promedio jugado:</h1>
+                                    <h2>@zona.tiempo</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Promedio de preguntas correctas:</h1>
+                                    <h2>@zona.pCorrectas</h2>
+                                </div>
+                                <div class="resume-row">
+                                    <h1>Promedio de preguntas incorrectas:</h1>
+                                    <h2>@zona.pIncorrectas</h2>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="./js/GraphAdmin.js"></script>
+<script src="./js/LargeGraphAdmin.js"></script>
+<script src="./js/dashboardAdmin.js"></script>
+<script src="./js/BarrasAdmin.js"></script>
