@@ -13,18 +13,18 @@ namespace Onboarding_AWAQ.Pages
         public string src { get; set; }
         public List<Preguntas> ListaPreguntas { get; set; }
         public List<Area> ListaAreas { get; set; }
-        public Tiempo promedio { get; set; }
-        static async Task<Tiempo> promedioPreguntasUsuario(int id)
+        public float promedio { get; set; }
+        static async Task<float> promedioPreguntasUsuario(int id)
         {
             HttpClient cliente = new HttpClient();
             cliente.BaseAddress = new Uri("https://localhost:7117/");
             cliente.DefaultRequestHeaders.Accept.Clear();
             cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            Tiempo promedio = new Tiempo();
+            float promedio = 0;
             try
             {
                 //Path interno del end point
-                string url = "api/Web/getAverageTimeQuestion/" + id;
+                string url = "api/Web/getAverage";
                 HttpResponseMessage Res = await cliente.GetAsync(url);
                 //Checar si el estatus es correcto del HttpClient
                 if (Res.IsSuccessStatusCode)
@@ -32,7 +32,7 @@ namespace Onboarding_AWAQ.Pages
                     //Obtener el response recibido web api
                     var apiResponse = Res.Content.ReadAsStringAsync().Result;
                     //Deserializing la respuesta del web api y guardarlo en la lista
-                    promedio = JsonConvert.DeserializeObject<Tiempo>(apiResponse);
+                    promedio = JsonConvert.DeserializeObject<float>(apiResponse);
                 }
             }
             catch (HttpRequestException e)
@@ -43,7 +43,7 @@ namespace Onboarding_AWAQ.Pages
             return promedio;
         }
 
-        static async Task<List<Area>> areaUsuario(int id)
+        static async Task<List<Area>> Area(int id)
         {
             HttpClient cliente = new HttpClient();
             cliente.BaseAddress = new Uri("https://localhost:7117/");
@@ -53,7 +53,7 @@ namespace Onboarding_AWAQ.Pages
             try
             {
                 //Path interno del end point
-                string url = "api/Web/getAreaStats/" + id;
+                string url = "api/Web/getAverageZones";
                 HttpResponseMessage Res = await cliente.GetAsync(url);
                 //Checar si el estatus es correcto del HttpClient
                 if (Res.IsSuccessStatusCode)
@@ -72,7 +72,7 @@ namespace Onboarding_AWAQ.Pages
             return Estadisticas;
         }
 
-        static async Task<List<Preguntas>> preguntasUsuario(int id)
+        static async Task<List<Preguntas>> StatsPregunta(int id)
         {
             HttpClient cliente = new HttpClient();
             cliente.BaseAddress = new Uri("https://localhost:7117/");
@@ -110,8 +110,8 @@ namespace Onboarding_AWAQ.Pages
             src = HttpContext.Session.GetString("src");
 
             promedio = await promedioPreguntasUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
-            ListaAreas = await areaUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
-            ListaPreguntas = await preguntasUsuario(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
+            ListaAreas = await Area(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
+            ListaPreguntas = await StatsPregunta(Convert.ToInt32(HttpContext.Session.GetString("usuario")));
             return Page();
         }
     }

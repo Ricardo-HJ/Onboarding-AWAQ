@@ -30,13 +30,12 @@
         </div>
         <div class="graph-container">
             <div class="graph-title">
-                <h1>Tiempo promedio por pregunta</h1>
+                <h1>Progreso departamento
             </div>
             <div>
                 @if (Model.promedio != null)
                 {
-                    <p class="time-kpi">@Model.promedio.tiempo</p>
-                    <p class="time-unit">@Model.promedio.unidad</p>
+                    <p class="time-kpi">@Model.promedio</p>
                 }
                 else
                 {
