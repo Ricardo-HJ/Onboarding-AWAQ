@@ -1,0 +1,11 @@
+﻿@page
+@model MyApp.Namespace.TutorialesModel
+@{
+    Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
+    ViewData["Title"] = "Tutoriales";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+<div class="row">
+    <h1>Tutoriales</h1>
+</div>

@@ -1144,3 +1144,29 @@ select::after {
     height: 1rem;
     border-radius: 1rem;
 }
+
+.credits-sq {
+    width: 60%;
+    height: 75%;
+    flex-shrink: 0;
+    padding: 3rem;
+
+    border-radius: 1.125rem;
+    background: linear-gradient(68deg, #010101 0%, #232323 100%);
+    box-shadow: 0px 0px 0px 1px rgba(165, 165, 165, 0.04), 
+    -9px 9px 9px -0.5px rgba(0, 0, 0, 0.04), 
+    -18px -18px 18px -1.5px rgba(0, 0, 0, 0.08), 
+    -37px 37px 37px -3px rgba(0, 0, 0, 0.16), 
+    -75px 75px 75px -6px rgba(0, 0, 0, 0.24), 
+    -150px 150px 150px -12px rgba(0, 0, 0, 0.48);
+}
+
+.credits-cont {
+    width: 100%;
+    height: 100%;
+}
+
+.bottom-left {
+    margin-top: auto;
+    margin-left: auto;
+}

@@ -17,7 +17,8 @@ fetch('/GetUserSession')
         graficate(zoneData, zones)
     })
     .catch(e => {
-        noInfo();
+        zones = ["Rio", "Bosque", "Ciudad", "Montaña"];
+        graficate(zoneData, zones);
     })
 });
 

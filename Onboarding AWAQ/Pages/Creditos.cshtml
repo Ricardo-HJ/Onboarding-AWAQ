@@ -1,0 +1,29 @@
+﻿@page
+@model MyApp.Namespace.CreditosModel
+@{
+    ViewData["Title"] = "Creditos";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- GoogleFonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Bebas+Neue&family=Inter:wght@100..900&family=Signika+Negative:wght@300..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+
+</head>
+<body background="../img/Fondo creditos.png">
+    <div class="d-flex justify-content-center align-items-center credits-cont">
+        <div class="credits-sq">
+            
+                <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
+             
+        </div>
+    </div>
+</body>
+</html>
