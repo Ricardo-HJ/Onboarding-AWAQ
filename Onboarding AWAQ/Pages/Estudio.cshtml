@@ -1,0 +1,38 @@
+﻿@page
+@model Onboarding_AWAQ.Pages.EstudioModel
+@{
+    Layout = "~/Pages/Shared/_LayoutSideBar.cshtml";
+    ViewData["Title"] = "Estudio";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+<div class="row">
+    <h1>Información</h1>
+</div>
+<ol class="info-select nav nav-pills nav-flush flex-row text-center">
+    <li>
+        <button class="btn info-select-active">
+            <p>Principios éticos</p>
+        </button>
+    </li>
+    <li>
+        <button class="btn info-select-inactive">
+            <p>Gamificación TEDI</p>
+        </button>
+    </li>
+    <li>
+        <button class="btn info-select-inactive">
+            <p>Normas Actuación</p>
+        </button>
+    </li>
+    <li>
+        <button class="btn info-select-inactive">
+            <p>Conducta Básica</p>
+        </button>
+    </li>
+</ol>
+<div class="info-cards">
+</div>
+
+
+<script src="./js/selectInfo.js"></script>

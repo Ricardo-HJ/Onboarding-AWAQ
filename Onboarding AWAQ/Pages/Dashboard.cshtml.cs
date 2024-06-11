@@ -18,7 +18,7 @@ namespace Onboarding_AWAQ.Pages
         static async Task<Tiempo> promedioPreguntasUsuario(int id)
         {
             HttpClient cliente = new HttpClient();
-            cliente.BaseAddress = new Uri("https://localhost:7117/");
+            cliente.BaseAddress = new Uri("http://localhost:5223/");
             cliente.DefaultRequestHeaders.Accept.Clear();
             cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Tiempo promedio = new Tiempo();
@@ -47,7 +47,7 @@ namespace Onboarding_AWAQ.Pages
         static async Task<List<Area>> areaUsuario(int id)
         {
             HttpClient cliente = new HttpClient();
-            cliente.BaseAddress = new Uri("https://localhost:7117/");
+            cliente.BaseAddress = new Uri("https://localhost:5223/");
             cliente.DefaultRequestHeaders.Accept.Clear();
             cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             List<Area> Estadisticas = new List<Area> { };
@@ -76,7 +76,7 @@ namespace Onboarding_AWAQ.Pages
         static async Task<List<Preguntas>> preguntasUsuario(int id)
         {
             HttpClient cliente = new HttpClient();
-            cliente.BaseAddress = new Uri("https://localhost:7117/");
+            cliente.BaseAddress = new Uri("https://localhost:5223/");
             cliente.DefaultRequestHeaders.Accept.Clear();
             cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             List<Preguntas> Estadisticas = new List<Preguntas> { };

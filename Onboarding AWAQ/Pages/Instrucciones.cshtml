@@ -1,0 +1,131 @@
+﻿@page
+@model Onboarding_AWAQ.Pages.InstruccionesModel
+@{
+    ViewData["Title"] = "Instrucciones";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Instrucciones"]</title>
+    <!-- GoogleFonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Bebas+Neue&family=Inter:wght@100..900&family=Signika+Negative:wght@300..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+
+</head>
+<body background="../img/Fondo creditos.png">
+    <div class="d-flex justify-content-center align-items-center credits-cont">
+        <div class="credits-sq">
+            <h1>Instrucciones de Juego</h1>
+
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Pantalla Principal del Videojuego</h2>
+                    <div class="creditsContent">
+                        <p>Al ingresar al videojuego tendrás que dar clic al botón de “play” (jugar) para pasar al inicio de sesión. </p>
+                    </div>
+                </div>
+                <img src="../img/Inst/1.png" class="creditsImage">
+            </div>
+
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Inicio de sesión</h2>
+                    <div class="creditsContent">
+                        <p>La acción anterior te llevará a la página de inicio de sesión. Debes hacer clic en los dos campos de entrada de información para ingresar tu correo electrónico y contraseña en los campos correspondientes. Una vez que hayas llenado los datos solicitados, haz clic en el botón "Login" (inicio de sesión). Si necesitas ayuda para iniciar sesión puedes contactar a tu líder dentro de AWAQ.</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/2.png" class="creditsImage">
+            </div>
+
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Empezar a Jugar</h2>
+                    <div class="creditsContent">
+                        <p>Al iniciar sesión en el videojuego, tienes que presionar el botón de “play” (jugar) para entrar al mundo principal en donde puedes mover al personaje utilizando un joystick (palanca).</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/3.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Jugar con joystick</h2>
+                    <div class="creditsContent">
+                        <p>En este punto podrás mover al personaje (Oski). Mueve el joystick (palanca) en diferentes direcciones para poder probar y explorar el movimiento del personaje. </p>
+                    </div>
+                </div>
+                <img src="../img/Inst/4.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Gemas</h2>
+                    <div class="creditsContent">
+                        <p>En la esquina superior derecha, puedes ver un panel que contiene el número de gemas necesarias para completar el juego. En pasos posteriores, se te explicará cómo conseguir gemas para ir progresando en el videojuego.</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/5.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Menú</h2>
+                    <div class="creditsContent">
+                        <p>Otro aspecto importante con el que puedes interactuar en la pantalla principal es el menú de opciones. Dirígete a la esquina superior derecha e interactúa con los botones de pausa y "Leaderboard" (tablero de mejores jugadores).</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/6.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Volumen</h2>
+                    <div class="creditsContent">
+                        <p>Al hacer clic en el botón de pausa podrás modificar el volumen del juego desplazando la barra de sonido. Una vez que te sientas cómodo puedes quitar el panel de pausa presionando el botón de la flecha (play) para continuar.</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/7.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Leaderboard</h2>
+                    <div class="creditsContent">
+                        <p>Haz clic en el botón de "Leaderboard" (mejores jugadores), el cual aparece con el ícono de un trofeo,al hacer clic podrás ver a los jugadores con mayor puntuación en el videojuego. Después de ver el “Leaderboard” puedes regresar al mundo principal para seguir explorando dando clic a la flecha de regresar. </p>
+                    </div>
+                </div>
+                <img src="../img/Inst/8.png" class="creditsImage">
+            </div>
+
+            
+            <div class="imageCreditsSection">
+                <div class="creditsSection">
+                    <h2>Mundos diferentes</h2>
+                    <div class="creditsContent">
+                        <p>Ahora estás nuevamente en el mundo principal [1.5]. En el mundo principal, tienes acceso a cuatro mundos diferentes: río, bosque, ciudad y montaña. Algunos mundos están bloqueados, por lo que no tienes acceso a ellos, pero se irán desbloqueando conforme avances en el juego [1.6]. Más adelante, recibirás información sobre cómo progresar en el videojuego.</p>
+                    </div>
+                </div>
+                <img src="../img/Inst/9.png" class="creditsImage">
+            </div>
+
+            <form class="w-100">
+                @if(Model.admin) {
+                    <button asp-page="DashboardAdmin" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
+                } else {
+                    <button asp-page="Dashboard" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
+                }
+            </form>
+        </div>
+    </div>
+</body>
+</html>

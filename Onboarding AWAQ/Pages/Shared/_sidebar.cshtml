@@ -13,11 +13,41 @@
     <!-- Sidebar navigation -->
     <ol class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <!-- Dashboard button -->
+        @if(Model.admin){
+            <li class="nav-item">
+                <a asp-page="DashboardAdmin" aria-label="Home">
+                <img src="./img/Dashboard-default.png">
+                </a>
+            </li>
+        } else {
+            <li class="nav-item">
+                <a asp-page="Dashboard" aria-label="Home">
+                <img src="./img/Dashboard-default.png">
+                </a>
+            </li>
+        }
+
+        <!-- Leaderboard button -->
         <li class="nav-item">
-            <a asp-page="Dashboard" aria-label="Home">
-            <img src="./img/Dashboard-default.png">
+            <a asp-page="Leaderboard" aria-label="Leaderboard">
+            <img src="./img/Leaderboard-default.png">
             </a>
         </li>
+        
+        <!-- estudio button -->
+        <li class="nav-item">
+            <a asp-page="Estudio" aria-label="Tutoriales">
+            <img src="./img/Estudio-default.png">
+            </a>
+        </li>
+
+        <!-- Preguntas button -->
+        <li class="nav-item">
+            <a asp-page="Sugerencias" aria-label="Preguntas">
+            <img src="./img/Sugerencias-default.png">
+            </a>
+        </li>
+
         <!-- Registro button -->
         @if (Model.admin){
             <li class="nav-item">
@@ -26,13 +56,22 @@
                 </a>
             </li>
         }
-        <!-- Leaderboard button -->
+
+        <!-- Creditos button -->
         <li class="nav-item">
-            <a asp-page="Leaderboard" aria-label="Leaderboard">
-            <img src="./img/Leaderboard-default.png">
+            <a asp-page="Creditos" aria-label="Creditos">
+            <img src="./img/Creditos-default.png">
+            </a>
+        </li>
+
+        <!-- Instrucciones button -->
+        <li class="nav-item">
+            <a asp-page="Instrucciones" aria-label="Instrucciones">
+            <img src="./img/Instrucciones-default.png">
             </a>
         </li>
     </ol>
+
     <!-- Profile icon -->
     <div class="dropdown">
     <a href="#" class="d-flex align-items-center justify-content-center p-3" data-bs-toggle="dropdown">

@@ -61,7 +61,6 @@ create table zonaUsuario(
 create table minijuego(
 	idMinijuego int primary key auto_increment,
 	minijuego varchar(50),
-	puntosBase int,
 	idZona int,
 	foreign key (idZona) references zona(idZona)
 );
@@ -102,9 +101,13 @@ create table preguntaUsuario(
 
 insert into usuario (nombre, pais, ciudad, correo, telefono, puntos, tiempoJugado, contrasena, superUsuario) values
 	("Adrian", "Mexico", "Monterrey","atrevino136@gmail.com", "0451664", 190, 900, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 1),
-    ("Ricardo", "Mexico", "Monterrey","rh9344001@gmail.com", "0451664", 190, 900, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 1),
-	("Pedro Jimenez", "Mexico", "Monterrey", "pedroJ@pedro.com", "1111111", 300,  1800, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 0),
-	("Rodrigo Perez", "Colombia", "Medellin", "rodrigoP@rodrigo.com", "8888888", 25, 300, "RodrigoPRodrigo", 0),
+	("Ricardo", "Mexico", "Monterrey", "rh9344001@gmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 1),
+    ("Ricardo", "Mexico", "Monterrey", "ricardo_antoniohj@hotmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 0);
+
+insert into usuario (nombre, pais, ciudad, correo, telefono, puntos, tiempoJugado, contrasena, superUsuario) values
+	("Adrian", "Mexico", "Monterrey","atrevino136@gmail.com", "0451664", 190, 900, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 1),
+	("Ricardo", "Mexico", "Monterrey", "rh9344001@gmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 1),
+    ("Ricardo", "Mexico", "Monterrey", "ricardo_antoniohj@hotmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 0),
 	("Maria Rodriguez", "Colombia", "Medellin", "maria@gmail.com", "7777777", 30, 120, "ContraM123", 0),
 	("Juan Rulfo", "España", "Barcelona", "Rulfo_Juan@yahoo.com", "6666666", 0, 0, "A143Vcew@19", 0);
 
@@ -259,10 +262,137 @@ insert into puntajeUsuario(idUsuario, puntos, fecha) values
 	(2, 100, "2024-05-23"),
     (2, 180, "2024-05-24"),
     (2, 250, "2024-05-25"),
-    (2, 300, "2024-05-26")
-    ;
+    (2, 300, "2024-05-26");
+
+insert into preguntaUsuario(idUsuario, idPregunta, acierto, segundos) values
+	(1,1,1,5),
+    (1,2,1,10),
+    (1,3,1,14),
+    (1,4,1,20),
+	(1,5,1,17),
+    (1,6,1,12),
+    (1,7,0,30),
+    (1,8,0,1),
+	(2,1,1,15),
+    (2,2,0,30),
+    (2,3,1,5),
+    (2,4,1,2);
+
+insert into puntajeUsuario(idUsuario, puntos, fecha) values
+	(1, 0, "2024-05-23"),
+    (1, 50, "2024-05-24"),
+    (1, 120, "2024-05-25"),
+    (1, 190, "2024-05-26"),
+    (2, 75, "2024-05-23"),
+	(2, 100, "2024-05-23"),
+    (2, 180, "2024-05-24"),
+    (2, 250, "2024-05-25"),
+    (2, 300, "2024-05-26");
 
 #### Store Procedures ###
+## Dashboard Admin Procedures ##
+/* Store procedure average points */
+Delimiter // 
+create procedure getAveragePoints()
+	begin
+		select 
+            round(avg(zu.progreso), 2) as "promedio"
+		from zonausuario zu;
+	end
+//
+Delimiter ;
+
+/* Store Procedure usuario stats */
+Delimiter //
+create procedure getUserStats()
+	begin
+		select 
+			case 
+				when progresoU = 100 then 'Terminado'
+				when progresoU <= 25 then 'Río'
+				when progresoU <= 50 then 'Bosque'
+				when progresoU <= 75 then 'Ciudad'
+				else 'Montaña'
+			end as "zona",
+			count(*) as "cantidad"
+		from (
+			select
+				round(avg(zu.progreso)) as progresoU
+			from zonausuario zu
+            inner join usuariodepartamento ud on zu.idUsuario = ud.idUsuario
+			group by zu.idUsuario
+		) as subquery
+		group by
+			case 
+				when progresoU = 100 then 'Terminado'
+				when progresoU <= 25 then 'Río'
+				when progresoU <= 50 then 'Bosque'
+				when progresoU <= 75 then 'Ciudad'
+				else 'Montaña'
+			end;
+		end
+//
+Delimiter ;
+
+
+/* Store Proecedure pregunta stats */
+Delimiter // 
+create procedure getUserQuestionStats(idUsuario int)
+	begin
+		select 
+			u.nombre,
+            m.minijuego,
+            p.pregunta,
+            pu.segundos,
+            pu.acierto
+        from usuario u 
+        inner join preguntaUsuario pu on u.idUsuario = pu.idUsuario
+        inner join pregunta p on p.idPregunta = pu.idPregunta
+        inner join minijuego m on m.idMinijuego = p.idMinijuego
+        where u.idUsuario = idUsuario;
+	end
+//
+Delimiter ;
+
+/* Store Proecedure average points departamento */
+Delimiter // 
+create procedure getDepartmentProgress()
+	begin
+		select 
+			(case 
+				when d.departamento = "TEDI" then "TEDI" 
+				else "Otros" 
+			end) as "departamento",
+            avg(zu.progreso) as "Progreso Total"
+		from departamento d
+        inner join usuarioDepartamento ud on d.idDepartamento = ud.idDepartamento
+        inner join usuario u on u.idUsuario = ud.idUsuario
+        inner join zonausuario zu on u.idUsuario = zu.idUsuario
+        group by     
+        case 
+			when d.departamento = "TEDI" then "TEDI" 
+			else "Otros" 
+		end;
+	end
+//
+Delimiter ;
+
+/* Store Procedure averge progress */
+Delimiter //
+create procedure getAverageZoneProgres()
+	begin
+		select
+			z.zona,
+			avg(zu.progreso) as "progreso"
+		from zonaUsuario zu
+        inner join zona z on zu.idZona = z.idZona
+        inner join minijuego m on m.idZona = z.idZona
+        inner join minijuegoUsuario mu on mu.idMinijuego = m.idMinijuego
+        group by z.zona;
+	end
+//
+Delimiter ;
+
 ## Dashboard Colaborador Procedures ##
 /* Store Procedure getChangePuntaje */
 Delimiter //
@@ -295,12 +425,12 @@ Delimiter ;
 Delimiter //
 create procedure getAverageTime(idUsuario int)
 	begin
-		select avg(pu.segundos) as tiempo from preguntaUsuario pu where pu.idUsuario = idUsuario;
+		select round(avg(pu.segundos), 2) as tiempo from preguntaUsuario pu where pu.idUsuario = idUsuario;
     end
 //
 Delimiter ;
 
-/Store Procedure  getStatsPreguntas/alter
+/Store Procedure  getStatsPreguntas/
 Delimiter //
 create procedure getStatsPreguntas(idUsuario int)
 	begin
@@ -335,9 +465,9 @@ create procedure getAreaStats(idUsuario int)
 		from zonaUsuario zu
         inner join zona z on zu.idZona = z.idZona
         inner join minijuego m on m.idZona = z.idZona
-        inner join minijuegoUsuario mu on mu.idMinijuego = m.idMinijuego and zu.idUsuario = mu.idUsuario
-        inner join pregunta p on p.idMinijuego = m.idMinijuego
-        inner join preguntausuario pu on p.idPregunta = pu.idPregunta and pu.idUsuario = zu.idUsuario
+        left join minijuegoUsuario mu on mu.idMinijuego = m.idMinijuego and zu.idUsuario = mu.idUsuario
+        left join pregunta p on p.idMinijuego = m.idMinijuego
+        left join preguntausuario pu on p.idPregunta = pu.idPregunta and pu.idUsuario = zu.idUsuario
         where zu.idUsuario = idUsuario
         group by z.zona, zu.progreso;
 	end
@@ -418,6 +548,22 @@ create procedure getLeaderboard()
 //
 Delimiter ;
 
+/* Store Procedure videgmae leaderboard */
+Delimiter //
+create procedure getGameLeaderboard()
+	begin
+		select 
+			u.nombre, 
+			u.puntos
+		from usuario u
+		inner join usuarioDepartamento UD on UD.idUsuario = u.idUsuario
+		inner join departamento d on d.idDepartamento = UD.idDepartamento
+		order by puntos DESC
+        limit 3;
+	end
+//
+Delimiter ;
+
 ## Token Procedures ##	
 /*Store Procedure insertToken */
 Delimiter //
@@ -477,12 +623,12 @@ create procedure loginWeb(correo varchar(320))
 	end
 //
 Delimiter ;
-
+zonausuario
 /* Store Procedure LogIn VideoJuego */
 Delimiter //
 create procedure loginVideoJuego(correo varchar(320))
 	begin
-		select u.idUsuario, u.contrasena, d.departamento, u.tiempoJugado from usuario u
+		select u.idUsuario, u.nombre, u.contrasena, d.departamento, u.tiempoJugado from usuario u
 		inner join usuarioDepartamento ud on u.idUsuario = ud.idUsuario
 		inner join departamento d on ud.idDepartamento = d.idDepartamento
 		where u.correo = correo;
@@ -493,7 +639,7 @@ Delimiter ;
 ## Preguntas Procedures ##
 /* Store Procedure obtener preguntas minijuego */
 Delimiter //
-create procedure getPreguntasMinijuego(idMinijuego varchar(320))
+create procedure getPreguntasMinijuego(idMinijuego int)
 	begin
 		select 
 			p.idPregunta, 
@@ -507,10 +653,22 @@ Delimiter ;
 Delimiter //
 create procedure changePregunta(idPregunta int, idUsuario int, segundos int, acierto tinyint)
 	begin
-		update preguntaUsuario pu set 
-			pu.segundos = segundos, 
-			pu.acierto = acierto 
-		where pu.idPregunta = idPregunta and pu.idUsuario = idUsuario;
+    declare preguntaID int;
+		if exists (
+				select 
+					p.idPregunta 
+				from preguntausuario pu 
+				inner join pregunta p on pu.idPregunta = p.idPregunta
+				where pu.idUsuario = idUsuario and p.idPregunta = idPregunta) 
+            then
+				update preguntaUsuario pu set 
+				pu.segundos = segundos, 
+				pu.acierto = acierto 
+				where pu.idPregunta = idPregunta and pu.idUsuario = idUsuario;
+		else             
+			insert into preguntausuario (idUsuario, idPregunta, acierto, segundos) values
+				(idUsuario, idPregunta, segundos, acierto);
+		end if;
 	end
 //
 Delimiter ;
@@ -529,7 +687,39 @@ create procedure getRespuestasPregunta(idPregunta int)
 	end
 //
 Delimiter ;
-	
+
+## Minijuego Procedures ##
+/* Store Procedure update Minijuego */
+Delimiter //
+create procedure updateMinijuego(minijuego varchar(50), idUsuario int, tiempo int, puntos int)
+	begin
+		declare minijuegoID int;
+		if exists (
+				select 
+					m.minijuego 
+				from minijuegousuario mu 
+				inner join minijuego m on mu.idMinijuego = m.idMinijuego
+				where mu.idUsuario = idUsuario and m.minijuego = minijuego) 
+            then
+				update minijuegousuario mu 
+				inner join minijuego m on mu.idMinijuego = m.idMinijuego
+				set mu.segundos = tiempo, mu.puntosObtenidos = puntos
+				where m.minijuego = minijuego and mu.idUsuario = idUsuario;
+		else 
+			set minijuegoID = (Select m.idMinijuego from minijuego m where m.minijuego = minijuego);
+            
+            if minijuegoID is not null then
+				insert into minijuegoUsuario (idMinijuego, idUsuario, segundos, completado, puntosObtenidos) values
+					(minijuegoID, idUsuario, tiempo, 1, puntos);
+			else 
+				signal sqlstate '45000'
+				set MESSAGE_TEXT = 'Minijuego not found';
+			end if;
+		end if;
+	end
+//
+Delimiter ;
+
 select * from usuario;
 
 select * from token;
