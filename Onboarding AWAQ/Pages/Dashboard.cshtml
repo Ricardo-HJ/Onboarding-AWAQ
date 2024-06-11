@@ -16,104 +16,177 @@
             <div class="graph-title">
                 <h1>Resumen de preguntas</h1>
             </div>
-            <div class="row-preguntas">
-                <div class="Correctas"></div>
-                <div class="Incorrectas"></div>
-                <div class="Pendientes"></div>
+            <div style="display: flex;justify-content: center;align-items: flex-start;gap: 2.125rem;align-self: stretch;">
+                <div style="display: flex;align-items:  flex-start; gap: 0.5rem;">
+                    <div style="width: 12rem; height: 0.75rem;flex-shrink: 0; border-radius: 1.875rem 0rem 0rem 1.875rem; background: #FF986B;"></div>
+                    <div style="width: 10rem;height: 0.75rem; flex-shrink: 0; border-radius: 0rem 1.875rem 1.875rem 0rem;background: #84EC9E;"></div>
+                </div>
+                <div style="width: 1.5rem; height: 0.75rem; background: #f4c564; border-radius: 1rem"></div>
             </div>
             <!--Bottom row -->
-            <div class="row-datos">
-                @foreach (Preguntas pregunta in Model.ListaPreguntas)
-                {
-                    <div class="row-block">
-                        <p class="info-p">@pregunta.cantidad</p>
-                        <div class="div-info">
-                            <div class="div-@pregunta.clase"></div>
-                            <p class="clase">@pregunta.clase</p>
-                        </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; align-self: stretch;">
+                <!--Block--> 
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem;">
+                    <p style="color: #000;font-family: Inter; font-size: 2rem;font-style: normal; font-weight: 500;line-height: normal;">32</p>
+                    <div style="display: flex; justify-content: center;align-items: center; gap: 0.25rem;">
+                        <div style="width: 1rem; height: 0.5rem; border-radius: 0.375rem; background: #FF986B;"></div>
+                        <p style="color: var(--Dark-grey, #525252); font-family: Inter;font-size: 1rem; font-style: normal; font-weight: 400; line-height: normal;">Correctas</p>
                     </div>
-                } 
+                </div>
+
+                <!--Block--> 
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5re m;">
+                    <p style="color: #000;font-family: Inter; font-size: 2rem;font-style: normal; font-weight: 500;line-height: normal;">24</p>
+                    <div style="display: flex; justify-content: center;align-items: center; gap: 0.25rem;">
+                        <div style="width: 1rem; height: 0.5rem; border-radius: 0.375rem; background: #84EC9E;"></div>
+                        <p style="color: var(--Dark-grey, #525252); font-family: Inter;font-size: 1rem; font-style: normal; font-weight: 400; line-height: normal;">Incorrectas</p>
+                    </div>
+                </div>
+
+                <!--Block--> 
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem;">
+                    <p style="color: #000;font-family: Inter; font-size: 2rem;font-style: normal; font-weight: 500;line-height: normal;">9</p>
+                    <div style="display: flex; justify-content: center;align-items: center; gap: 0.25rem;">
+                        <div style="width: 1rem; height: 0.5rem; border-radius: 0.375rem; background: #F7C65E;"></div>
+                        <p style="color: var(--Dark-grey, #525252); font-family: Inter;font-size: 1rem; font-style: normal; font-weight: 400; line-height: normal;">Pendientes</p>
+                    </div>
+                </div> 
             </div>
         </div>
         <div class="graph-container">
             <div class="graph-title">
                 <h1>Tiempo por pregunta</h1>
-            </div>
-            <div>
-                @if (Model.promedio != null)
-                {
-                    <p class="time-kpi">@Model.promedio.tiempo</p>
-                    <p class="time-unit">@Model.promedio.unidad</p>
-                }
-                else
-                {
-                    <p class="time-kpi">N/A</p>
-                    <p class="time-unit">No se a comenzado la capacitacion</p>
-                }
-            </div> 
-        </div>
-        <div class="graph-container">
-            <div class="graph-title">
-                <h1>Puntos por Area</h1>
                 <div class="colored-tag">
                     <p>+ 46%</p>
                 </div>
             </div>
             <div id="graph"></div> 
         </div>
+        <div class="graph-container">
+            <div class="graph-title">
+                <h1>Tiempo promedio por area</h1>
+                <div class="colored-tag">
+                    <p>+ 46%</p>
+                </div>
+            </div>
+            <div id="graph2"></div> 
+        </div>
     </div>
     <div class="big-graph-row">
         <div class="large-graph">
-            <h1>Puntos historicos</h1>
+            <h1>Puntos</h1>
             <div id="graphL"></div>
         </div>
         <div class="resume-col">
-            <h2>Resumen por area</h2>
+            <h1>Resumen por area</h1>
             <div class="resume-container">
-                @if(Model.ListaAreas == null) 
-                {
-                    <p class="time-kpi">N/A</p>
-                    <p class="time-unit">No se a comenzado la capacitacion</p>
-                }
-                else
-                {
-                    @foreach (Area zona in Model.ListaAreas)
-                    {
-                        <div class="resume-block">
-                            <div class="resume-title">
-                                <h1>@zona.zona</h1>
-                                <div class="colored-tag">
-                                    @if (zona.progreso == 100)
-                                    {
-                                        <p>Terminado</p>
-                                    }
-                                    else
-                                    {
-                                        <p>@zona.progreso%</p>
-                                    }
-                                </div>
-                            </div>
-                            <div class="resume-row-container">
-                                <div class="resume-row">
-                                    <h1>Puntos:</h1>
-                                    <h2>@zona.puntos</h2>
-                                </div>
-                                <div class="resume-row">
-                                    <h1>Tiempo Jugado:</h1>
-                                    <h2>@zona.tiempo</h2>
-                                </div>
-                                <div class="resume-row">
-                                    <h1>Preguntas correctas:</h1>
-                                    <h2>@zona.pCorrectas</h2>
-                                </div>
-                                <div class="resume-row">
-                                    <h1>Preguntas incorrectas:</h1>
-                                    <h2>@zona.pIncorrectas</h2>
-                                </div>
-                            </div>
+                <div class="resume-block">
+                    <div class="resume-title">
+                        <h1>Area de Bosque - TEDI</h1>
+                        <div class="colored-tag">
+                            <p>Terminado</p>
                         </div>
-                    }
-                }
+                    </div>
+                    <div class="resume-row-container">
+                        <div class="resume-row">
+                            <h1>Puntos:</h1>
+                            <h2>780</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Tiempo Jugado:</h1>
+                            <h2>2:19 Horas</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas correctas:</h1>
+                            <h2>24</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas incorrectas:</h1>
+                            <h2>0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-block">
+                    <div class="resume-title">
+                        <h1>Area de Rio - Etica</h1>
+                        <div class="colored-tag">
+                            <p>Terminado</p>
+                        </div>
+                    </div>
+                    <div class="resume-row-container">
+                        <div class="resume-row">
+                            <h1>Puntos:</h1>
+                            <h2>780</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Tiempo Jugado:</h1>
+                            <h2>2:19 Horas</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas correctas:</h1>
+                            <h2>24</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas incorrectas:</h1>
+                            <h2>0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-block">
+                    <div class="resume-title">
+                        <h1>Area de Montaña - Seguridad</h1>
+                        <div class="colored-tag">
+                            <p>Terminado</p>
+                        </div>
+                    </div>
+                    <div class="resume-row-container">
+                        <div class="resume-row">
+                            <h1>Puntos:</h1>
+                            <h2>780</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Tiempo Jugado:</h1>
+                            <h2>2:19 Horas</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas correctas:</h1>
+                            <h2>24</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas incorrectas:</h1>
+                            <h2>0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-block">
+                    <div class="resume-title">
+                        <h1>Area de Ciudad - TEDI</h1>
+                        <div class="colored-tag">
+                            <p>Terminado</p>
+                        </div>
+                    </div>
+                    <div class="resume-row-container">
+                        <div class="resume-row">
+                            <h1>Puntos:</h1>
+                            <h2>780</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Tiempo Jugado:</h1>
+                            <h2>2:19 Horas</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas correctas:</h1>
+                            <h2>24</h2>
+                        </div>
+                        <div class="resume-row">
+                            <h1>Preguntas incorrectas:</h1>
+                            <h2>0</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -122,4 +195,3 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="./js/Graph.js"></script>
 <script src="./js/LargeGraph.js"></script>
-<script src="./js/dashboard.js"></script>

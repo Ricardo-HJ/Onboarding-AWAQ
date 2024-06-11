@@ -54,7 +54,7 @@ function createGraph(dataDepartment) {
 
         // Style the text
         d3.selectAll("text")
-            .style("fill", "white")
+            .style("fill", "black")
             .style("font-family", "Inter")
             .style("font-size", "12px")
             .style("font-style", "normal")
