@@ -191,23 +191,23 @@ namespace DB_Sql_API.Controllers
             cmd.Parameters.AddWithValue("idUsuario", idUsuario);
 
 
-            bool result = Convert.ToBoolean(cmd.ExecuteNonQuery());
-            if (result)
-            {
-                conexion.Close();
-                return 200;
-            }
-            else
-            {
+			try
+			{
+				cmd.ExecuteNonQuery();
+			}
+			catch (MySqlException ex)
+			{
                 conexion.Close();
                 return null;
             }
+            conexion.Close();
+            return 200;
         }
 
         /* Cambiar informacion de preguntas */
-        [Route("updatePregunta/{idPregunta}/{time}/{acierto}")]
+        [Route("updatePregunta/{idPregunta}/{time}/{acierto}/{idUsuario}")]
 		[HttpPut]
-		public int? updatePregunta(int idPregunta, int time, bool acierto)
+		public int? updatePregunta(int idPregunta, int time, bool acierto, int idUsuario)
 		{
 
 			string connectionString = config.GetConnectionString("AWAQLocal");
@@ -221,18 +221,20 @@ namespace DB_Sql_API.Controllers
 			cmd.Parameters.AddWithValue("idPregunta", idPregunta);
 			cmd.Parameters.AddWithValue("segundos", time);
 			cmd.Parameters.AddWithValue("acierto", acierto);
+            cmd.Parameters.AddWithValue("idUsuario", idUsuario);
 
-			bool result = Convert.ToBoolean(cmd.ExecuteNonQuery());
-			if (result)
-			{
-				conexion.Close();
-				return 200;
-			}
-			else
-			{
-				conexion.Close();
-				return null;
-			}
-		}
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            conexion.Close();
+            return 200;
+        }
 	}
 }

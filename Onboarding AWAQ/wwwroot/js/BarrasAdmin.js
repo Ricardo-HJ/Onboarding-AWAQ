@@ -26,10 +26,13 @@ function createGraph(dataDepartment) {
         width = 356,
         height = 147 - margin.top - margin.bottom;
 
-    var data = [
-        { x: dataDepartment[0]["x"], y: dataDepartment[0]["y"], color: '#111111' },
-        { x: dataDepartment[1]["x"], y: dataDepartment[1]["y"], color: '#2d572a' }
-    ];
+    var data = []
+    for (var i = 0; i < dataDepartment; i++) {
+        if (i === 0) {
+            data.push({ x: dataDepartment[i]["x"], y: dataDepartment[i]["y"], color: '#111111' });
+        }
+        else { data.push({ x: dataDepartment[1]["x"], y: dataDepartment[1]["y"], color: '#2d572a' }) }
+    } 
 
     // Create the SVG container
     const svg = d3.selectAll("#barsgraph").each(function () {
