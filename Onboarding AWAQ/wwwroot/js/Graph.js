@@ -23,10 +23,9 @@ fetch('/GetUserSession')
 
 function getData(zoneInfo, position, zoneData, zones) {
     var zone = zoneInfo["zona"];
-    var points = zoneInfo["puntos"];
     var completion = zoneInfo["progreso"];
     zones.push(zone)
-    zoneData.push({x : position * 2, y : points})
+    zoneData.push({ x: position * 2, y: completion })
 }
 
 function noInfo() {
@@ -81,7 +80,7 @@ const svg = d3.selectAll("#graph").each(function () {
         .call(d3.axisLeft(y).tickSize(0).tickPadding(16)
             .tickValues(getDistanceY(data)) // Specify the points at which ticks should be placed
             .tickFormat(function (d) { // Format the ticks
-                return d + " pts"
+                return d + " %"
             })
         )
         .call(g => g.select(".domain").style("stroke", "#EDEDED").style("stroke-width", "2px"))

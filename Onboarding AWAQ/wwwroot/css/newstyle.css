@@ -1144,3 +1144,13 @@ select::after {
     height: 1rem;
     border-radius: 1rem;
 }
+
+.bar-G {
+    align-items: center;
+    width: 500px;
+}
+
+.kpi {
+    width: 400px;
+    align-items: center;
+}

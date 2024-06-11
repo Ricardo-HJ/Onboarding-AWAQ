@@ -76,7 +76,7 @@ function graficateLarge(data, dates) {
         .style("text-anchor", "start"); // Align the text to the left
 
     svg2.append("g")
-        .call(d3.axisLeft(y).tickSize(0).tickPadding(8)
+        .call(d3.axisLeft(y).tickSize(0).tickPadding(3)
             .tickValues(getDistanceY(data)) // Specify the points at which ticks should be placed
             .tickFormat(function (d) { // Format the ticks
                 return d + " pts"
@@ -163,13 +163,14 @@ function getDistanceX(data) {
     for (var i = 0; i < data.length; i++) {
         if (max < data[i].x) { max = data[i].x };
     }
-    var increment = max / (data.length * 1);
+    var increment = max / 4;
     max = max - (increment / 2);
-    increment = max / (data.length * 1);
+    increment = max / 4;
     var ticks = [];
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < 4; i++) {
         ticks.push(increment * (i + 1));
     }
+    console.log(ticks);
     return ticks;
 }
 
@@ -178,9 +179,9 @@ function getDistanceY(data) {
     for (var i = 0; i < data.length; i++) {
         if (max < data[i].y) { max = data[i].y };
     }
-    var increment = max / data.length;
+    var increment = max / 4;
     var ticks = [0]
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < 4; i++) {
         ticks.push(increment * (i + 1));
     }
     return ticks;

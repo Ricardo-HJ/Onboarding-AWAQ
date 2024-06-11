@@ -35,7 +35,7 @@
                 } 
             </div>
         </div>
-        <div class="graph-container">
+        <div class="graph-container kpi">
             <div class="graph-title">
                 <h1>Tiempo por pregunta</h1>
             </div>
@@ -48,13 +48,13 @@
                 else
                 {
                     <p class="time-kpi">N/A</p>
-                    <p class="time-unit">No se a comenzado la capacitacion</p>
+                    <p class="time-unit">No se a comenzado la capacitación</p>
                 }
             </div> 
         </div>
-        <div class="graph-container">
+        <div class="graph-container bar-G">
             <div class="graph-title">
-                <h1>Puntos por Area</h1>
+                <h1>Progreso por Zona</h1>
                 <div class="colored-tag">
                     <p>+ 46%</p>
                 </div>
@@ -64,16 +64,16 @@
     </div>
     <div class="big-graph-row">
         <div class="large-graph">
-            <h1>Puntos historicos</h1>
+            <h1>Puntos históricos</h1>
             <div id="graphL"></div>
         </div>
         <div class="resume-col">
-            <h2>Resumen por area</h2>
+            <h2>Resumen por área</h2>
             <div class="resume-container">
                 @if(Model.ListaAreas == null) 
                 {
                     <p class="time-kpi">N/A</p>
-                    <p class="time-unit">No se a comenzado la capacitacion</p>
+                    <p class="time-unit">No se a comenzado la capacitación</p>
                 }
                 else
                 {
