@@ -101,22 +101,29 @@ create table preguntaUsuario(
 
 insert into usuario (nombre, pais, ciudad, correo, telefono, puntos, tiempoJugado, contrasena, superUsuario) values
 	("Adrian", "Mexico", "Monterrey","atrevino136@gmail.com", "0451664", 190, 900, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 1),
-	("Ricardo", "Mexico", "Monterrey", "rh9344001@gmail.com", "1111111", 300,  1800, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 1);
+	("Ricardo", "Mexico", "Monterrey", "rh9344001@gmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 1),
+    ("Ricardo", "Mexico", "Monterrey", "ricardo_antoniohj@hotmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 0);
+
+insert into usuario (nombre, pais, ciudad, correo, telefono, puntos, tiempoJugado, contrasena, superUsuario) values
+	("Adrian", "Mexico", "Monterrey","atrevino136@gmail.com", "0451664", 190, 900, "$2a$11$4UvQq/bt1Ll6hkBEHOasguNs0Mi3vOH0yyrtOOnaqh4iFSMVOOeJO", 1),
+	("Ricardo", "Mexico", "Monterrey", "rh9344001@gmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 1),
+    ("Ricardo", "Mexico", "Monterrey", "ricardo_antoniohj@hotmail.com", "1111111", 300,  1800, "$2a$11$hSMF5DE1WlavUO7939a1bO8sfYYPF0BaJypXaOkBweQ6spTu5E5RC", 0),
+	("Maria Rodriguez", "Colombia", "Medellin", "maria@gmail.com", "7777777", 30, 120, "ContraM123", 0),
+	("Juan Rulfo", "España", "Barcelona", "Rulfo_Juan@yahoo.com", "6666666", 0, 0, "A143Vcew@19", 0);
 
 insert into departamento (departamento) values 
 	("TEDI"),
-	("Recursos Humanos"),
-    ("Comunicacion");
+	("Recursos Humanos");
 
 insert into usuarioDepartamento (idUsuario, idDepartamento) values
 	(1,1),
 	(2,2),
-	(3,3),
+	(3,1),
 	(4,1),
 	(5,2);
 
 insert into zona (zona) values
-	("Río - Ética"),
+	("Rio - Ética"),
 	("Bosque - Ética"),
 	("Montaña - Estaciones"),
 	("Ciudad - TEDI");
@@ -128,23 +135,22 @@ insert into zonaUsuario(idZona, idUsuario, progreso) values
 	(4,1,0),
 	(1,2,100),
 	(2,2,5),
-    (3,2,0),
-	(1,3,100),
-    (1,4,100);
+	(3,2,0),
+	(4,2,0);
 
-insert into minijuego (minijuego, idZona) values	
-	("Froghopper", 1),
-	("Petróleo", 1),
-	("Recolectar Basura", 1),
-	("Frutas", 2),
-	("Incendio", 2),
-	("Tala", 2),
-    ("Excavación", 4),
-    ("Pingüino", 4),
-    ("Memorama", 4),
-	("Seguridad", 3),
-    ("Git", 3),
-	("HTML", 3);
+insert into minijuego (minijuego, puntosBase, idZona) values	
+	("Froghopper", 100, 1),
+	("Petroleo", 100, 1),
+	("CleaningRiver", 100, 1),
+	("Berries", 100, 2),
+	("Incendio", 100, 2),
+	("Tala", 100, 2),
+    ("Excavacion", 100, 4),
+    ("Goat", 100, 4),
+    ("Rocks", 100, 4),
+	("Casa 1", 100, 3),
+    ("Casa 2", 100, 3),
+	("Casa 3", 100, 3);
 
 insert into minijuegoUsuario (idMinijuego, idUsuario, segundos, completado, puntosObtenidos) values
 	(1, 1, 15, 0, 30),
@@ -232,6 +238,31 @@ insert into respuesta (respuesta, idPregunta, correcta) values
 	("Respuesta 2",2, 0),
 	("Respuesta 3",2, 1),
 	("Respuesta 4",2, 0);
+
+insert into preguntaUsuario(idUsuario, idPregunta, acierto, segundos) values
+	(1,1,1,5),
+    (1,2,1,10),
+    (1,3,0,14),
+    (1,4,0,20),
+	(1,5,1,17),
+    (1,6,1,12),
+    (1,7,0,30),
+    (1,8,0,1),
+	(2,1,1,15),
+    (2,2,0,30),
+    (2,3,1,5),
+    (2,4,1,2);
+
+insert into puntajeUsuario(idUsuario, puntos, fecha) values
+	(1, 0, "2024-05-23"),
+    (1, 50, "2024-05-24"),
+    (1, 120, "2024-05-25"),
+    (1, 190, "2024-05-26"),
+    (2, 75, "2024-05-23"),
+	(2, 100, "2024-05-23"),
+    (2, 180, "2024-05-24"),
+    (2, 250, "2024-05-25"),
+    (2, 300, "2024-05-26");
 
 insert into preguntaUsuario(idUsuario, idPregunta, acierto, segundos) values
 	(1,1,1,5),

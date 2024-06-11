@@ -86,13 +86,13 @@ function graficateLarge(data, dates) {
         .selectAll("text")
         .style("text-anchor", "end"); // Align the text to the left
 
-    svg2.selectAll(".vertical-line")
+        svg2.selectAll(".vertical-line")
         .data(d3.range(1, 10, 1)) // Define the range and step for the lines
         .enter()
         .append("line")
         .attr("class", "vertical-line")
-        .attr("x1", d => x(new Date(d)))
-        .attr("x2", d => x(new Date(d)))
+        .attr("x1", d => x(d))
+        .attr("x2", d => x(d))
         .attr("y1", 0)
         .attr("y2", height)
         .attr("stroke", "#EDEDED")

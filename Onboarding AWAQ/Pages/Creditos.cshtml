@@ -1,5 +1,5 @@
 ﻿@page
-@model MyApp.Namespace.CreditosModel
+@model Onboarding_AWAQ.Pages.CreditosModel
 @{
     ViewData["Title"] = "Creditos";
     var user = HttpContext.Session.GetString("usuario");
@@ -20,9 +20,94 @@
 <body background="../img/Fondo creditos.png">
     <div class="d-flex justify-content-center align-items-center credits-cont">
         <div class="credits-sq">
+            <h1>Proyecto: Setting Up AWAQ for Success</h1>
+
+            <div class="creditsSection">
+                <h2>Equipo de Desarrollo</h2>
+                <div class="creditsContent">
+                    <p>Christel Gómez Velázquez - Unity Developer</p>
+                    <p>Adrián Treviño Jiménez - Back-End Developer</p>
+                    <p>Leonardo Adrián González Hernández - Unity Designer</p>
+                    <p>Ricardo Antonio Hernández Jiménez - SCRUM Master</p>
+                    <p>Eugenio Elizondo Jaime - Product Owner</p>
+                </div>
+            </div>
+
+            <div class="creditsSection">
+                <h2>Assets Utilizados</h2>
+                <div class="creditsContent">
+                    <p>Efectos de Sonido: <a href="https://pixabay.com/es/sound-effects/">Pixabay Sound Effects</a></p>
+                    <p>Assets de Unity: <a href="https://assetstore.unity.com/packages/2d/environments/2d-rpg-topdown-tilesets-pixelart-assets-full-bundle-212921">2D RPG Topdown Tilesets Pixelart Assets Full Bundle</a></p>
+                    <p>Assets Adicionales: <a href="https://admurin.itch.io/top-down-mobs-bears">Top-Down Mobs Bears</a></p>
+                </div>
+            </div>            
+
+            <div class="creditsSection">
+                <h2>Herramientas y Tecnologías</h2>
+                <div class="creditsContent">
+                    <p>Motor de Juego: Unity</p>
+                    <p>Desarrollo Web: HTML, CSS, Bootstrap, Javascript</p>
+                    <p>Base de Datos: MySQL, DBeaver</p>
+                    <p>Visualización de Datos: <a href="https://d3js.org">D3.js</a></p>
+                    <p>Entornos de Desarrollo: Xcode, Visual Studio Code</p>
+                    <p>Lenguajes de Programación: C# ASP Net Core 7.0, C# ASP NET API Web</p>
+                    <p>Seguridad: BCRYPT.NET - NEXT</p>
+                    <p>Gestión de Proyectos: Notion, Drive, <a href="https://web.openrainbow.com/">OpenRainbow</a>, Teams</p>
+                </div>
+            </div>
             
-                <button type="submit" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
-             
+            <div class="creditsSection">
+                <h2>Recursos</h2>
+                <div class="creditsContent">
+                    <p>AWAQ Onboarding Modules PDF</p>
+                    <p>PROYECTO GAMIFICACIÓN TEDI</p>
+                    <p>PROYECTO GAMIFICACIÓN CODIGO ETICO</p>
+                    <p>PROYECTO GAMIFICACIÓN SEGURIDAD</p>
+                </div>
+            </div>
+
+            <div class="creditsSection">
+                <h2>Agradecimientos Especiales</h2>
+                <div class="creditsContent">
+                    <p>Claudia Solís - Profesora Experta (Videojuegos)</p>
+                    <p>Cristina González Córdova - Profesora Experta (Desarrollo Web / Análisis y Modelación de Sistemas)</p>
+                    <p>Ernesto Cantú - Profesor Experto (Base de Datos)</p>
+                    <p>Jose Serna - Awaq ONGD</p>
+                    <p>Nahuel Rotela - Awaq ONGD</p>
+                </div>
+            </div>
+
+            <div class="creditsSection">
+                <h2>Fecha de Lanzamiento</h2>
+                <div class="creditsContent">
+                    <p>11 de junio de 2024</p>
+                </div>
+            </div>
+            
+            <div class="creditsSection">
+                <h2>Información Adicional</h2>                
+                <div class="creditsContent">
+                    <p>Isaac Hernández Pérez - Beta Tester</p>
+                </div>
+            </div>
+
+            <div class="creditsSection">
+                <h2>Preguntas y Consultas</h2>                
+                <div class="creditsContent">
+                    <p>ChatGPT</p>
+                </div>
+            </div>
+
+            <div class="creditsContent">
+                <p>Gracias a todos por su dedicación y esfuerzo en el desarrollo de "Setting Up AWAQ for Success". Este proyecto no habría sido posible sin la colaboración y el compromiso de cada uno de ustedes.</p>
+            </div>
+            <form class="w-100">
+                 @if(Model.admin) {
+                    <button asp-page="DashboardAdmin" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
+                } else {
+                    <button asp-page="Dashboard" class="btn btn-dark col-12 inicioSesion-btn">Regresar</button>
+                }
+            </form>
         </div>
     </div>
 </body>

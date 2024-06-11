@@ -1,0 +1,74 @@
+﻿@page
+@model Onboarding_AWAQ.Pages.SugerenciasModel
+@{
+    ViewData["Title"] = "Sugerencias";
+    var user = HttpContext.Session.GetString("usuario");
+}
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<section>
+    <div class="row full-row">
+        <!-- Forms column -->
+        <div class="col-lg-6 d-flex justify-content-center align-items-center form-column card-body p-md-5 auth-container">
+            <!-- Logo and welcome message -->
+            <div class="col-12 auth-title">
+                <img src="./img/AWAQ-logo.png">
+                <h1>Sugerencias para AWAQ</h1>
+                <p>Por favor, seleciona el area de tu sugerencia y agrega un comentario</p>
+            </div>
+
+            <!-- Login form -->
+            <form method="post" class="col-12 form-login">
+                <!-- Text inputs -->
+                <div class="input-group">
+                    <!-- Mail -->
+                    <div class="input col-12">
+                        <div class="input-labels">
+                            <label class="forms-paragraph">Area de sugerencia</label>
+                            <div class="alert">
+                                <img src="./img/alert-circle.png">
+                                <label class="alert-label">@Model.mensajeArea</label>
+                            </div>
+                        </div>
+                        <select asp-for="area"> 
+                            <option selected>Selecciona</option>
+                            <option value="Videojuego">Videojuego</option>
+                            <option value="Tablero">Dashboard</option>
+                            <option value="Estudio">Información de estudio</option>
+                        </select>
+                    </div>
+                    <!-- Password -->
+                    <div class="input col-12">
+                        <div class="input-labels">
+                            <label class="forms-paragraph">Comentario</label>
+                            <div class="alert">
+                                <img src="./img/alert-circle.png">
+                                <label class="alert-label">@Model.mensajeComment</label>
+                            </div>
+                        </div>
+                        <textarea type="text" asp-for="comment"></textarea>
+                    </div>
+                </div>
+                <!-- Form actions -->
+                <div class="form-actions">
+                    <!-- Button -->
+                    <div class="col-12 buttons2">
+                        @if(Model.admin) {
+                            <button asp-page="DashboardAdmin" class="btn btn-light inicioSesion-btn w-100">Cancelar</button>
+                        } else {
+                            <button asp-page="Dashboard" class="btn btn-light inicioSesion-btn w-100">Cancelar</button>
+                        }
+                        <button type="submit" class="btn btn-dark inicioSesion-btn w-100">Enviar sugerencia</button>
+                    </div>    
+                </div>
+            </form>
+        </div>
+
+        <!-- Image column -->
+        <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center position-relative auth-img-col">
+            <!-- AWAQ Logo -->    
+            <img src="./img/AWAQ-LOGOHD.png" alt="logo de la marca">
+        </div>
+    </div>    
+</section>

@@ -33,7 +33,7 @@ namespace Onboarding_AWAQ.Pages
 
 			MySqlCommand CMD = new MySqlCommand();
 			CMD.Connection = Conexion;
-			string Comand = "select `idUsuario`, `contrasena`, `src`, `superUsuario` from usuario where correo = \"" + correo + "\";";
+			string Comand = "select `idUsuario`,`nombre`, `contrasena`, `src`, `superUsuario` from usuario where correo = \"" + correo + "\";";
 			CMD.CommandText = Comand;
 
 			Usuario usr = new Usuario();
@@ -45,6 +45,7 @@ namespace Onboarding_AWAQ.Pages
                     usr = new Usuario();
 					usr.Id = Convert.ToInt32(registro["idUsuario"]);
 					usr.Correo = correo;
+					usr.Nombre = registro["nombre"].ToString();
 					usr.Contrasena = registro["Contrasena"].ToString()!;
 					usr.superUsuario = Convert.ToBoolean(registro["superUsuario"]);
 					usr.src = registro["src"].ToString();
@@ -54,6 +55,8 @@ namespace Onboarding_AWAQ.Pages
 						Conexion.Dispose();
                         HttpContext.Session.SetString("usuario", usr.Id.ToString());
                         HttpContext.Session.SetString("permisos", usr.superUsuario.ToString());
+						HttpContext.Session.SetString("nombre", usr.Nombre.ToString());
+                        HttpContext.Session.SetString("correo", usr.Correo.ToString());
 						if(usr.src != "")
                         {
                             HttpContext.Session.SetString("src", usr.src);
